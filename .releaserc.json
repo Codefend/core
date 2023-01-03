@@ -14,12 +14,6 @@
       "prerelease": true
     }
   ],
-  "repositoryUrl": "https://github.com/Z-n-o-M/code-defender-core.git",
-  "plugins": [
-    "@semantic-release/commit-analyzer",
-    "@semantic-release/release-notes-generator",
-    "@semantic-release/changelog",
-    "@semantic-release/npm",
-    "@semantic-release/github"
-  ]
+  "repositoryUrl": "https://github.com/Codefend/codefend.git",
+  "plugins": ["@semantic-release/commit-analyzer", "@semantic-release/release-notes-generator", "@semantic-release/changelog", "@semantic-release/npm", "@semantic-release/github"]
 }

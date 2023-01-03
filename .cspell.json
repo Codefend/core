@@ -1,7 +1,7 @@
 {
   "version": "0.1",
   "language": "en",
-  "words": ["degit", "esbuild", "code-defender-core", "octocat", "rmrf", "socio", "gjuchault"],
+  "words": ["degit", "esbuild", "Codefend", "octocat", "rmrf", "socio", "gjuchault"],
   "flagWords": [],
   "ignorePaths": ["package.json", "package-lock.json", "yarn.lock", "tsconfig.json", "node_modules/**"]
 }

@@ -1,4 +1,4 @@
-name: code-defender-core
+name: codefend
 
 on: [push]
 
@@ -6,7 +6,7 @@ env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
-  code-defender-core:
+  codefend:
     runs-on: ubuntu-latest
 
     concurrency:
