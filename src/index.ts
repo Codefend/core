@@ -22,6 +22,6 @@ export function obfuscate(
   map = CodefendCore.mapper.sortMap(map);
   CodefendCore.mapper.mapPredefinedWords(map, options?.predefinedWords);
   CodefendCore.mapper.mapIgnoredWords(map, options?.ignoredWords);
-  const output = CodefendCore.replacer.replace(map, code);
+  const output = CodefendCore.replacer.replace(code, map);
   return output;
 }
