@@ -1,8 +1,7 @@
 import { CodefendMapper } from "./core/mapper/CodeDefendMapper";
-import { ICodefendOptions } from "./core/options/ICodeDefendOptions";
+import { ICodefendOptions, defaultOptions } from "./core/options/ICodeDefendOptions";
 import { CodefendParser } from "./core/parser/CodeDefendParser";
 import { CodefendReplacer } from "./core/replacer/CodeDefendReplacer";
-import { defaultOptions } from "./core/utils/Defaults";
 
 export const Codefend = {
   core: {
