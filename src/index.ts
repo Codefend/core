@@ -2,12 +2,12 @@ import { CodefendMapper } from "./core/mapper/CodeDefendMapper";
 import { ICodefendOptions } from "./core/options/ICodeDefendOptions";
 import { CodefendParser } from "./core/parser/CodeDefendParser";
 import { CodefendReplacer } from "./core/replacer/CodeDefendReplacer";
-import { codeDefenderDefaultOptions } from "./core/utils/Defaults";
+import { defaultOptions } from "./core/utils/Defaults";
 
 export const Codefend = {
   core: {
-    parser: new CodefendParser(codeDefenderDefaultOptions),
-    mapper: new CodefendMapper(codeDefenderDefaultOptions),
+    parser: new CodefendParser(defaultOptions),
+    mapper: new CodefendMapper(defaultOptions),
     replacer: new CodefendReplacer(),
   },
   obfuscate: (code: string, map: Record<string, string> = {}, options?: ICodefendOptions) => {

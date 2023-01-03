@@ -1,6 +1,6 @@
 import { ICodefendOptions } from "../options/ICodeDefendOptions";
 
-export const codeDefenderDefaultOptions: ICodefendOptions = {
+export const defaultOptions: ICodefendOptions = {
   prefix: "Ox",
   predefinedWords: [],
   ignoredWords: [],
