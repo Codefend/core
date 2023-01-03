@@ -2,6 +2,7 @@ import {
   ICodefendOptions,
   ICodefendPredefinedWordOption,
 } from "../options/ICodeDefendOptions";
+import { ICodefendParserWord } from "./../parser/ICodeDefendParser";
 import { ICodefendMapper } from "./ICodeDefendMapper";
 
 export class CodefendMapper implements ICodefendMapper {
@@ -16,24 +17,19 @@ export class CodefendMapper implements ICodefendMapper {
   }
 
   buildMap(
-    words: RegExpMatchArray | null,
-    prefix?: string,
-    map?: Record<string, string>
+    words: ICodefendParserWord[],
+    map: Record<string, string>,
+    prefix?: string
   ) {
-    map = map ?? {};
-    if (!words) return map;
     prefix = prefix ?? this.options?.prefix;
     let sequence = Object.keys(map).length;
-    words.forEach((word: string) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      if (map[word]) return;
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      map[word] = `${prefix ?? ""}${sequence++}`;
+    words.forEach((word) => {
+      if (map[word.value]) return;
+      map[word.value] = `${prefix ?? ""}${sequence++}`;
     });
     return map;
   }
+
   sortMap(map: Record<string, string>) {
     return Object.keys(map)
       .sort((a, b) => {
@@ -44,6 +40,7 @@ export class CodefendMapper implements ICodefendMapper {
         return obj;
       }, {});
   }
+
   mapIgnoredWords(map: Record<string, string>, ignoredWords?: string[]) {
     ignoredWords = ignoredWords ?? this.options?.ignoredWords ?? [];
     ignoredWords.forEach((word: string) => {
@@ -51,6 +48,7 @@ export class CodefendMapper implements ICodefendMapper {
     });
     return map;
   }
+
   mapPredefinedWords(
     map: Record<string, string>,
     predefinedWords?: ICodefendPredefinedWordOption[]

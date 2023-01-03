@@ -2,7 +2,7 @@ export interface ICodefendOptions {
   prefix?: string;
   predefinedWords?: ICodefendPredefinedWordOption[];
   ignoredWords?: string[];
-  regex: RegExp;
+  regexList: RegExp[];
 }
 
 export interface ICodefendPredefinedWordOption {
@@ -14,5 +14,5 @@ export const defaultOptions: ICodefendOptions = {
   prefix: "Ox",
   predefinedWords: [],
   ignoredWords: [],
-  regex: /([a-zA-Z]+(_[a-zA-Z0-9]+)+)/g,
+  regexList: [/([a-zA-Z]+(_[a-zA-Z0-9]+)+)/g, /((cmp|lib)+(-[a-zA-Z]+)+)/g],
 };

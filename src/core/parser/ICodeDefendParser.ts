@@ -1,3 +1,8 @@
 export interface ICodefendParser {
-  parse: (code: string, regex: RegExp) => RegExpMatchArray | null;
+  parse: (code: string, regexList?: RegExp[]) => ICodefendParserWord[];
+}
+
+export interface ICodefendParserWord {
+  value: string;
+  regexIndex: number;
 }

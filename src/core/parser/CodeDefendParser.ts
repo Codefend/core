@@ -1,5 +1,5 @@
 import { ICodefendOptions } from "../options/ICodeDefendOptions";
-import { ICodefendParser } from "./ICodeDefendParser";
+import { ICodefendParser, ICodefendParserWord } from "./ICodeDefendParser";
 
 export class CodefendParser implements ICodefendParser {
   options: ICodefendOptions | undefined;
@@ -12,11 +12,22 @@ export class CodefendParser implements ICodefendParser {
     this.options = options;
   }
 
-  parse(code: string, regex?: RegExp) {
-    regex = regex ?? this.options?.regex;
-    if (!regex) {
-      throw new Error("Code Defender: regex required for parser");
+  parse(code: string, regexList?: RegExp[]) {
+    regexList = regexList ?? this.options?.regexList;
+    if (!regexList) {
+      throw new Error("Code Defender: regexList required for parser");
     }
-    return code.match(regex);
+    const words: ICodefendParserWord[] = [];
+    let match;
+    let index = 0;
+    regexList.forEach((regex) => {
+      index++;
+      match = code.match(regex);
+      if (!match) return;
+      match.forEach((word: string) => {
+        words.push({ value: word, regexIndex: index });
+      });
+    });
+    return words;
   }
 }

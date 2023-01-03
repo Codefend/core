@@ -17,8 +17,8 @@ export const Codefend = {
     map: Record<string, string> = {},
     options?: ICodefendOptions
   ) => {
-    const words = Codefend.core.parser.parse(code, options?.regex);
-    Codefend.core.mapper.buildMap(words, options?.prefix, map);
+    const words = Codefend.core.parser.parse(code, options?.regexList);
+    Codefend.core.mapper.buildMap(words, map, options?.prefix);
     map = Codefend.core.mapper.sortMap(map);
     Codefend.core.mapper.mapPredefinedWords(map, options?.predefinedWords);
     Codefend.core.mapper.mapIgnoredWords(map, options?.ignoredWords);
