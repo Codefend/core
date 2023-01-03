@@ -1,4 +1,7 @@
-import { ICodefendOptions, ICodefendPredefinedWordOption } from "../options/ICodeDefendOptions";
+import {
+  ICodefendOptions,
+  ICodefendPredefinedWordOption,
+} from "../options/ICodeDefendOptions";
 import { ICodefendMapper } from "./ICodeDefendMapper";
 
 export class CodefendMapper implements ICodefendMapper {
@@ -12,7 +15,11 @@ export class CodefendMapper implements ICodefendMapper {
     this.options = options;
   }
 
-  buildMap(words: RegExpMatchArray | null, prefix?: string, map?: Record<string, string>) {
+  buildMap(
+    words: RegExpMatchArray | null,
+    prefix?: string,
+    map?: Record<string, string>
+  ) {
     map = map ?? {};
     if (!words) return map;
     prefix = prefix ?? this.options?.prefix;
@@ -44,7 +51,10 @@ export class CodefendMapper implements ICodefendMapper {
     });
     return map;
   }
-  mapPredefinedWords(map: Record<string, string>, predefinedWords?: ICodefendPredefinedWordOption[]) {
+  mapPredefinedWords(
+    map: Record<string, string>,
+    predefinedWords?: ICodefendPredefinedWordOption[]
+  ) {
     predefinedWords = predefinedWords ?? this.options?.predefinedWords ?? [];
     predefinedWords.forEach((predefinedWord) => {
       map[predefinedWord.originalWord] = predefinedWord.targetWord;

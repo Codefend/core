@@ -1,5 +1,8 @@
 import { CodefendMapper } from "./core/mapper/CodeDefendMapper";
-import { ICodefendOptions, defaultOptions } from "./core/options/ICodeDefendOptions";
+import {
+  ICodefendOptions,
+  defaultOptions,
+} from "./core/options/ICodeDefendOptions";
 import { CodefendParser } from "./core/parser/CodeDefendParser";
 import { CodefendReplacer } from "./core/replacer/CodeDefendReplacer";
 
@@ -9,7 +12,11 @@ export const Codefend = {
     mapper: new CodefendMapper(defaultOptions),
     replacer: new CodefendReplacer(),
   },
-  obfuscate: (code: string, map: Record<string, string> = {}, options?: ICodefendOptions) => {
+  obfuscate: (
+    code: string,
+    map: Record<string, string> = {},
+    options?: ICodefendOptions
+  ) => {
     const words = Codefend.core.parser.parse(code, options?.regex);
     Codefend.core.mapper.buildMap(words, options?.prefix, map);
     map = Codefend.core.mapper.sortMap(map);
