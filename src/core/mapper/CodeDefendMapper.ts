@@ -1,14 +1,14 @@
-import { ICodeDefenderOptions, ICodeDefenderPredefinedWordOption } from "../options/ICodeDefenderOptions";
-import { ICodeDefenderMapper } from "./ICodeDefenderMapper";
+import { ICodefendOptions, ICodefendPredefinedWordOption } from "../options/ICodeDefendOptions";
+import { ICodefendMapper } from "./ICodeDefendMapper";
 
-export class CodeDefenderMapper implements ICodeDefenderMapper {
-  options: ICodeDefenderOptions | undefined;
+export class CodefendMapper implements ICodefendMapper {
+  options: ICodefendOptions | undefined;
 
-  constructor(options: ICodeDefenderOptions) {
+  constructor(options: ICodefendOptions) {
     this.setOptions(options);
   }
 
-  setOptions(options: ICodeDefenderOptions) {
+  setOptions(options: ICodefendOptions) {
     this.options = options;
   }
 
@@ -44,7 +44,7 @@ export class CodeDefenderMapper implements ICodeDefenderMapper {
     });
     return map;
   }
-  mapPredefinedWords(map: Record<string, string>, predefinedWords?: ICodeDefenderPredefinedWordOption[]) {
+  mapPredefinedWords(map: Record<string, string>, predefinedWords?: ICodefendPredefinedWordOption[]) {
     predefinedWords = predefinedWords ?? this.options?.predefinedWords ?? [];
     predefinedWords.forEach((predefinedWord) => {
       map[predefinedWord.originalWord] = predefinedWord.targetWord;

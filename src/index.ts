@@ -1,22 +1,22 @@
-import { CodeDefenderMapper } from "./core/mapper/CodeDefenderMapper";
-import { ICodeDefenderOptions } from "./core/options/ICodeDefenderOptions";
-import { CodeDefenderParser } from "./core/parser/CodeDefenderParser";
-import { CodeDefenderReplacer } from "./core/replacer/CodeDefenderReplacer";
+import { CodefendMapper } from "./core/mapper/CodeDefendMapper";
+import { ICodefendOptions } from "./core/options/ICodeDefendOptions";
+import { CodefendParser } from "./core/parser/CodeDefendParser";
+import { CodefendReplacer } from "./core/replacer/CodeDefendReplacer";
 import { codeDefenderDefaultOptions } from "./core/utils/Defaults";
 
-export const CodeDefender = {
+export const Codefend = {
   core: {
-    parser: new CodeDefenderParser(codeDefenderDefaultOptions),
-    mapper: new CodeDefenderMapper(codeDefenderDefaultOptions),
-    replacer: new CodeDefenderReplacer(),
+    parser: new CodefendParser(codeDefenderDefaultOptions),
+    mapper: new CodefendMapper(codeDefenderDefaultOptions),
+    replacer: new CodefendReplacer(),
   },
-  obfuscate: (code: string, map: Record<string, string> = {}, options?: ICodeDefenderOptions) => {
-    const words = CodeDefender.core.parser.parse(code, options?.regex);
-    CodeDefender.core.mapper.buildMap(words, options?.prefix, map);
-    map = CodeDefender.core.mapper.sortMap(map);
-    CodeDefender.core.mapper.mapPredefinedWords(map, options?.predefinedWords);
-    CodeDefender.core.mapper.mapIgnoredWords(map, options?.ignoredWords);
-    const output = CodeDefender.core.replacer.replace(map, code);
+  obfuscate: (code: string, map: Record<string, string> = {}, options?: ICodefendOptions) => {
+    const words = Codefend.core.parser.parse(code, options?.regex);
+    Codefend.core.mapper.buildMap(words, options?.prefix, map);
+    map = Codefend.core.mapper.sortMap(map);
+    Codefend.core.mapper.mapPredefinedWords(map, options?.predefinedWords);
+    Codefend.core.mapper.mapIgnoredWords(map, options?.ignoredWords);
+    const output = Codefend.core.replacer.replace(map, code);
     return output;
   },
 };

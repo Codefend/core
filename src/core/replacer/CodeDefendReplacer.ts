@@ -1,6 +1,6 @@
-import { ICodeDefenderReplacer } from "./ICodeDefenderReplacer";
+import { ICodefendReplacer } from "./ICodeDefendReplacer";
 
-export class CodeDefenderReplacer implements ICodeDefenderReplacer {
+export class CodefendReplacer implements ICodefendReplacer {
   replace(map: Record<string, string>, code: string) {
     const words = Object.keys(map);
     if (!words.length) return code;
