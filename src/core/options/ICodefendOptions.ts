@@ -3,6 +3,7 @@ export interface ICodefendOptions {
   predefinedWords?: ICodefendPredefinedWordOption[];
   ignoredWords?: string[];
   regexList?: ICodefendRegexListOption[];
+  debug?: boolean;
 }
 
 export interface ICodefendPredefinedWordOption {
@@ -29,4 +30,5 @@ export const defaultOptions: ICodefendOptions = {
       value: /((cmp|lib)+(-[a-zA-Z]+)+)/g,
     },
   ],
+  debug: false,
 };

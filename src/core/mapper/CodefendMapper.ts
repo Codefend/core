@@ -1,15 +1,20 @@
+import { CodefendLogger } from "../logger/CodefendLogger";
 import {
   ICodefendOptions,
   ICodefendPredefinedWordOption,
-} from "../options/ICodeDefendOptions";
-import { ICodefendParserWord } from "./../parser/ICodeDefendParser";
-import { ICodefendMapper } from "./ICodeDefendMapper";
+} from "../options/ICodefendOptions";
+import { ICodefendParserWord } from "../parser/ICodefendParser";
+import { ICodefendMapper } from "./ICodefendMapper";
 
 export class CodefendMapper implements ICodefendMapper {
   options: ICodefendOptions | undefined;
+  logger: CodefendLogger;
+  scope: string;
 
-  constructor(options: ICodefendOptions) {
+  constructor(options: ICodefendOptions, logger: CodefendLogger) {
     this.setOptions(options);
+    this.logger = logger;
+    this.scope = this.constructor.name.replace("Codefend", "");
   }
 
   setOptions(options: ICodefendOptions) {
@@ -26,6 +31,7 @@ export class CodefendMapper implements ICodefendMapper {
     words.forEach((word) => {
       if (map[word.value]) return;
       map[word.value] = `${prefix ?? ""}${sequence++}`;
+      this.logger.log(this.scope, "INFO", word.value);
     });
     return map;
   }

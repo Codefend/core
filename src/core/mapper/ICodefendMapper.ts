@@ -1,5 +1,5 @@
-import { ICodefendPredefinedWordOption } from "../options/ICodeDefendOptions";
-import { ICodefendParserWord } from "../parser/ICodeDefendParser";
+import { ICodefendPredefinedWordOption } from "../options/ICodefendOptions";
+import { ICodefendParserWord } from "../parser/ICodefendParser";
 export interface ICodefendMapper {
   buildMap: (
     words: ICodefendParserWord[],
