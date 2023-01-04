@@ -25,4 +25,26 @@ describe("Obfuscate", () => {
       expect(output).toEqual(`import * from "./Ox1";const Ox0 = 0;`);
     });
   });
+
+  describe("predefined-ignored", () => {
+    const code = `import * from "./lib-file";const l_var = 0;const l_predefined_and_ignored = 0;`;
+    it("with default options", () => {
+      const output = obfuscate(
+        code,
+        {},
+        {
+          ignoredWords: ["l_predefined_and_ignored"],
+          predefinedWords: [
+            {
+              originalWord: "l_predefined_and_ignored",
+              targetWord: "l_predefined_target",
+            },
+          ],
+        }
+      );
+      expect(output).toEqual(
+        `import * from "./Ox2";const Ox0 = 0;const l_predefined_and_ignored = 0;`
+      );
+    });
+  });
 });
