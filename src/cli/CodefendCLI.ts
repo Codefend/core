@@ -1,11 +1,23 @@
-import { Command } from "commander";
-import { obfuscate, logger } from "..";
+import { Command, OptionValues } from "commander";
 import { version } from "../../package.json";
 import { ICodefendCLI } from "./ICodefendCLI";
 export class CodefendCLI implements ICodefendCLI {
   async start() {
-    const program = new Command();
-    program
+    const program = this.buildCommand();
+    const options = program.opts();
+    await this.excecuteCommand(program, options);
+  }
+
+  delay(ms: number) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(true);
+      }, ms);
+    });
+  }
+
+  buildCommand() {
+    return new Command()
       .version(version)
       .description("Defend Your Code By All Means Necessary.")
       .option("-i, --init", "Create .codefendrc.json (configuration file)")
@@ -18,54 +30,47 @@ export class CodefendCLI implements ICodefendCLI {
         "Obfuscate your project (based on .codefendrc.json)"
       )
       .parse(process.argv);
+  }
 
-    logger.options.debug = true;
-    const from = "const l_var = 0;";
-    logger.log(
-      this.constructor.name.replace("Codefend", "").toLowerCase(),
-      "INFO",
-      `from: ${from}`
-    );
-    const to = obfuscate(from);
-    logger.log(
-      this.constructor.name.replace("Codefend", "").toLowerCase(),
-      "INFO",
-      `to: ${to}`
-    );
-    logger.options.debug = false;
-
-    const options = program.opts();
-
+  async excecuteCommand(program: Command, options: OptionValues) {
     if (options.init) {
-      console.log("Creating .codefendrc.json...");
-      await this.delay(500);
-      console.log(
-        "Initialization completed. .codefendrc.json has been generated."
-      );
+      await this.executeInitCommand();
     }
 
     if (options.check) {
-      console.log("checking .codefendrc.json...");
-      await this.delay(500);
-      console.log("Check completed. 0 error(s)  0 warning(s) ");
+      await this.executeCheckCommand();
     }
 
     if (options.obfuscate) {
-      console.log("Obfuscation started...");
-      await this.delay(500);
-      console.log("Obfuscation completed.");
+      await this.executeObfuscateCommand();
     }
 
     if (options.help || !process.argv.slice(2).length) {
-      program.outputHelp();
+      this.executeHelpCommand(program);
     }
   }
 
-  delay(ms: number) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(true);
-      }, ms);
-    });
+  async executeInitCommand() {
+    console.log("Creating .codefendrc.json...");
+    await this.delay(500);
+    console.log(
+      "Initialization completed. .codefendrc.json has been generated."
+    );
+  }
+
+  async executeCheckCommand() {
+    console.log("checking .codefendrc.json...");
+    await this.delay(500);
+    console.log("Check completed. 0 error(s)  0 warning(s) ");
+  }
+
+  async executeObfuscateCommand() {
+    console.log("Obfuscation started...");
+    await this.delay(500);
+    console.log("Obfuscation completed.");
+  }
+
+  executeHelpCommand(program: Command) {
+    program.outputHelp();
   }
 }
