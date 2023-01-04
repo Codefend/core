@@ -1,8 +1,13 @@
+import { ICodefendRegexListOption } from "../options/ICodeDefendOptions";
+
 export interface ICodefendParser {
-  parse: (code: string, regexList?: RegExp[]) => ICodefendParserWord[];
+  parse: (
+    code: string,
+    regexList: ICodefendRegexListOption[]
+  ) => ICodefendParserWord[];
 }
 
 export interface ICodefendParserWord {
   value: string;
-  regexIndex: number;
+  fromRegex: string;
 }
