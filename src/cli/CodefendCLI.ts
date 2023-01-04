@@ -1,6 +1,7 @@
 import { Command, OptionValues } from "commander";
 import { version } from "../../package.json";
 import { ICodefendCLI } from "./ICodefendCLI";
+import { fileSystem, codefendDefaultOptions } from "..";
 export class CodefendCLI implements ICodefendCLI {
   async start() {
     const program = this.buildCommand();
@@ -53,6 +54,10 @@ export class CodefendCLI implements ICodefendCLI {
   async executeInitCommand() {
     console.log("Creating .codefendrc.json...");
     await this.delay(500);
+    await fileSystem.fileWriter.writeFile(
+      "./.codefendrc.json",
+      JSON.stringify(codefendDefaultOptions, null, 4)
+    );
     console.log(
       "Initialization completed. .codefendrc.json has been generated."
     );
