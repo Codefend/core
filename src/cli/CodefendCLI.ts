@@ -1,4 +1,5 @@
 import { Command } from "commander";
+import { obfuscate, logger } from "..";
 
 import { ICodefendCLI } from "./ICodefendCLI";
 
@@ -17,6 +18,21 @@ export class CodefendCLI implements ICodefendCLI {
         "Obfuscate your project (based on .codefendrc.json)"
       )
       .parse(process.argv);
+
+    logger.options.debug = true;
+    const from = "const l_var = 0;";
+    logger.log(
+      this.constructor.name.replace("Codefend", "").toLowerCase(),
+      "INFO",
+      `from: ${from}`
+    );
+    const to = obfuscate(from);
+    logger.log(
+      this.constructor.name.replace("Codefend", "").toLowerCase(),
+      "INFO",
+      `to: ${to}`
+    );
+    logger.options.debug = false;
 
     const options = program.opts();
 
