@@ -2,7 +2,7 @@ export interface ICodefendOptions {
   prefix?: string;
   predefinedWords?: ICodefendPredefinedWordOption[];
   ignoredWords?: string[];
-  regexList: ICodefendRegexListOption[];
+  regexList?: ICodefendRegexListOption[];
 }
 
 export interface ICodefendPredefinedWordOption {
