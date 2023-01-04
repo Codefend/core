@@ -1,7 +1,7 @@
 import { Command, OptionValues } from "commander";
+import { fileSystem, codefendDefaultOptions } from "..";
 import { version } from "../../package.json";
 import { ICodefendCLI } from "./ICodefendCLI";
-import { fileSystem, codefendDefaultOptions } from "..";
 export class CodefendCLI implements ICodefendCLI {
   async start() {
     const program = this.buildCommand();
