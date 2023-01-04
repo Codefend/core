@@ -19,7 +19,7 @@ export class CodefendParser implements ICodefendParser {
   }
 
   parse(code: string, regexList?: ICodefendRegexListOption[]) {
-    regexList = regexList ?? this.options?.regexList;
+    regexList = regexList ?? this.options.regexList;
     if (!regexList) {
       throw new Error("Codefend: regexList required for parser");
     }

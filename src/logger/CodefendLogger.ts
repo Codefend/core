@@ -13,7 +13,7 @@ export class CodefendLogger implements ICodefendLogger {
   }
 
   log(scope: string, type: string, message: unknown) {
-    if (!this.options?.debug) return;
+    if (!this.options.debug) return;
     console.log(`Codefend(${scope}):${type}:`, message);
   }
 }
