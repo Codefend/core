@@ -1,4 +1,4 @@
-import { CodefendLogger } from "../logger/CodefendLogger";
+import { CodefendLogger } from "../../logger/CodefendLogger";
 import {
   ICodefendOptions,
   ICodefendPredefinedWordOption,

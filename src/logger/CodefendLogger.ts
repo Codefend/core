@@ -1,4 +1,4 @@
-import { ICodefendOptions } from "../options/ICodefendOptions";
+import { ICodefendOptions } from "../core/options/ICodefendOptions";
 import { ICodefendLogger } from "./ICodefendLogger";
 
 export class CodefendLogger implements ICodefendLogger {
