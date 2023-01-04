@@ -6,7 +6,7 @@ export class CodefendCLI implements ICodefendCLI {
   async start() {
     const program = this.buildCommand();
     const options = program.opts();
-    await this.excecuteCommand(program, options);
+    await this.executeCommand(program, options);
   }
 
   delay(ms: number) {
@@ -33,7 +33,7 @@ export class CodefendCLI implements ICodefendCLI {
       .parse(process.argv);
   }
 
-  async excecuteCommand(program: Command, options: OptionValues) {
+  async executeCommand(program: Command, options: OptionValues) {
     if (options.init) {
       await this.executeInitCommand();
     }
