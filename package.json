@@ -1,6 +1,9 @@
 {
   "name": "codefend",
   "version": "0.0.0-development",
+  "bin": {
+    "codefend": "./bin/codefend"
+  },
   "keywords": [
     "obfuscator",
     "code",
@@ -71,5 +74,8 @@
   },
   "overrides": {
     "semver-regex": "3.1.4"
+  },
+  "dependencies": {
+    "commander": "^9.4.1"
   }
 }

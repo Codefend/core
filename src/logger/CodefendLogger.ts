@@ -1,11 +1,11 @@
-import { ICodefendOptions } from "../options/ICodefendOptions";
+import { ICodefendOptions } from "../core/options/ICodefendOptions";
 import { ICodefendLogger } from "./ICodefendLogger";
 
 export class CodefendLogger implements ICodefendLogger {
-  options: ICodefendOptions | undefined;
+  options: ICodefendOptions;
 
   constructor(options: ICodefendOptions) {
-    this.setOptions(options);
+    this.options = options;
   }
 
   setOptions(options: ICodefendOptions) {
@@ -13,7 +13,7 @@ export class CodefendLogger implements ICodefendLogger {
   }
 
   log(scope: string, type: string, message: unknown) {
-    if (!this.options?.debug) return;
+    if (!this.options.debug) return;
     console.log(`Codefend(${scope}):${type}:`, message);
   }
 }
