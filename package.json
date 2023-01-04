@@ -2,10 +2,12 @@
   "name": "codefend",
   "version": "0.0.0-development",
   "keywords": [
-    "typescript",
-    "library",
-    "starter",
-    "template"
+    "obfuscator",
+    "code",
+    "defender",
+    "angular",
+    "vue",
+    "react"
   ],
   "main": "./build/cjs/index.js",
   "module": "./build/esm/index.js",
