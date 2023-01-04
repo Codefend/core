@@ -2,10 +2,10 @@ import { ICodefendOptions } from "../core/options/ICodefendOptions";
 import { ICodefendLogger } from "./ICodefendLogger";
 
 export class CodefendLogger implements ICodefendLogger {
-  options: ICodefendOptions | undefined;
+  options: ICodefendOptions;
 
   constructor(options: ICodefendOptions) {
-    this.setOptions(options);
+    this.options = options;
   }
 
   setOptions(options: ICodefendOptions) {

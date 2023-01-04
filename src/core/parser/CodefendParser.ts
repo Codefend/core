@@ -6,11 +6,11 @@ import {
 import { ICodefendParser, ICodefendParserWord } from "./ICodefendParser";
 
 export class CodefendParser implements ICodefendParser {
-  options: ICodefendOptions | undefined;
+  options: ICodefendOptions;
   logger: CodefendLogger;
 
   constructor(options: ICodefendOptions, logger: CodefendLogger) {
-    this.setOptions(options);
+    this.options = options;
     this.logger = logger;
   }
 

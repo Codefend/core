@@ -7,12 +7,12 @@ import { ICodefendParserWord } from "../parser/ICodefendParser";
 import { ICodefendMapper } from "./ICodefendMapper";
 
 export class CodefendMapper implements ICodefendMapper {
-  options: ICodefendOptions | undefined;
+  options: ICodefendOptions;
   logger: CodefendLogger;
   scope: string;
 
   constructor(options: ICodefendOptions, logger: CodefendLogger) {
-    this.setOptions(options);
+    this.options = options;
     this.logger = logger;
     this.scope = this.constructor.name.replace("Codefend", "");
   }
