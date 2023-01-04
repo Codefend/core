@@ -1,3 +1,4 @@
+import { CodefendCLI } from "./cli/CodefendCLI";
 import { CodefendLogger } from "./core/logger/CodefendLogger";
 import { CodefendMapper } from "./core/mapper/CodefendMapper";
 import {
@@ -29,3 +30,5 @@ export function obfuscate(
   const output = CodefendCore.replacer.replace(code, map);
   return output;
 }
+
+export const cli = new CodefendCLI();
