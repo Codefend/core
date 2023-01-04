@@ -6,13 +6,13 @@ export interface ICodefendMapper {
     map: Record<string, string>,
     prefix?: string
   ) => Record<string, string>;
-  sortMap: (map: Record<string, string>) => void;
+  sortMap: (map: Record<string, string>) => Record<string, string>;
   mapIgnoredWords: (
     map: Record<string, string>,
-    ignoredWords: string[]
+    ignoredWords?: string[]
   ) => Record<string, string>;
   mapPredefinedWords: (
     map: Record<string, string>,
-    predefinedWords: ICodefendPredefinedWordOption[]
+    predefinedWords?: ICodefendPredefinedWordOption[]
   ) => Record<string, string>;
 }
