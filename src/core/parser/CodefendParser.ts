@@ -1,3 +1,4 @@
+import { CodefendLogger } from "../logger/CodefendLogger";
 import {
   ICodefendOptions,
   ICodefendRegexListOption,
@@ -6,9 +7,11 @@ import { ICodefendParser, ICodefendParserWord } from "./ICodefendParser";
 
 export class CodefendParser implements ICodefendParser {
   options: ICodefendOptions | undefined;
+  logger: CodefendLogger;
 
-  constructor(options: ICodefendOptions) {
+  constructor(options: ICodefendOptions, logger: CodefendLogger) {
     this.setOptions(options);
+    this.logger = logger;
   }
 
   setOptions(options: ICodefendOptions) {

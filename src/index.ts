@@ -1,3 +1,4 @@
+import { CodefendLogger } from "./core/logger/CodefendLogger";
 import { CodefendMapper } from "./core/mapper/CodefendMapper";
 import {
   ICodefendOptions,
@@ -6,10 +7,13 @@ import {
 import { CodefendParser } from "./core/parser/CodefendParser";
 import { CodefendReplacer } from "./core/replacer/CodefendReplacer";
 
+const logger = new CodefendLogger(defaultOptions);
+
 export const CodefendCore = {
-  parser: new CodefendParser(defaultOptions),
-  mapper: new CodefendMapper(defaultOptions),
-  replacer: new CodefendReplacer(),
+  parser: new CodefendParser(defaultOptions, logger),
+  mapper: new CodefendMapper(defaultOptions, logger),
+  replacer: new CodefendReplacer(logger),
+  logger: logger,
 };
 
 export function obfuscate(
