@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ICodefendPredefinedWordOption } from "../core/options/ICodeDefendOptions";
+import { ICodefendPredefinedWordOption } from "../core/options/ICodefendOptions";
 import { CodefendCore } from "../index";
 
 describe("Mapper", () => {

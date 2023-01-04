@@ -1,4 +1,4 @@
-import { ICodefendReplacer } from "./ICodeDefendReplacer";
+import { ICodefendReplacer } from "./ICodefendReplacer";
 
 export class CodefendReplacer implements ICodefendReplacer {
   replace(code: string, map: Record<string, string>) {

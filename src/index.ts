@@ -1,10 +1,10 @@
-import { CodefendMapper } from "./core/mapper/CodeDefendMapper";
+import { CodefendMapper } from "./core/mapper/CodefendMapper";
 import {
   ICodefendOptions,
   defaultOptions,
-} from "./core/options/ICodeDefendOptions";
-import { CodefendParser } from "./core/parser/CodeDefendParser";
-import { CodefendReplacer } from "./core/replacer/CodeDefendReplacer";
+} from "./core/options/ICodefendOptions";
+import { CodefendParser } from "./core/parser/CodefendParser";
+import { CodefendReplacer } from "./core/replacer/CodefendReplacer";
 
 export const CodefendCore = {
   parser: new CodefendParser(defaultOptions),

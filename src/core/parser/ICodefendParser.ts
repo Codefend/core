@@ -1,4 +1,4 @@
-import { ICodefendRegexListOption } from "../options/ICodeDefendOptions";
+import { ICodefendRegexListOption } from "../options/ICodefendOptions";
 
 export interface ICodefendParser {
   parse: (

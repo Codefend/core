@@ -1,9 +1,9 @@
 import {
   ICodefendOptions,
   ICodefendPredefinedWordOption,
-} from "../options/ICodeDefendOptions";
-import { ICodefendParserWord } from "./../parser/ICodeDefendParser";
-import { ICodefendMapper } from "./ICodeDefendMapper";
+} from "../options/ICodefendOptions";
+import { ICodefendParserWord } from "../parser/ICodefendParser";
+import { ICodefendMapper } from "./ICodefendMapper";
 
 export class CodefendMapper implements ICodefendMapper {
   options: ICodefendOptions | undefined;
