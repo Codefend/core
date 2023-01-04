@@ -3,7 +3,7 @@ import { obfuscate } from "../index";
 
 describe("Obfuscate", () => {
   describe("main-regex", () => {
-    const code = "const l_a = 0;";
+    const code = "const l_var = 0;";
     it("with default options", () => {
       const output = obfuscate(code);
       expect(output).toEqual("const Ox0 = 0;");
@@ -11,18 +11,18 @@ describe("Obfuscate", () => {
   });
 
   describe("file-regex", () => {
-    const code = `import lib_utils from "./lib-utils";`;
+    const code = `import * from "./lib-file";`;
     it("with default options", () => {
       const output = obfuscate(code);
-      expect(output).toEqual(`import Ox0 from "./Ox1";`);
+      expect(output).toEqual(`import * from "./Ox0";`);
     });
   });
 
   describe("all-regex", () => {
-    const code = `import lib_utils from "./lib-utils";const l_a = 0;`;
+    const code = `import * from "./lib-file";const l_var = 0;`;
     it("with default options", () => {
       const output = obfuscate(code);
-      expect(output).toEqual(`import Ox0 from "./Ox2";const Ox1 = 0;`);
+      expect(output).toEqual(`import * from "./Ox1";const Ox0 = 0;`);
     });
   });
 });
