@@ -30,5 +30,5 @@ export const defaultOptions: ICodefendOptions = {
       value: /((cmp|lib)+(-[a-zA-Z]+)+)/g,
     },
   ],
-  debug: true,
+  debug: false,
 };
