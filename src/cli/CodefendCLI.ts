@@ -1,13 +1,13 @@
 import { Command } from "commander";
 import { obfuscate, logger } from "..";
-
+import { version } from "../../package.json";
 import { ICodefendCLI } from "./ICodefendCLI";
-
 export class CodefendCLI implements ICodefendCLI {
   async start() {
     const program = new Command();
     program
-      .description("Defend Your Code By All Means Necessary. (Alpha)")
+      .version(version)
+      .description("Defend Your Code By All Means Necessary.")
       .option("-i, --init", "Create .codefendrc.json (configuration file)")
       .option(
         "-c, --check",
