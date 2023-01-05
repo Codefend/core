@@ -146,7 +146,8 @@ export class CodefendCLI implements ICodefendCLI {
     console.log("copying new files...");
     fileSystem.folderManager.copyFolderSync(
       config.generationOptions.inputDir,
-      config.generationOptions.outputDir
+      config.generationOptions.outputDir,
+      config.generationOptions.ignoredFilesInGeneration
     );
 
     const fileNames = fileSystem.folderManager.getAllFileNamesInDir(
