@@ -15,6 +15,12 @@
   "main": "./build/cjs/index.js",
   "module": "./build/esm/index.js",
   "types": "./build/src/index.d.ts",
+  "author": "mounzz",
+  "homepage": "https://github.com/Codefend/core.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Codefend/core.git"
+  },
   "license": "MIT",
   "engines": {
     "node": "^18.7.0 || >= 16",

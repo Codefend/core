@@ -54,9 +54,15 @@ export class CodefendCLI implements ICodefendCLI {
   async executeInitCommand() {
     console.log("Creating .codefendrc.json...");
     await this.delay(500);
+    const options = { ...codefendDefaultOptions };
+    if (options.regexList?.length) {
+      options.regexList.forEach((regex) => {
+        regex.value = regex.value.toString();
+      });
+    }
     await fileSystem.fileWriter.writeFile(
       "./.codefendrc.json",
-      JSON.stringify(codefendDefaultOptions, null, 4)
+      JSON.stringify(options, null, 4)
     );
     console.log(
       "Initialization completed. .codefendrc.json has been generated."
