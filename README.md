@@ -1,4 +1,6 @@
-![Alt text](logo.png?raw=true "logo")
+<p align="center">
+ ![Alt text](logo.png?raw=true "logo")
+</p>
 
 # Codefend
 
