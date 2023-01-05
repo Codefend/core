@@ -12,8 +12,10 @@ export interface ICodefendPredefinedWordOption {
 }
 
 export interface ICodefendRegexListOption {
-  value: RegExp | string;
+  value: string;
   name: string;
+  flag: string;
+  _regExp?: RegExp;
 }
 
 export const defaultOptions: ICodefendOptions = {
@@ -23,12 +25,13 @@ export const defaultOptions: ICodefendOptions = {
   regexList: [
     {
       name: "main",
-      value: /([a-zA-Z]+(_[a-zA-Z0-9]+)+)/g,
+      value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",
+      flag: "g",
     },
     {
       name: "file",
-      value: /((cmp|lib)+(-[a-zA-Z]+)+)/g,
+      value: "((cmp|lib)+(-[a-zA-Z]+)+)",
+      flag: "g",
     },
   ],
-  debug: false,
 };

@@ -9,4 +9,12 @@ export class CodefendFileReader implements ICodefendFileReader {
       return null;
     }
   }
+
+  tryParse(json: string) {
+    try {
+      return JSON.parse(json) as unknown;
+    } catch (e) {
+      return null;
+    }
+  }
 }

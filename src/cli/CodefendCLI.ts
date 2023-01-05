@@ -1,6 +1,7 @@
 import { Command, OptionValues } from "commander";
-import { fileSystem, codefendDefaultOptions } from "..";
+import { fileSystem, codefendDefaultOptions, CodefendCore } from "..";
 import { version } from "../../package.json";
+import { ICodefendOptions } from "../core/options/ICodefendOptions";
 import { ICodefendCLI } from "./ICodefendCLI";
 export class CodefendCLI implements ICodefendCLI {
   async start() {
@@ -57,7 +58,7 @@ export class CodefendCLI implements ICodefendCLI {
     const options = { ...codefendDefaultOptions };
     if (options.regexList?.length) {
       options.regexList.forEach((regex) => {
-        regex.value = regex.value.toString();
+        delete regex._regExp;
       });
     }
     fileSystem.fileWriter.writeFile(
@@ -77,11 +78,27 @@ export class CodefendCLI implements ICodefendCLI {
       warnings: [],
     };
 
-    const config = fileSystem.fileReader.readFile("./.codefendrc.json");
-    if (!config) {
+    const configFile = fileSystem.fileReader.readFile("./.codefendrc.json");
+    if (!configFile) {
       checkResults.errors.push(
         ".codefendrc.json not found. please run codefend -i to create a new one"
       );
+    }
+    let configObj;
+    if (configFile) {
+      configObj = fileSystem.fileReader.tryParse(
+        configFile
+      ) as ICodefendOptions | null;
+      if (!configObj) {
+        checkResults.errors.push(
+          ".codefendrc.json does not contains a valid json format"
+        );
+      } else {
+        configObj.regexList?.forEach((regexListOption) => {
+          regexListOption._regExp =
+            CodefendCore.parser.initializeRegex(regexListOption);
+        });
+      }
     }
 
     console.log(
@@ -96,13 +113,15 @@ export class CodefendCLI implements ICodefendCLI {
 
     const success = !checkResults.errors.length;
 
-    return success;
+    return success ? configObj : null;
   }
 
   async executeObfuscateCommand() {
-    const checkSuccess = await this.executeCheckCommand();
-    if (!checkSuccess) {
-      console.log("Could not start with Obfuscation, check contains errors");
+    const config = await this.executeCheckCommand();
+    if (!config) {
+      console.log(
+        "Could not start with Obfuscation, please resolve errors first"
+      );
       return;
     }
     console.log("Obfuscation started...");
