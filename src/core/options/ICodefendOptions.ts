@@ -12,7 +12,7 @@ export interface ICodefendPredefinedWordOption {
 }
 
 export interface ICodefendRegexListOption {
-  value: RegExp;
+  value: RegExp | string;
   name: string;
 }
 
