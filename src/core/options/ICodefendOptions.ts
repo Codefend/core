@@ -1,9 +1,20 @@
 export interface ICodefendOptions {
+  generationOptions?: ICodefendGenerationOptions;
+  obfuscationOptions: ICodefendObfuscationOptions;
+  debug?: boolean;
+}
+
+export interface ICodefendGenerationOptions {
+  inputDir: string;
+  outputDir: string;
+  ignoredFilesInGeneration: string[];
+}
+
+export interface ICodefendObfuscationOptions {
   prefix?: string;
   predefinedWords?: ICodefendPredefinedWordOption[];
   ignoredWords?: string[];
   regexList?: ICodefendRegexListOption[];
-  debug?: boolean;
 }
 
 export interface ICodefendPredefinedWordOption {
@@ -12,23 +23,44 @@ export interface ICodefendPredefinedWordOption {
 }
 
 export interface ICodefendRegexListOption {
-  value: RegExp;
+  value: string;
   name: string;
+  flag: string;
+  _regExp?: RegExp;
 }
 
 export const defaultOptions: ICodefendOptions = {
-  prefix: "Ox",
-  predefinedWords: [],
-  ignoredWords: [],
-  regexList: [
-    {
-      name: "main",
-      value: /([a-zA-Z]+(_[a-zA-Z0-9]+)+)/g,
-    },
-    {
-      name: "file",
-      value: /((cmp|lib)+(-[a-zA-Z]+)+)/g,
-    },
-  ],
-  debug: false,
+  generationOptions: {
+    inputDir: ".",
+    outputDir: "codefend-output",
+    ignoredFilesInGeneration: [
+      "codefend-output",
+      ".codefendrc.json",
+      "node_modules",
+      ".git",
+      ".github",
+      ".gitignore",
+      ".vscode",
+      "build",
+      "dist",
+    ],
+  },
+
+  obfuscationOptions: {
+    prefix: "Ox",
+    predefinedWords: [],
+    ignoredWords: [],
+    regexList: [
+      {
+        name: "main",
+        value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",
+        flag: "g",
+      },
+      {
+        name: "file",
+        value: "((cmp|lib)+(-[a-zA-Z]+)+)",
+        flag: "g",
+      },
+    ],
+  },
 };

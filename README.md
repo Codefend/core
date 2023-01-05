@@ -1,3 +1,7 @@
+<p align="center">
+ <img src="./logo.png">
+</p>
+
 # Codefend
 
 Codefend short for "Code Defender" encrypts your code regardless of your source code language or framework.
@@ -6,14 +10,30 @@ Codefend short for "Code Defender" encrypts your code regardless of your source 
 
 ```bash
 npm install codefend
+
+Usage: codefend [options]
+
+Defend Your Code By All Means Necessary.
+
+Options:
+  -V, --version    output the version number
+  -i, --init       Create .codefendrc.json (configuration file)
+  -c, --check      Check .codefendrc.json for potential warnings/errors
+  -o, --obfuscate  Obfuscate your project (based on .codefendrc.json)
+  -h, --help       display help for command
 ```
 
-# RoadMap
+## Examples
 
-- Codefend core (done)
-- Codefend cli (in progress)
-- Codefend Bundler (coming soon)
-- Codefend webpack plugin (coming soon)
+[Node js](https://github.com/Codefend/core/tree/main/examples/nodejs)
+
+### Angular (coming soon)
+
+### React (coming soon)
+
+### Vue (coming soon)
+
+### Svelte (coming soon)
 
 ## Contributing
 

@@ -1,4 +1,4 @@
-import { CodefendLogger } from "../logger/CodefendLogger";
+import { CodefendLogger } from "../../logger/CodefendLogger";
 import {
   ICodefendOptions,
   ICodefendPredefinedWordOption,
@@ -7,12 +7,12 @@ import { ICodefendParserWord } from "../parser/ICodefendParser";
 import { ICodefendMapper } from "./ICodefendMapper";
 
 export class CodefendMapper implements ICodefendMapper {
-  options: ICodefendOptions | undefined;
+  options: ICodefendOptions;
   logger: CodefendLogger;
   scope: string;
 
   constructor(options: ICodefendOptions, logger: CodefendLogger) {
-    this.setOptions(options);
+    this.options = options;
     this.logger = logger;
     this.scope = this.constructor.name.replace("Codefend", "");
   }
@@ -26,7 +26,7 @@ export class CodefendMapper implements ICodefendMapper {
     map: Record<string, string>,
     prefix?: string
   ) {
-    prefix = prefix ?? this.options?.prefix;
+    prefix = prefix ?? this.options.obfuscationOptions.prefix;
     let sequence = Object.keys(map).length;
     words.forEach((word) => {
       if (map[word.value]) return;
@@ -48,7 +48,8 @@ export class CodefendMapper implements ICodefendMapper {
   }
 
   mapIgnoredWords(map: Record<string, string>, ignoredWords?: string[]) {
-    ignoredWords = ignoredWords ?? this.options?.ignoredWords ?? [];
+    ignoredWords =
+      ignoredWords ?? this.options.obfuscationOptions.ignoredWords ?? [];
     ignoredWords.forEach((word: string) => {
       map[word] = word;
     });
@@ -59,7 +60,8 @@ export class CodefendMapper implements ICodefendMapper {
     map: Record<string, string>,
     predefinedWords?: ICodefendPredefinedWordOption[]
   ) {
-    predefinedWords = predefinedWords ?? this.options?.predefinedWords ?? [];
+    predefinedWords =
+      predefinedWords ?? this.options.obfuscationOptions.predefinedWords ?? [];
     predefinedWords.forEach((predefinedWord) => {
       map[predefinedWord.originalWord] = predefinedWord.targetWord;
     });
