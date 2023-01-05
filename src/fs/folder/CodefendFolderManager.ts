@@ -7,9 +7,15 @@ export class CodefendFolderManager implements ICodefendFolderManager {
     if (!fs.existsSync(to)) fs.mkdirSync(to);
     fs.readdirSync(from).forEach((element) => {
       if (
-        ["node_modules", ".github", ".vscode", "codefend-output"].includes(
-          element
-        )
+        [
+          "node_modules",
+          ".git",
+          ".github",
+          ".vscode",
+          "codefend-output",
+          "build",
+          "dist",
+        ].includes(element)
       )
         return;
       if (fs.lstatSync(path.join(from, element)).isFile()) {
