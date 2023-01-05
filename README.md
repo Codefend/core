@@ -1,5 +1,5 @@
 <p align="center">
- ![Alt text](logo.png?raw=true "logo")
+ <img src="./logo.png">
 </p>
 
 # Codefend
