@@ -30,7 +30,7 @@ export interface ICodefendRegexListOption {
 
 export const defaultOptions: ICodefendOptions = {
   generationOptions: {
-    inputDir: "codefend-input",
+    inputDir: ".",
     outputDir: "codefend-output",
   },
 
