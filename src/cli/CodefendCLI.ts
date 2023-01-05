@@ -126,6 +126,8 @@ export class CodefendCLI implements ICodefendCLI {
     }
     console.log("Obfuscation started...");
     await this.delay(500);
+    fileSystem.folderManager.removeFolder("./output");
+    fileSystem.folderManager.copyFolderSync("./input", "./output");
     console.log("Obfuscation completed.");
   }
 
