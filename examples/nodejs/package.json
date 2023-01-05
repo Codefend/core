@@ -1,0 +1,12 @@
+{
+  "name": "codefend-example-nodejs",
+  "main": "index.js",
+  "scripts": {
+    "codefend:init": "codefend -i",
+    "codefend:check": "codefend -c",
+    "codefend:obfuscate": "codefend -o"
+  },
+  "dependencies": {
+    "codefend": "^1.3.0-alpha.4"
+  }
+}
