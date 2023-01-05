@@ -1,4 +1,3 @@
-import { ICodefendFolderManager } from "./../build/src/fs/folder/ICodefendFolderManager.d";
 import { CodefendCLI } from "./cli/CodefendCLI";
 import { CodefendMapper } from "./core/mapper/CodefendMapper";
 import { ICodefendMapper } from "./core/mapper/ICodefendMapper";
@@ -15,6 +14,7 @@ import { ICodefendFileReader } from "./fs/file/reader/ICodefendFileReader";
 import { CodefendFileWriter } from "./fs/file/writer/CodefendFileWriter";
 import { ICodefendFileWriter } from "./fs/file/writer/ICodefendFileWriter";
 import { CodefendFolderManager } from "./fs/folder/CodefendFolderManager";
+import { ICodefendFolderManager } from "./fs/folder/ICodefendFolderManager";
 import { CodefendLogger } from "./logger/CodefendLogger";
 
 export const logger = new CodefendLogger(defaultOptions);
@@ -37,11 +37,20 @@ export function obfuscate(
   map: Record<string, string> = {},
   options?: ICodefendOptions
 ) {
-  const words = CodefendCore.parser.parse(code, options?.regexList);
-  CodefendCore.mapper.buildMap(words, map, options?.prefix);
+  const words = CodefendCore.parser.parse(
+    code,
+    options?.obfuscationOptions.regexList
+  );
+  CodefendCore.mapper.buildMap(words, map, options?.obfuscationOptions.prefix);
   map = CodefendCore.mapper.sortMap(map);
-  CodefendCore.mapper.mapPredefinedWords(map, options?.predefinedWords);
-  CodefendCore.mapper.mapIgnoredWords(map, options?.ignoredWords);
+  CodefendCore.mapper.mapPredefinedWords(
+    map,
+    options?.obfuscationOptions.predefinedWords
+  );
+  CodefendCore.mapper.mapIgnoredWords(
+    map,
+    options?.obfuscationOptions.ignoredWords
+  );
   const output = CodefendCore.replacer.replace(code, map);
   return output;
 }

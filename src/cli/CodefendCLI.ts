@@ -56,8 +56,8 @@ export class CodefendCLI implements ICodefendCLI {
     console.log("Creating .codefendrc.json...");
     await this.delay(500);
     const options = { ...codefendDefaultOptions };
-    if (options.regexList?.length) {
-      options.regexList.forEach((regex) => {
+    if (options.obfuscationOptions.regexList?.length) {
+      options.obfuscationOptions.regexList.forEach((regex) => {
         delete regex._regExp;
       });
     }
@@ -94,7 +94,14 @@ export class CodefendCLI implements ICodefendCLI {
           ".codefendrc.json does not contains a valid json format"
         );
       } else {
-        configObj.regexList?.forEach((regexListOption) => {
+        if (!configObj.generationOptions) {
+          checkResults.errors.push(
+            ".codefendrc.json is missing generationOptions. please run codefend -i to create a new one"
+          );
+          return;
+        }
+
+        configObj.obfuscationOptions.regexList?.forEach((regexListOption) => {
           regexListOption._regExp =
             CodefendCore.parser.initializeRegex(regexListOption);
         });
@@ -126,8 +133,14 @@ export class CodefendCLI implements ICodefendCLI {
     }
     console.log("Obfuscation started...");
     await this.delay(500);
-    fileSystem.folderManager.removeFolder("./output");
-    fileSystem.folderManager.copyFolderSync("./input", "./output");
+    if (!config.generationOptions) {
+      return;
+    }
+    fileSystem.folderManager.removeFolder(config.generationOptions.outputDir);
+    fileSystem.folderManager.copyFolderSync(
+      config.generationOptions.inputDir,
+      config.generationOptions.outputDir
+    );
     console.log("Obfuscation completed.");
   }
 
