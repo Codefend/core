@@ -7,6 +7,7 @@ export interface ICodefendOptions {
 export interface ICodefendGenerationOptions {
   inputDir: string;
   outputDir: string;
+  ignoredFilesInGeneration: string[];
 }
 
 export interface ICodefendObfuscationOptions {
@@ -30,8 +31,19 @@ export interface ICodefendRegexListOption {
 
 export const defaultOptions: ICodefendOptions = {
   generationOptions: {
-    inputDir: "codefend-input",
+    inputDir: ".",
     outputDir: "codefend-output",
+    ignoredFilesInGeneration: [
+      "codefend-output",
+      ".codefendrc.json",
+      "node_modules",
+      ".git",
+      ".github",
+      ".gitignore",
+      ".vscode",
+      "build",
+      "dist",
+    ],
   },
 
   obfuscationOptions: {
