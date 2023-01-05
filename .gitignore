@@ -3,3 +3,7 @@ node_modules/
 .nyc_output/
 coverage/
 .DS_Store
+.codefendrc.json
+codefend-output/
+codefend-input/
+

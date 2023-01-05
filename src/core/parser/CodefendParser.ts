@@ -18,18 +18,24 @@ export class CodefendParser implements ICodefendParser {
     this.options = options;
   }
 
+  initializeRegex(regexListOption: ICodefendRegexListOption) {
+    return new RegExp(regexListOption.value, regexListOption.flag);
+  }
+
   parse(code: string, regexList?: ICodefendRegexListOption[]) {
-    regexList = regexList ?? this.options.regexList;
+    regexList = regexList ?? this.options.obfuscationOptions.regexList;
     if (!regexList) {
       throw new Error("Codefend: regexList required for parser");
     }
     const words: ICodefendParserWord[] = [];
     let match;
-    regexList.forEach((regex) => {
-      match = code.match(regex.value);
+    regexList.forEach((regexListOption) => {
+      match = code.match(
+        regexListOption._regExp ?? this.initializeRegex(regexListOption)
+      );
       if (!match) return;
       match.forEach((word: string) => {
-        words.push({ value: word, fromRegex: regex.name });
+        words.push({ value: word, fromRegex: regexListOption.name });
       });
     });
     return words;

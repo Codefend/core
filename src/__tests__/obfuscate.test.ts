@@ -33,13 +33,15 @@ describe("Obfuscate", () => {
         code,
         {},
         {
-          ignoredWords: ["l_predefined_and_ignored"],
-          predefinedWords: [
-            {
-              originalWord: "l_predefined_and_ignored",
-              targetWord: "l_predefined_target",
-            },
-          ],
+          obfuscationOptions: {
+            ignoredWords: ["l_predefined_and_ignored"],
+            predefinedWords: [
+              {
+                originalWord: "l_predefined_and_ignored",
+                targetWord: "l_predefined_target",
+              },
+            ],
+          },
         }
       );
       expect(output).toEqual(
