@@ -24,7 +24,7 @@ export class CodefendCLI implements ICodefendCLI {
   buildCommand() {
     return new Command()
       .version(version)
-      .description("Defend Your Code By All Means Necessary.")
+      .description("Defend Your Code By All Means Necessary =)")
       .option("-i, --init", "Create .codefendrc.json (configuration file)")
       .option(
         "-c, --check",
