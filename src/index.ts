@@ -9,6 +9,8 @@ import { CodefendParser } from "./core/parser/CodefendParser";
 import { ICodefendParser } from "./core/parser/ICodefendParser";
 import { CodefendReplacer } from "./core/replacer/CodefendReplacer";
 import { ICodefendReplacer } from "./core/replacer/ICodefendReplacer";
+import { CodefendFileReader } from "./fs/file/reader/CodefendFileReader";
+import { ICodefendFileReader } from "./fs/file/reader/ICodefendFileReader";
 import { CodefendFileWriter } from "./fs/file/writer/CodefendFileWriter";
 import { ICodefendFileWriter } from "./fs/file/writer/ICodefendFileWriter";
 import { CodefendLogger } from "./logger/CodefendLogger";
@@ -17,6 +19,7 @@ export const logger = new CodefendLogger(defaultOptions);
 export const cli = new CodefendCLI();
 export const fileSystem: ICodefendFileSystem = {
   fileWriter: new CodefendFileWriter(),
+  fileReader: new CodefendFileReader(),
 };
 export const codefendDefaultOptions = defaultOptions;
 
@@ -48,4 +51,5 @@ export interface ICodefendCore {
 
 export interface ICodefendFileSystem {
   fileWriter: ICodefendFileWriter;
+  fileReader: ICodefendFileReader;
 }

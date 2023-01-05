@@ -72,10 +72,39 @@ export class CodefendCLI implements ICodefendCLI {
   async executeCheckCommand() {
     console.log("checking .codefendrc.json...");
     await this.delay(500);
-    console.log("Check completed. 0 error(s)  0 warning(s) ");
+    const checkResults: ICheckResults = {
+      errors: [],
+      warnings: [],
+    };
+
+    const config = fileSystem.fileReader.readFile("./.codefendrc.json");
+    if (!config) {
+      checkResults.errors.push(
+        ".codefendrc.json not found. please run codefend -i to create a new one"
+      );
+    }
+
+    console.log(
+      `Check completed. ${checkResults.errors.length} error(s)  ${checkResults.warnings.length} warning(s) `
+    );
+    checkResults.errors.forEach((error) => {
+      console.log(`Error: ${error}`);
+    });
+    checkResults.warnings.forEach((warning) => {
+      console.log(`Warning: ${warning}`);
+    });
+
+    const success = !checkResults.errors.length;
+
+    return success;
   }
 
   async executeObfuscateCommand() {
+    const checkSuccess = await this.executeCheckCommand();
+    if (!checkSuccess) {
+      console.log("Could not start with Obfuscation, check contains errors");
+      return;
+    }
     console.log("Obfuscation started...");
     await this.delay(500);
     console.log("Obfuscation completed.");
@@ -84,4 +113,9 @@ export class CodefendCLI implements ICodefendCLI {
   executeHelpCommand(program: Command) {
     program.outputHelp();
   }
+}
+
+export interface ICheckResults {
+  warnings: string[];
+  errors: string[];
 }
