@@ -35,6 +35,7 @@ export const defaultOptions: ICodefendOptions = {
     outputDir: "codefend-output",
     ignoredFilesInGeneration: [
       "codefend-output",
+      ".codefendrc.json",
       "node_modules",
       ".git",
       ".github",
