@@ -29,4 +29,24 @@ export class CodefendFolderManager implements ICodefendFolderManager {
   removeFolder(path: string): void {
     fs.rmSync(path, { recursive: true, force: true });
   }
+
+  getAllFileNamesInDir(dirName: string) {
+    let files: unknown[] = [];
+    const items = fs.readdirSync(dirName, { withFileTypes: true });
+
+    for (const item of items) {
+      if (item.isDirectory()) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        files = [
+          ...files,
+          ...this.getAllFileNamesInDir(`${dirName}/${item.name}`),
+        ];
+      } else {
+        files.push(`${dirName}/${item.name}`);
+      }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return files;
+  }
 }

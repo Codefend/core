@@ -1,5 +1,10 @@
 import { Command, OptionValues } from "commander";
-import { fileSystem, codefendDefaultOptions, CodefendCore } from "..";
+import {
+  fileSystem,
+  codefendDefaultOptions,
+  CodefendCore,
+  obfuscate,
+} from "..";
 import { version } from "../../package.json";
 import { ICodefendOptions } from "../core/options/ICodefendOptions";
 import { ICodefendCLI } from "./ICodefendCLI";
@@ -136,11 +141,27 @@ export class CodefendCLI implements ICodefendCLI {
     if (!config.generationOptions) {
       return;
     }
+    console.log("removing existing output folder...");
     fileSystem.folderManager.removeFolder(config.generationOptions.outputDir);
+    console.log("copying new files...");
     fileSystem.folderManager.copyFolderSync(
       config.generationOptions.inputDir,
       config.generationOptions.outputDir
     );
+
+    const fileNames = fileSystem.folderManager.getAllFileNamesInDir(
+      config.generationOptions.outputDir
+    );
+    console.log(`copied ${fileNames.length} file(s)`);
+    const map: Record<string, string> = {};
+    let fileCode;
+    fileNames.forEach((fileName) => {
+      fileCode = fileSystem.fileReader.readFile(fileName as string);
+      fileSystem.fileWriter.writeFile(
+        fileName as string,
+        obfuscate(fileCode ?? "", map, config)
+      );
+    });
     console.log("Obfuscation completed.");
   }
 
