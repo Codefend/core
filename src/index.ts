@@ -9,8 +9,8 @@ import { CodefendParser } from "./core/parser/CodefendParser";
 import { ICodefendParser } from "./core/parser/ICodefendParser";
 import { CodefendReplacer } from "./core/replacer/CodefendReplacer";
 import { ICodefendReplacer } from "./core/replacer/ICodefendReplacer";
-import { CodefendFileWriter } from "./fs/file/CodefendFileWriter";
-import { ICodefendFileWriter } from "./fs/file/ICodefendFileWriter";
+import { CodefendFileWriter } from "./fs/file/writer/CodefendFileWriter";
+import { ICodefendFileWriter } from "./fs/file/writer/ICodefendFileWriter";
 import { CodefendLogger } from "./logger/CodefendLogger";
 
 export const logger = new CodefendLogger(defaultOptions);
