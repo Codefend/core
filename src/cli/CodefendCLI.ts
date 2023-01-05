@@ -60,7 +60,7 @@ export class CodefendCLI implements ICodefendCLI {
         regex.value = regex.value.toString();
       });
     }
-    await fileSystem.fileWriter.writeFile(
+    fileSystem.fileWriter.writeFile(
       "./.codefendrc.json",
       JSON.stringify(options, null, 4)
     );
