@@ -2,11 +2,11 @@
  <img src="./public/img/logo.png">
 </p>
 
-# `Codefend`
+# Codefend
 
 Codefend short for "Code Defender" encrypts your code regardless of your source code language or framework.
 
-## `Installation`
+## Installation
 
 #### `Globally`
 
@@ -29,7 +29,7 @@ npx codefend -i  //generates .codefendrc.json
 npx codefend -o  //obfuscates your whole project inside a new directory: 'codefend-output'
 ```
 
-## `Commands`
+## Commands
 
 ```bash
 Usage: codefend [options]
@@ -44,12 +44,12 @@ Options:
   -h, --help       display help for command
 ```
 
-## `Philosophy`
+## Philosophy
 
 The only thing Codefend needs from you as a programmer is to follow a specific **naming convention** for the **words** that you want to obfuscate **(variable/functions/classes...)** and Codefend will do the rest for you!
 This basic rule applies to all the languages and the frameworks that you will be programming with.
 
-## `configuration`
+## Configuration
 
 ```js
 //default configuration generated inside .codefendrc.json
@@ -92,7 +92,7 @@ This basic rule applies to all the languages and the frameworks that you will be
 
 ```
 
-## `Usage`
+## Usage
 
 ### `Naming convention`
 
@@ -139,24 +139,24 @@ it is possible also to change the regex from the .codefendrc.json file so that y
  <img src="./public/img/npx_example_1.PNG">
 </p>
 
-## `Examples`
+## Examples
 
-[Node js example](https://github.com/Codefend/core/tree/main/examples/nodejs)
+[Node js](https://github.com/Codefend/core/tree/main/examples/nodejs)
 
-### `Angular example` (coming soon)
+### `Angular` (coming soon)
 
-### `React example` (coming soon)
+### `React` (coming soon)
 
-### `Vue example` (coming soon)
+### `Vue` (coming soon)
 
-### `Svelte example` (coming soon)
+### `Svelte` (coming soon)
 
-## `Contributing`
+## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## `License`
+## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
