@@ -31,7 +31,7 @@ export class CodefendMapper implements ICodefendMapper {
     words.forEach((word) => {
       if (map[word.value]) return;
       map[word.value] = `${prefix ?? ""}${sequence++}`;
-      this.logger.log(this.scope, "INFO", word.value);
+      this.logger.info("Codefend", `${word.value} --> ${map[word.value]}`);
     });
     return map;
   }

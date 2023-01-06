@@ -86,6 +86,7 @@
     "semver-regex": "3.1.4"
   },
   "dependencies": {
+    "chalk": "^5.2.0",
     "commander": "^9.4.1"
   }
 }

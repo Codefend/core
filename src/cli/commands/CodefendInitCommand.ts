@@ -1,4 +1,4 @@
-import { fileSystem, codefendDefaultOptions } from "../../";
+import { fileSystem, codefendDefaultOptions, logger } from "../../";
 import { OPTIONS_FILE_PATH } from "./../../utils/Constants";
 export class CodefendInitCommand {
   execute() {
@@ -14,7 +14,6 @@ export class CodefendInitCommand {
       OPTIONS_FILE_PATH,
       JSON.stringify(options, null, 4)
     );
-
-    console.log(".codefendrc.json created.");
+    logger.success("Codefend", ".codefendrc.json created.");
   }
 }
