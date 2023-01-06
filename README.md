@@ -96,6 +96,8 @@ This basic rule applies to all the languages and the frameworks that you will be
 
 ### `Step 1`: Naming convention
 
+`Add prefixes to the words that you want to encrypt.`
+
 ```js
 /** 
 1- local variable -> starts with l_
@@ -120,6 +122,13 @@ class Ox0 {
 ```
 
 ### `Step 2`: Run the CLI
+
+`navigate to the root of your project and run the following commands:`
+
+```bash
+codefend -i  //generates .codefendrc.json
+codefend -o  //obfuscates your whole project inside a new directory: 'codefend-output'
+```
 
 <p align="center">
  <img src="./public/img/main-example.PNG">
