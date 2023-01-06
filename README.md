@@ -46,8 +46,8 @@ Options:
 
 ## Philosophy
 
-The only thing Codefend needs from you as a programmer is to follow a specific **naming convention** for the **words** that you want to obfuscate **(variable/functions/classes...)** and Codefend will do the rest.\
-This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source.
+`The only thing Codefend needs from you as a programmer is to follow a specific **naming convention** for the **words** that you want to obfuscate **(variable/functions/classes...)** and Codefend will do the rest.\
+This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source.`
 
 ## Configuration
 
@@ -134,17 +134,14 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
  <img src="./public/img/main-example.PNG">
 </p>
 
-### `Step 3`: install dependencies, build and finally deploy
+### `Step 3`: install dependencies, build and deploy the obfuscated project
 
 ```bash
-//1. navigate to the output folder (codefend-ouput by default)
-      cd codefend-ouput
-//2. install dependencies:
-      npm install //or equivalent depending on your language
-//3. build project:
-      npm run build
-//4. build project:
-      npm run deploy
+
+      cd codefend-ouput  //navigate to the output folder (codefend-ouput by default)
+      npm install //install dependencies
+      npm run build //build the obfuscated project
+      npm run deploy  //deploy the obfuscated project
 ```
 
 ## Examples
