@@ -143,7 +143,7 @@ it is possible also to change the regex from the .codefendrc.json file so that y
 
 ## Examples
 
-1. ### [Node js](https://github.com/Codefend/core/tree/main/examples/nodejs)
+1. ### [`Node js`](https://github.com/Codefend/core/tree/main/examples/nodejs)
 
 2. ### `Angular` (coming soon)
 
