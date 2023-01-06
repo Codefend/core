@@ -84,6 +84,12 @@ class Ox0 {
 
 ```bash
 codefend -i  //generates .codefendrc.json
+
+```
+
+`then:`
+
+```bash
 codefend -o  //obfuscates your whole project inside a new directory: 'codefend-output'
 ```
 
