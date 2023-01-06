@@ -1,5 +1,5 @@
 <p align="center">
- <img src="./logo.png">
+ <img src="./public/img/logo.png">
 </p>
 
 # Codefend
@@ -22,6 +22,10 @@ Options:
   -o, --obfuscate  Obfuscate your project (based on .codefendrc.json)
   -h, --help       display help for command
 ```
+
+<p align="center">
+ <img src="./public/img/npx_example_1.PNG">
+</p>
 
 ## Examples
 
