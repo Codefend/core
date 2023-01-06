@@ -92,7 +92,7 @@ This basic rule applies to all the languages and the frameworks that you will be
 
 ```
 
-## Usage
+## Basic Usage
 
 ### `Naming convention`
 
@@ -115,28 +115,6 @@ class Ox0 {
   Ox1(Ox2, Ox3) {
     const Ox4 = Ox2 + Ox3;
     return Ox4;
-  }
-}
-```
-
-Note: its possible to not follow the exact naming convention as long as the words you want to encrypts match the regex.
-
-```js
-//as an example you can use the same prefix for all words:
-class l_Calculator {
-  l_sum(l_a, l_b) {
-    const l_results = l_a + l_b;
-    return l_results;
-  }
-}
-```
-
-```js
-// or use a custom prefix
-class myApp_Calculator {
-  myApp_sum(myApp_a, myApp_b) {
-    const myApp_results = myApp_a + myApp_b;
-    return myApp_results;
   }
 }
 ```
@@ -175,6 +153,42 @@ class myApp_Calculator {
 7. ### `C#` (coming soon)
 
 8. ### `C++` (coming soon)
+
+## Advanced Usage (beta)
+
+### `Prefix`
+
+default: "Ox"
+
+### `Naming convention`
+
+````js
+
+Note: its possible to not follow the exact naming convention as long as the words you want to encrypts match the regex.
+
+```js
+//as an example you can use the same prefix for all words:
+class l_Calculator {
+  l_sum(l_a, l_b) {
+    const l_results = l_a + l_b;
+    return l_results;
+  }
+}
+````
+
+```js
+// or use a custom prefix
+class myApp_Calculator {
+  myApp_sum(myApp_a, myApp_b) {
+    const myApp_results = myApp_a + myApp_b;
+    return myApp_results;
+  }
+}
+```
+
+### `Ignore Files`
+
+its possible to ignore some files from being generated into the new obfuscated folder
 
 ## Contributing
 
