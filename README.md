@@ -109,6 +109,14 @@ class c_Calculator {
     return l_results;
   }
 }
+
+//>>>>>>==== Will Become ======<<<<<<
+class Ox0 {
+  Ox1(Ox2, Ox3) {
+    const Ox4 = Ox2 + Ox3;
+    return Ox4;
+  }
+}
 ```
 
 Note: its possible to not follow the exact naming convention as long as the words you want to encrypts match the regex.
@@ -136,10 +144,10 @@ class myApp_Calculator {
 ### `CLI`
 
 <p align="center">
- <img src="./public/img/npx_example_1.PNG">
+ <img src="./public/img/main-example.PNG">
 </p>
 
-### `after Obfuscation is completed`
+### `after Obfuscation is complete`
 
 ```bash
 //1. navigate to the output folder (codefend-ouput by default)
