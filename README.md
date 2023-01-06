@@ -22,12 +22,14 @@ npm install -D codefend
 
 #### npx
 
-In case you want to execute it directly and dont want to install it:
+In case you want to execute it directly without installing it on your machine:
 
 ```bash
 npx codefend -i  //generates .codefendrc.json
 npx codefend -o  //obfuscates your whole project inside a new directory: 'codefend-output'
 ```
+
+## Commands
 
 ```bash
 Usage: codefend [options]
@@ -41,6 +43,10 @@ Options:
   -o, --obfuscate  Obfuscate your project (based on .codefendrc.json)
   -h, --help       display help for command
 ```
+
+## Philosophy
+
+## Usage
 
 <p align="center">
  <img src="./public/img/npx_example_1.PNG">
