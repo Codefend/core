@@ -143,15 +143,15 @@ it is possible also to change the regex from the .codefendrc.json file so that y
 
 ## Examples
 
-[Node js](https://github.com/Codefend/core/tree/main/examples/nodejs)
+1. ### [Node js](https://github.com/Codefend/core/tree/main/examples/nodejs)
 
-1. ### `Angular` (coming soon)
+2. ### `Angular` (coming soon)
 
-### `React` (coming soon)
+3. ### `React` (coming soon)
 
-### `Vue` (coming soon)
+4. ### `Vue` (coming soon)
 
-### `Svelte` (coming soon)
+5. ### `Svelte` (coming soon)
 
 ## Contributing
 
