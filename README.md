@@ -2,25 +2,25 @@
  <img src="./public/img/logo.png">
 </p>
 
-# Codefend
+# `Codefend`
 
 Codefend short for "Code Defender" encrypts your code regardless of your source code language or framework.
 
-## Installation
+## `Installation`
 
-#### Globally
+#### `Globally`
 
 ```bash
 npm install -g codefend
 ```
 
-#### Dev dependency
+#### `Dev dependency`
 
 ```bash
 npm install -D codefend
 ```
 
-#### npx
+#### `npx`
 
 In case you want to execute it directly without installing it on your machine:
 
@@ -29,7 +29,7 @@ npx codefend -i  //generates .codefendrc.json
 npx codefend -o  //obfuscates your whole project inside a new directory: 'codefend-output'
 ```
 
-## Commands
+## `Commands`
 
 ```bash
 Usage: codefend [options]
@@ -44,14 +44,15 @@ Options:
   -h, --help       display help for command
 ```
 
-## Philosophy
+## `Philosophy`
 
 The only thing Codefend needs from you as a programmer is to follow a specific **naming convention** for the **words** that you want to obfuscate **(variable/functions/classes...)** and Codefend will do the rest for you!
 This basic rule applies to all the languages and the frameworks that you will be programming with.
 
-## `config`
+## `configuration`
 
 ```js
+//default configuration generated inside .codefendrc.json
 {
   debug: true,    // for additional logs
   generationOptions: {
@@ -91,9 +92,9 @@ This basic rule applies to all the languages and the frameworks that you will be
 
 ```
 
-## Usage
+## `Usage`
 
-### Naming convention
+### `Naming convention`
 
 ```js
 /** 
@@ -132,30 +133,30 @@ class myApp_Calculator {
 
 it is possible also to change the regex from the .codefendrc.json file so that you name the variables in another way
 
-### CLI
+### `CLI`
 
 <p align="center">
  <img src="./public/img/npx_example_1.PNG">
 </p>
 
-## Examples
+## `Examples`
 
-[Node js](https://github.com/Codefend/core/tree/main/examples/nodejs)
+[Node js example](https://github.com/Codefend/core/tree/main/examples/nodejs)
 
-### Angular (coming soon)
+### `Angular example` (coming soon)
 
-### React (coming soon)
+### `React example` (coming soon)
 
-### Vue (coming soon)
+### `Vue example` (coming soon)
 
-### Svelte (coming soon)
+### `Svelte example` (coming soon)
 
-## Contributing
+## `Contributing`
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## License
+## `License`
 
 [MIT](https://choosealicense.com/licenses/mit/)
