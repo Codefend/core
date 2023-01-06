@@ -111,7 +111,7 @@ class c_Calculator {
 }
 ```
 
-Note: its possible to not follow the exact naming convention as long as the words you want to encrypts match the regex,
+Note: its possible to not follow the exact naming convention as long as the words you want to encrypts match the regex.
 
 ```js
 //as an example you can use the same prefix for all words:
@@ -133,8 +133,6 @@ class myApp_Calculator {
 }
 ```
 
-it is possible also to change the regex from the .codefendrc.json file so that you name the variables in another way
-
 ### `CLI`
 
 <p align="center">
@@ -152,6 +150,12 @@ it is possible also to change the regex from the .codefendrc.json file so that y
 4. ### `Vue` (coming soon)
 
 5. ### `Svelte` (coming soon)
+
+6. ### `Python` (coming soon)
+
+7. ### `C#` (coming soon)
+
+8. ### `C++` (coming soon)
 
 ## Contributing
 
