@@ -49,49 +49,6 @@ Options:
 `The only thing Codefend needs from you as a programmer is to follow a specific **naming convention** for the **words** that you want to obfuscate **(variable/functions/classes...)** and Codefend will do the rest.\
 This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source.`
 
-## Configuration
-
-```js
-//default configuration generated inside .codefendrc.json
-{
-  debug: true,    // for additional logs
-  generationOptions: {
-    inputDir: ".", // the folder that should be copied and obfuscated ( keep it . if you're running in the same directory)
-    outputDir: "codefend-output", // the output folder that will be an obfuscated clone of your code
-    ignoredFilesInGeneration: [ // the files that should not be copied to the output folder
-      "codefend-output",
-      ".codefendrc.json",
-      "node_modules",
-      ".git",
-      ".github",
-      ".gitignore",
-      ".vscode",
-      "build",
-      "dist",
-    ],
-  },
-
-  obfuscationOptions: {
-    prefix: "Ox", // the prefix of each variable, make sure its a valid character to start with a variable ( e.g dont start with "-"" or a number)
-    predefinedWords: [], // words that you want to obfuscate them in a static way
-    ignoredWords: ["node_modules"], // words that you dont want to obfuscate them and they unfortunately match the regex :)
-    regexList: [
-      {
-        name: "main",
-        value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",//regex for variables,functions,classes ...
-        flag: "g",
-      },
-      {
-        name: "file",
-        value: "((cmp|lib)+(-[a-zA-Z]+)+)",//regex for files (coming soon)
-        flag: "g",
-      },
-    ],
-  },
-}
-
-```
-
 ## Basic Usage
 
 ### `Step 1`: Naming convention
@@ -161,6 +118,49 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 7. ### `C#` (coming soon)
 
 8. ### `C++` (coming soon)
+
+## Configuration
+
+```js
+//default configuration generated inside .codefendrc.json
+{
+  debug: true,    // for additional logs
+  generationOptions: {
+    inputDir: ".", // the folder that should be copied and obfuscated ( keep it . if you're running in the same directory)
+    outputDir: "codefend-output", // the output folder that will be an obfuscated clone of your code
+    ignoredFilesInGeneration: [ // the files that should not be copied to the output folder
+      "codefend-output",
+      ".codefendrc.json",
+      "node_modules",
+      ".git",
+      ".github",
+      ".gitignore",
+      ".vscode",
+      "build",
+      "dist",
+    ],
+  },
+
+  obfuscationOptions: {
+    prefix: "Ox", // the prefix of each variable, make sure its a valid character to start with a variable ( e.g dont start with "-"" or a number)
+    predefinedWords: [], // words that you want to obfuscate them in a static way
+    ignoredWords: ["node_modules"], // words that you dont want to obfuscate them and they unfortunately match the regex :)
+    regexList: [
+      {
+        name: "main",
+        value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",//regex for variables,functions,classes ...
+        flag: "g",
+      },
+      {
+        name: "file",
+        value: "((cmp|lib)+(-[a-zA-Z]+)+)",//regex for files (coming soon)
+        flag: "g",
+      },
+    ],
+  },
+}
+
+```
 
 ## Advanced Usage (beta)
 
