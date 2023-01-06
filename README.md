@@ -46,7 +46,7 @@ Options:
 
 ## Philosophy
 
-The only thing Codefend needs from you as a programmer is to follow a specific naming convention for your variable/functions/classes... and Codefend will do its magic. no matter the language nor the framework your programming with.
+The only thing Codefend needs from you as a programmer is to follow a specific naming convention for the "words" that you want to obfuscate (variable/functions/classes...) and Codefend will do its magic! this basic rule apply to all the languages and the frameworks that you're programming with.
 
 ```js
 /** 
