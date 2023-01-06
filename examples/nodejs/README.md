@@ -3,7 +3,7 @@
 ## Usage
 
 ```bash
-npm install
+npm install -D codefend@latest
 
 npm run codefend:init
 

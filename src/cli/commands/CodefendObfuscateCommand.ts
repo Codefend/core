@@ -11,13 +11,11 @@ export class CodefendObfuscateCommand {
       return;
     }
 
-    options.obfuscationOptions.regexList?.forEach((regexListOption) => {
-      regexListOption._regExp =
-        CodefendCore.parser.initializeRegex(regexListOption);
-    });
     if (!options.generationOptions) {
       return;
     }
+    this.applyTransformationsOnOptions(options);
+
     logger.info("Codefend", "Obfuscation started...");
     logger.info(
       "Codefend",
@@ -46,5 +44,28 @@ export class CodefendObfuscateCommand {
     });
     logger.success("Codefend", `Obfuscated ${Object.keys(map).length} word(s)`);
     logger.success("Codefend", `Obfuscation completed.`);
+  }
+  applyTransformationsOnOptions(options: ICodefendOptions) {
+    this.initializeRegexList(options);
+    this.addInternallyRequiredFilesToIgnoreInGeneration(options);
+  }
+
+  initializeRegexList(options: ICodefendOptions) {
+    options.obfuscationOptions.regexList?.forEach((regexListOption) => {
+      regexListOption._regExp =
+        CodefendCore.parser.initializeRegex(regexListOption);
+    });
+  }
+
+  addInternallyRequiredFilesToIgnoreInGeneration(options: ICodefendOptions) {
+    if (
+      !options.generationOptions?.ignoredFilesInGeneration.includes(
+        options.generationOptions.outputDir
+      )
+    ) {
+      options.generationOptions?.ignoredFilesInGeneration.push(
+        options.generationOptions.outputDir
+      );
+    }
   }
 }
