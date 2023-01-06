@@ -16,6 +16,10 @@ cd codefend-output
 code .
 ```
 
+<p align="center">
+ <img src="./public/img/npx_example_1.PNG">
+</p>
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
