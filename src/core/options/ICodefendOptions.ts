@@ -50,7 +50,7 @@ export const defaultOptions: ICodefendOptions = {
   obfuscationOptions: {
     prefix: "Ox",
     predefinedWords: [],
-    ignoredWords: [],
+    ignoredWords: ["node_modules"],
     regexList: [
       {
         name: "main",
