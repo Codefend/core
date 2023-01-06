@@ -46,7 +46,12 @@ Options:
 
 ## Philosophy
 
-The only thing Codefend needs from you as a programmer is to follow a specific **naming convention** for the **words** that you want to obfuscate **(variable/functions/classes...)** and Codefend will do its magic! this basic rule apply to all the languages and the frameworks that you're programming with.
+The only thing Codefend needs from you as a programmer is to follow a specific **naming convention** for the **words** that you want to obfuscate **(variable/functions/classes...)** and Codefend will do the rest for you!
+This basic rule applies to all the languages and the frameworks that you will be programming with.
+
+## Usage
+
+### Naming convention
 
 ```js
 /** 
@@ -85,7 +90,7 @@ class myApp_Calculator {
 
 it is possible also to change the regex from the .codefendrc.json file so that you name the variables in another way
 
-## Usage
+### CLI
 
 <p align="center">
  <img src="./public/img/npx_example_1.PNG">
