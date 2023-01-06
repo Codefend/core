@@ -1,6 +1,6 @@
 {
   "name": "codefend",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Code obfuscator that protects your code regardless of the programming language or framework.",
   "keywords": [
     "obfuscator",

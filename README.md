@@ -147,7 +147,10 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
   obfuscationOptions: {
     prefix: "Ox", // the prefix of each variable, make sure its a valid character to start with a variable ( e.g do not start with "-"" or a number)
-    predefinedWords: [], // words that you want to obfuscate them in a static way
+    predefinedWords: [], // words that you want to obfuscate them in a static way (determined output)
+                         // {"originalWord":"l_secretVar" , "targetWord": "123456"}
+                         // note that the original word should have a prefix 'l_' to be detected and replaced
+
     ignoredWords: ["node_modules"], // words that you wish not to obfuscate them and they unfortunately match the regex :)
     regexList: [
       {
