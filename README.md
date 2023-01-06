@@ -46,6 +46,45 @@ Options:
 
 ## Philosophy
 
+The only thing Codefend needs from you as a programmer is to follow a specific naming convention for your variable/functions/classes... and Codefend will do its magic. no matter the language nor the framework your programming with.
+
+```js
+/** 
+1- local variable -> starts with l_
+2- parameter -> starts with p_
+3- function -> starts with f_
+4- class -> starts with c_
+*/
+class c_Calculator {
+  f_sum(p_a, p_b) {
+    const l_results = p_a + p_b;
+    return l_results;
+  }
+}
+```
+
+Note: its possible to not follow the exact naming convention as long as the words you want to encrypts match the regex,
+
+```js
+//as an example you can use the same prefix for all words:
+class l_Calculator {
+  l_sum(l_a, l_b) {
+    const l_results = l_a + l_b;
+    return l_results;
+  }
+}
+
+// or use a custom prefix
+class myApp_Calculator {
+  myApp_sum(myApp_a, myApp_b) {
+    const myApp_results = myApp_a + myApp_b;
+    return myApp_results;
+  }
+}
+```
+
+it is possible also to change the regex from the .codefendrc.json file so that you name the variables in another way
+
 ## Usage
 
 <p align="center">
