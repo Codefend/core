@@ -1,10 +1,11 @@
-import { fileSystem, CodefendCore, obfuscate } from "../../";
+import { fileSystem, CodefendCore, obfuscate, logger } from "../../";
 import { ICodefendOptions } from "../../core/options/ICodefendOptions";
 
 export class CodefendObfuscateCommand {
   execute(options: ICodefendOptions | null) {
     if (!options) {
-      console.log(
+      logger.error(
+        "Codefend",
         "Could not start with Obfuscation. Please resolve errors first."
       );
       return;
@@ -17,11 +18,13 @@ export class CodefendObfuscateCommand {
     if (!options.generationOptions) {
       return;
     }
-    console.log("Obfuscation started...");
-
-    console.log("removing existing output folder...");
+    logger.info("Codefend", "Obfuscation started...");
+    logger.info(
+      "Codefend",
+      `removing existing output folder ${options.generationOptions.outputDir}...`
+    );
     fileSystem.folderManager.removeFolder(options.generationOptions.outputDir);
-    console.log("copying new files...");
+    logger.info("Codefend", "copying new files...");
     fileSystem.folderManager.copyFolderSync(
       options.generationOptions.inputDir,
       options.generationOptions.outputDir,
@@ -31,7 +34,7 @@ export class CodefendObfuscateCommand {
     const fileNames = fileSystem.folderManager.getAllFileNamesInDir(
       options.generationOptions.outputDir
     );
-    console.log(`copied ${fileNames.length} file(s)`);
+    logger.success("Codefend", `copied ${fileNames.length} file(s)`);
     const map: Record<string, string> = {};
     let fileCode;
     fileNames.forEach((fileName) => {
@@ -41,6 +44,7 @@ export class CodefendObfuscateCommand {
         obfuscate(fileCode ?? "", map, options)
       );
     });
-    console.log("Obfuscation completed.");
+    logger.success("Codefend", `Obfuscated ${Object.keys(map).length} word(s)`);
+    logger.success("Codefend", `Obfuscation completed.`);
   }
 }

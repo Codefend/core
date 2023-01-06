@@ -1,4 +1,4 @@
-import { fileSystem } from "../../";
+import { fileSystem, logger } from "../../";
 import { ICodefendOptions } from "../../core/options/ICodefendOptions";
 import { OPTIONS_FILE_PATH } from "./../../utils/Constants";
 
@@ -50,14 +50,20 @@ export class CodefendCheckCommand {
   }
 
   printCheckResults(checkResults: ICheckResults) {
-    console.log(
-      `Check completed. ${checkResults.errors.length} error(s)  ${checkResults.warnings.length} warning(s) `
-    );
+    const message = `Check completed. ${checkResults.errors.length} error(s)  ${checkResults.warnings.length} warning(s) `;
+
+    if (checkResults.errors.length) {
+      logger.error("Codefend", message);
+    } else if (checkResults.warnings.length) {
+      logger.warning("Codefend", message);
+    } else {
+      logger.success("Codefend", message);
+    }
     checkResults.errors.forEach((error) => {
-      console.log(`Error: ${error}`);
+      logger.error("Codefend", `Error: ${error}`);
     });
     checkResults.warnings.forEach((warning) => {
-      console.log(`Warning: ${warning}`);
+      logger.warning("Codefend", `Warning: ${warning}`);
     });
   }
 }
