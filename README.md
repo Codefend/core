@@ -34,7 +34,7 @@ npx codefend -o  //obfuscates your whole project inside a new directory: 'codefe
 ```bash
 Usage: codefend [options]
 
-Defend Your Code By All Means Necessary. 🍿 😎 🍿
+Defend Your Code By All Means Necessary. 💪 😎
 
 Options:
   -V, --version    output the version number
