@@ -46,7 +46,7 @@ Options:
 
 ## Philosophy
 
-The only thing Codefend needs from you as a programmer is to `follow a specific naming convention for the words that you want to obfuscate` (variable/functions/classes...) `and Codefend will do the rest.`\
+The only thing Codefend needs from you as a programmer is to `follow a specific naming convention for the words that you want to obfuscate` (variable/functions/classes...) `and Codefend will do the rest 👋`\
 This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source.
 
 ## Basic Usage
