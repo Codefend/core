@@ -8,9 +8,26 @@ Codefend short for "Code Defender" encrypts your code regardless of your source 
 
 ## Installation
 
-```bash
-npm install codefend
+### Globally
 
+```bash
+npm install -g codefend
+```
+
+### Dev dependency
+
+```bash
+npm install -D codefend
+```
+
+### npx
+
+```bash
+npx codefend -i  //generates .codefendrc.json
+npx codefend -o  //obfuscates your whole project inside a new directory: 'codefend-output'
+```
+
+```bash
 Usage: codefend [options]
 
 Defend Your Code By All Means Necessary.
