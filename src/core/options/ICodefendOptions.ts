@@ -30,6 +30,7 @@ export interface ICodefendRegexListOption {
 }
 
 export const defaultOptions: ICodefendOptions = {
+  debug: true,
   generationOptions: {
     inputDir: ".",
     outputDir: "codefend-output",
@@ -49,7 +50,7 @@ export const defaultOptions: ICodefendOptions = {
   obfuscationOptions: {
     prefix: "Ox",
     predefinedWords: [],
-    ignoredWords: [],
+    ignoredWords: ["node_modules"],
     regexList: [
       {
         name: "main",
