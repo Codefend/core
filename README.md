@@ -99,7 +99,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 ```bash
 
-      cd codefend-ouput  //navigate to the output folder (codefend-ouput by default)
+      cd codefend-output  //navigate to the output folder (codefend-output by default)
       npm install //install dependencies
       npm run build //build the obfuscated project
       npm run deploy  //deploy the obfuscated project
