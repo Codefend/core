@@ -94,7 +94,7 @@ This basic rule applies to all the languages and the frameworks that you will be
 
 ## Basic Usage
 
-### `Naming convention`
+### `Step 1`: Naming convention
 
 ```js
 /** 
@@ -119,13 +119,13 @@ class Ox0 {
 }
 ```
 
-### `CLI`
+### `Step 2`: Run the CLI
 
 <p align="center">
  <img src="./public/img/main-example.PNG">
 </p>
 
-### `after Obfuscation is complete`
+### `Step 3`: install dependencies, build and finally deploy
 
 ```bash
 //1. navigate to the output folder (codefend-ouput by default)
@@ -134,6 +134,8 @@ class Ox0 {
       npm install //or equivalent depending on your language
 //3. build project:
       npm run build
+//4. build project:
+      npm run deploy
 ```
 
 ## Examples
