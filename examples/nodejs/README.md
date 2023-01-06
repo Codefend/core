@@ -17,7 +17,7 @@ code .
 ```
 
 <p align="center">
- <img src="./public/img/npx_example_1.PNG">
+ <img src="../../public/img/npx_example_1.PNG">
 </p>
 
 ## Contributing

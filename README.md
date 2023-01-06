@@ -139,6 +139,17 @@ class myApp_Calculator {
  <img src="./public/img/npx_example_1.PNG">
 </p>
 
+### `after Obfuscation is completed`
+
+```bash
+//1. navigate to the output folder (codefend-ouput by default)
+      cd codefend-ouput
+//2. install dependencies:
+      npm install //or equivalent depending on your language
+//3. build project:
+      npm run build
+```
+
 ## Examples
 
 1. ### [`Node js`](https://github.com/Codefend/core/tree/main/examples/nodejs)
