@@ -121,7 +121,9 @@ class l_Calculator {
     return l_results;
   }
 }
+```
 
+```js
 // or use a custom prefix
 class myApp_Calculator {
   myApp_sum(myApp_a, myApp_b) {
@@ -143,7 +145,7 @@ it is possible also to change the regex from the .codefendrc.json file so that y
 
 [Node js](https://github.com/Codefend/core/tree/main/examples/nodejs)
 
-### `Angular` (coming soon)
+1. ### `Angular` (coming soon)
 
 ### `React` (coming soon)
 
