@@ -108,6 +108,48 @@ it is possible also to change the regex from the .codefendrc.json file so that y
 
 ### Svelte (coming soon)
 
+## `config`
+
+```js
+{
+  debug: true,    // logs the words that has been obfuscated
+  generationOptions: {
+    inputDir: ".", // the folder that should be copied and obfuscated ( keep it . if you're running in the same directory)
+    outputDir: "codefend-output", // the output folder that will be an obfuscated clone of your code
+    ignoredFilesInGeneration: [ // the files that should not be copied to the output folder
+      "codefend-output",
+      ".codefendrc.json",
+      "node_modules",
+      ".git",
+      ".github",
+      ".gitignore",
+      ".vscode",
+      "build",
+      "dist",
+    ],
+  },
+
+  obfuscationOptions: {
+    prefix: "Ox", // the prefix of each variable, make sure its a valid character to start with a variable ( e.g dont start with "-"" or a number)
+    predefinedWords: [], // words that you want to obfuscate them in a static way
+    ignoredWords: ["node_modules"], // words that you dont want to obfuscate them and they unfortunately match the regex :)
+    regexList: [
+      {
+        name: "main",
+        value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",//regex for variables,functions,classes ...
+        flag: "g",
+      },
+      {
+        name: "file",
+        value: "((cmp|lib)+(-[a-zA-Z]+)+)",//regex for files (coming soon)
+        flag: "g",
+      },
+    ],
+  },
+}
+
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
