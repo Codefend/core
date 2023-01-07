@@ -23,7 +23,7 @@ export class CodefendCLI implements ICodefendCLI {
 
   buildCommand() {
     return new Command()
-      .version(version)
+      .version(version, "-v, --version", "output the version number")
       .description("Defend Your Code By All Means Necessary =)")
       .option("-i, --init", "Create .codefendrc.json (configuration file)")
       .option(

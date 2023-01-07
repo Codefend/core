@@ -31,13 +31,13 @@ npx codefend -o  //obfuscates your whole project inside a new directory: 'codefe
 
 ## Commands
 
-```bash
+```shell
 Usage: codefend [options]
 
 Defend Your Code By All Means Necessary. 💪 😎
 
 Options:
-  -V, --version    output the version number
+  -v, --version    output the version number
   -i, --init       Create .codefendrc.json (configuration file)
   -c, --check      Check .codefendrc.json for potential warnings/errors
   -o, --obfuscate  Obfuscate your project (based on .codefendrc.json)
