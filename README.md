@@ -4,9 +4,10 @@
 
 # Codefend
 
-![NPM](https://img.shields.io/npm/l/codefend)
-![NPM](https://img.shields.io/node/v/codefend)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Codefend/core/code-defender-core.yml?branch=main)
+![NPM](https://img.shields.io/node/v/codefend)
+![NPM](https://img.shields.io/npm/dt/codefend)
+![NPM](https://img.shields.io/npm/l/codefend)
 
 Codefend short for "Code Defender" is a Code obfuscator CLI that protects your code regardless of the programming language or framework.\
 The complete list of examples for different programming languages/frameworks can be viewed [here](#examples)\
