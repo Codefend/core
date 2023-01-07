@@ -6,7 +6,7 @@
 
 Codefend short for "Code Defender" is a Code obfuscator CLI that protects your code regardless of the programming language or framework.\
 The complete list of examples for different programming languages/frameworks can be viewed [here](#examples)\
-`Please make sure to read the [here](#philosophy) behind the obfuscation first to understand why its cross language & cross-framework!`
+`Please make sure to read the `[`here`](#philosophy)` behind the obfuscation First to understand why Codefend can work with any code written in any language.`
 
 ## Installation
 
