@@ -10,9 +10,9 @@ cd codefend-output
 code .
 ```
 
-<p align="center">
- <img src="../../public/img/npx_example_1.PNG">
-</p>
+### output
+
+the generated code can be seen in [`codefend-output`](https://github.com/Codefend/core/tree/main/examples/vue/codefend-output)
 
 ## Contributing
 
