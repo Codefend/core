@@ -1,9 +1,9 @@
-# Codefend Node JS example
+# Codefend C# example
 
 ## Usage
 
 ```bash
-npm i -g codefend@latest // or npm i -D codefend@latest
+npm i -g codefend@latest
 codefend -i
 codefend -o
 cd codefend-output

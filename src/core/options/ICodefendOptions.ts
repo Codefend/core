@@ -44,6 +44,7 @@ export const defaultOptions: ICodefendOptions = {
       ".vscode",
       "build",
       "dist",
+      "README.md",
     ],
   },
 

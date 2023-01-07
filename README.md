@@ -4,7 +4,14 @@
 
 # Codefend
 
-Codefend short for "Code Defender" encrypts your code regardless of your source code language or framework.
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Codefend/core/code-defender-core.yml?branch=main)
+![NPM](https://img.shields.io/node/v/codefend)
+![NPM](https://img.shields.io/npm/dt/codefend)
+![NPM](https://img.shields.io/npm/l/codefend)
+
+Codefend short for "Code Defender" is a Code obfuscator CLI that protects your code regardless of the programming language or framework.\
+The complete list of examples for different programming languages/frameworks can be viewed [here](#examples)\
+`Please make sure to read the `[`Philosophy`](#philosophy)` behind the obfuscation First to understand why Codefend can work with any code written in any language.`
 
 ## Installation
 
@@ -31,13 +38,13 @@ npx codefend -o  //obfuscates your whole project inside a new directory: 'codefe
 
 ## Commands
 
-```bash
+```shell
 Usage: codefend [options]
 
 Defend Your Code By All Means Necessary. 💪 😎
 
 Options:
-  -V, --version    output the version number
+  -v, --version    output the version number
   -i, --init       Create .codefendrc.json (configuration file)
   -c, --check      Check .codefendrc.json for potential warnings/errors
   -o, --obfuscate  Obfuscate your project (based on .codefendrc.json)
@@ -46,8 +53,14 @@ Options:
 
 ## Philosophy
 
-The only thing Codefend needs from you as a programmer is to `follow a specific naming convention for the words that you want to obfuscate` (variable/functions/classes...) `and Codefend will do the rest ✨`\
-This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source.
+1. Codefend first copy all the files of your project to another directory
+2. Then parse every word of every file of your project, searching for a pattern and obfuscated the words that match the pattern
+3. Once your source code is obfuscated `in folder: /codefend-output` you can then build the obfuscated version of your code and deploy it instead of building and deploying the original not obfuscated files
+
+**The only thing Codefend needs from you** as a programmer is to `follow a specific naming convention for the words that you want to obfuscate` (variable/functions/classes...) `and Codefend will do the rest ✨`\
+This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source. \
+
+Once your source code is obfuscated you can build the obfuscated version of your code and deploy it
 
 ## Basic Usage
 
@@ -107,21 +120,21 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 ## Examples
 
-1. ### [`Node js`](https://github.com/Codefend/core/tree/main/examples/nodejs)
+1. ### [`Node js`](./examples/nodejs)
 
-2. ### `Angular` (coming soon)
+2. ### [`Angular`](./examples/angular)
 
-3. ### `React` (coming soon)
+3. ### [`React`](./examples/react)
 
-4. ### `Vue` (coming soon)
+4. ### [`Vue`](./examples/vue)
 
-5. ### `Svelte` (coming soon)
+5. ### [`Svelte`](./examples/svelte)
 
-6. ### `Python` (coming soon)
+6. ### [`Python`](./examples/python)
 
-7. ### `C#` (coming soon)
+7. ### [`C#`](./examples/C%23)
 
-8. ### `C++` (coming soon)
+8. ### [`C++`](./examples/C%2B%2B)
 
 ## Configuration
 
@@ -142,6 +155,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
       ".vscode",
       "build",
       "dist",
+      "README.md"
     ],
   },
 
