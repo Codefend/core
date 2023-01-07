@@ -107,21 +107,21 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 ## Examples
 
-1. ### [`Node js`](https://github.com/Codefend/core/tree/main/examples/nodejs)
+1. ### [`Node js`](./examples/nodejs)
 
-2. ### `Angular` (coming soon)
+2. ### [`Angular`](./examples/angular)
 
-3. ### `React` (coming soon)
+3. ### [`React`](./examples/react)
 
-4. ### `Vue` (coming soon)
+4. ### [`Vue`](./examples/vue)
 
-5. ### `Svelte` (coming soon)
+5. ### [`Svelte`](./examples/svelte)
 
-6. ### `Python` (coming soon)
+6. ### [`Python`](./examples/python)
 
-7. ### `C#` (coming soon)
+7. ### [`C#`](./examples/c#)
 
-8. ### `C++` (coming soon)
+8. ### [`C++`](./examples/c++)
 
 ## Configuration
 
