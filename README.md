@@ -142,6 +142,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
       ".vscode",
       "build",
       "dist",
+      "README.md"
     ],
   },
 
