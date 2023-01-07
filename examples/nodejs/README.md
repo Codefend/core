@@ -12,7 +12,7 @@ code .
 
 ### Output
 
-The code generated can be viewed inside [`codefend-output`](https://github.com/Codefend/core/tree/main/examples/nodejs/codefend-output) folder
+The code generated can be viewed inside [`codefend-output`](./codefend-output) folder
 
 ## Contributing
 
