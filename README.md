@@ -31,7 +31,7 @@ npx codefend -o  //obfuscates your whole project inside a new directory: 'codefe
 
 ## Commands
 
-```powershell
+```shell
 Usage: codefend [options]
 
 Defend Your Code By All Means Necessary. 💪 😎
