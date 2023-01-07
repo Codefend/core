@@ -10,9 +10,9 @@ cd codefend-output
 code .
 ```
 
-### output
+### Output
 
-the generated code can be seen in [`codefend-output`](https://github.com/Codefend/core/tree/main/examples/vue/codefend-output)
+The code generated can be seen in [`codefend-output`](https://github.com/Codefend/core/tree/main/examples/vue/codefend-output)
 
 ## Contributing
 
