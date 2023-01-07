@@ -1,4 +1,4 @@
-# Codefend React example
+# Codefend Node JS example
 
 ## Usage
 
