@@ -50,9 +50,12 @@ Options:
 
 1. Codefend first copy all the files of your project to another directory
 2. Then parse every word of every file of your project, searching for a pattern and obfuscated the words that match the pattern
+3. Once your source code is obfuscated `in another folder (codefend-output)` you can then build the obfuscated version of your code and deploy it
 
 The only thing Codefend needs from you as a programmer is to `follow a specific naming convention for the words that you want to obfuscate` (variable/functions/classes...) `and Codefend will do the rest ✨`\
-This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source.
+This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source.\
+
+Once your source code is obfuscated you can build the obfuscated version of your code and deploy it
 
 ## Basic Usage
 
