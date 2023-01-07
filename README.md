@@ -119,9 +119,9 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 6. ### [`Python`](./examples/python)
 
-7. ### [`C#`](./examples/c#)
+7. ### [`C#`](./examples/C%23)
 
-8. ### [`C++`](./examples/c++)
+8. ### [`C++`](./examples/C%2B%2B)
 
 ## Configuration
 
