@@ -44,9 +44,9 @@ Usage: codefend [options]
 Defend Your Code By All Means Necessary. 💪 😎
 
 Options:
-  -i, --init       Create the config file .codefendrc.json
-  -c, --check      Check .codefendrc.json for potential warnings/errors
-  -o, --obfuscate  Obfuscate your project (based on .codefendrc.json)
+  -i, --init       Create the configuration file (.codefendrc.json)
+  -c, --check      Check the configuration file for potential warnings/errors
+  -o, --obfuscate  Obfuscate your project based on the configuration file
   -v, --version    output the version number
   -h, --help       display help for command
 ```
