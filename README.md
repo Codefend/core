@@ -86,7 +86,7 @@ class Ox0 {
   }
 }
 
-// Or for a better orgnanized naming convention:
+// Or for a better organized naming convention:
 /** 
  * 
 1- class -> starts with c_
