@@ -45,8 +45,8 @@ Defend Your Code By All Means Necessary. 💪 😎
 
 Options:
   -i, --init       Create the config file (.codefendrc.json)
-  -c, --check      Check the config file for potential warnings/errors
   -o, --obfuscate  Obfuscate the project
+  -c, --check      Check the config file for potential warnings/errors
   -v, --version    Output the version number
   -h, --help       Display help for command
 ```
