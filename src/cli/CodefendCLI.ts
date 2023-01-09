@@ -24,16 +24,14 @@ export class CodefendCLI implements ICodefendCLI {
   buildCommand() {
     return new Command()
       .description("Defend Your Code By All Means Necessary =)")
-      .option("-i, --init", "Creates the configuration file (.codefendrc.json)")
+      .option("-i, --init", "Creates the config file (.codefendrc.json)")
       .option(
         "-c, --check",
-        "Check the configuration file for potential warnings/errors"
+        "Check the config file for potential warnings/errors"
       )
-      .option(
-        "-o, --obfuscate",
-        "Obfuscate your project based on the configuration file"
-      )
-      .version(version, "-v, --version", "output the version number")
+      .option("-o, --obfuscate", "Obfuscate the project")
+      .version(version, "-v, --version", "Output the version number")
+      .helpOption("-h, --help", "Display help for command")
       .parse(process.argv);
   }
 
