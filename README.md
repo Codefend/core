@@ -32,7 +32,7 @@ npm install -D codefend
 In case you want to execute it directly without installing it on your machine:
 
 ```bash
-npx codefend -i  //generates .codefendrc.json
+npx codefend -i  //required only the first time, generates .codefendrc.json
 npx codefend -o  //obfuscates your whole project inside a new directory: 'codefend-output'
 ```
 
@@ -44,21 +44,21 @@ Usage: codefend [options]
 Defend Your Code By All Means Necessary. 💪 😎
 
 Options:
-  -v, --version    output the version number
-  -i, --init       Create .codefendrc.json (configuration file)
-  -c, --check      Check .codefendrc.json for potential warnings/errors
-  -o, --obfuscate  Obfuscate your project (based on .codefendrc.json)
-  -h, --help       display help for command
+  -i, --init       Create the config file (.codefendrc.json)
+  -o, --obfuscate  Obfuscate the project
+  -c, --check      Check the config file for potential warnings/errors
+  -v, --version    Output the version number
+  -h, --help       Display help for command
 ```
 
 ## Philosophy
 
-1. Codefend first copy all the files of your project to another directory
-2. Then parse every word of every file of your project, searching for a pattern and obfuscated the words that match the pattern
-3. Once your source code is obfuscated `in folder: /codefend-output` you can then build the obfuscated version of your code and deploy it instead of building and deploying the original not obfuscated files
+1. Codefend first copy all the files of your project to another directory ` by default: /codefend-output`.
+2. Parse every word of every file of your project, searching for patterns in your code.
+3. Encrypts the detected words (Classes,Functions,Variables...) that matches the pattern.
 
-**The only thing Codefend needs from you** as a programmer is to `follow a specific naming convention for the words that you want to obfuscate` (variable/functions/classes...) `and Codefend will do the rest ✨`\
-This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source. \
+**The only thing Codefend needs from you as a programmer** is to `follow a specific naming convention for the words that you want to obfuscate` (Classes,Functions,Variables...) `and Codefend will do the rest ✨`\
+This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source.
 
 Once your source code is obfuscated you can build the obfuscated version of your code and deploy it
 
@@ -69,11 +69,30 @@ Once your source code is obfuscated you can build the obfuscated version of your
 `Add prefixes to the words that you want to encrypt.`
 
 ```js
+//prefix your words with l_
+class l_Calculator {
+  l_sum(l_a, l_b) {
+    const l_results = l_a + l_b;
+    return l_results;
+  }
+}
+
+//>>>>>>==== Will Become ======<<<<<<
+
+class Ox0 {
+  Ox1(Ox2, Ox3) {
+    const Ox4 = Ox2 + Ox3;
+    return Ox4;
+  }
+}
+
+// Or for a better organized naming convention:
 /** 
-1- local variable -> starts with l_
-2- parameter -> starts with p_
-3- function -> starts with f_
-4- class -> starts with c_
+ * 
+1- class -> starts with c_
+2- function -> starts with f_
+3- parameter -> starts with p_
+4- local variable -> starts with l_
 */
 class c_Calculator {
   f_sum(p_a, p_b) {
@@ -82,7 +101,7 @@ class c_Calculator {
   }
 }
 
-//>>>>>>==== Will Become ======<<<<<<
+//>>>>>>==== Same results ======<<<<<<
 class Ox0 {
   Ox1(Ox2, Ox3) {
     const Ox4 = Ox2 + Ox3;
@@ -91,12 +110,14 @@ class Ox0 {
 }
 ```
 
+Note: you can change the pattern of the word as your requirement from the configuration file [regexList](#configuration)
+
 ### `Step 2`: Run the CLI
 
 `navigate to the root of your project and run the following commands:`
 
 ```bash
-codefend -i  //generates .codefendrc.json
+codefend -i  //required only the first time, generates .codefendrc.json
 
 ```
 
@@ -112,10 +133,17 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 ```bash
 
-      cd codefend-output  //navigate to the output folder (codefend-output by default)
-      npm install //install dependencies
-      npm run build //build the obfuscated project
-      npm run deploy  //deploy the obfuscated project
+      /* navigate to the output folder*/
+      cd codefend-output
+
+      /* install the dependencies of the new obfuscated project */
+      npm install
+
+      /* build the obfuscated project */
+      npm run build // your build script
+
+      /* deploy the obfuscated project */
+      npm run deploy // your deploy script
 ```
 
 ## Examples
@@ -182,42 +210,6 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 }
 
 ```
-
-## Advanced Usage (beta)
-
-### `Prefix`
-
-default: "Ox"
-
-### `Naming convention`
-
-````js
-
-Note: its possible to not follow the exact naming convention as long as the words you want to encrypts match the regex.
-
-```js
-//as an example you can use the same prefix for all words:
-class l_Calculator {
-  l_sum(l_a, l_b) {
-    const l_results = l_a + l_b;
-    return l_results;
-  }
-}
-````
-
-```js
-// or use a custom prefix
-class myApp_Calculator {
-  myApp_sum(myApp_a, myApp_b) {
-    const myApp_results = myApp_a + myApp_b;
-    return myApp_results;
-  }
-}
-```
-
-### `Ignore Files`
-
-its possible to ignore some files from being generated into the new obfuscated folder
 
 ## Contributing
 

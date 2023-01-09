@@ -23,17 +23,15 @@ export class CodefendCLI implements ICodefendCLI {
 
   buildCommand() {
     return new Command()
-      .version(version, "-v, --version", "output the version number")
       .description("Defend Your Code By All Means Necessary =)")
-      .option("-i, --init", "Create .codefendrc.json (configuration file)")
+      .option("-i, --init", "Creates the config file (.codefendrc.json)")
+      .option("-o, --obfuscate", "Obfuscate the project")
       .option(
         "-c, --check",
-        "Check .codefendrc.json for potential warnings/errors"
+        "Check the config file for potential warnings/errors"
       )
-      .option(
-        "-o, --obfuscate",
-        "Obfuscate your project (based on .codefendrc.json)"
-      )
+      .version(version, "-v, --version", "Output the version number")
+      .helpOption("-h, --help", "Display help for command")
       .parse(process.argv);
   }
 
