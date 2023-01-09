@@ -55,9 +55,9 @@ Options:
 
 1. Codefend first copy all the files of your project to another directory ` by default: /codefend-output`.
 2. Parse every word of every file of your project, searching for patterns in your code.
-3. Encrypts the detected words ( can be Class names, variables , functions ...) that matches the pattern.
+3. Encrypts the detected words (Classes,Functions,Variables...) that matches the pattern.
 
-**The only thing Codefend needs from you as a programmer **is to `follow a specific naming convention for the words that you want to obfuscate` (variable/functions/classes...) `and Codefend will do the rest ✨`\
+**The only thing Codefend needs from you as a programmer** is to `follow a specific naming convention for the words that you want to obfuscate` (Classes,Functions,Variables...) `and Codefend will do the rest ✨`\
 This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source.
 
 Once your source code is obfuscated you can build the obfuscated version of your code and deploy it
@@ -69,20 +69,16 @@ Once your source code is obfuscated you can build the obfuscated version of your
 `Add prefixes to the words that you want to encrypt.`
 
 ```js
-/** 
-1- local variable -> starts with l_
-2- parameter -> starts with p_
-3- function -> starts with f_
-4- class -> starts with c_
-*/
-class c_Calculator {
-  f_sum(p_a, p_b) {
-    const l_results = p_a + p_b;
+//prefix your words with l_
+class l_Calculator {
+  l_sum(l_a, l_b) {
+    const l_results = l_a + l_b;
     return l_results;
   }
 }
 
 //>>>>>>==== Will Become ======<<<<<<
+
 class Ox0 {
   Ox1(Ox2, Ox3) {
     const Ox4 = Ox2 + Ox3;
@@ -90,10 +86,17 @@ class Ox0 {
   }
 }
 
-//Note: you can add any prefix as long as it contains "_" in the middle of the word: myApp_var , l_var ....
-class l_Calculator {
-  l_sum(l_a, l_b) {
-    const l_results = l_a + l_b;
+// Or for a better orgnanized naming convention:
+/** 
+ * 
+1- class -> starts with c_
+2- function -> starts with f_
+3- parameter -> starts with p_
+4- local variable -> starts with l_
+*/
+class c_Calculator {
+  f_sum(p_a, p_b) {
+    const l_results = p_a + p_b;
     return l_results;
   }
 }
@@ -107,7 +110,7 @@ class Ox0 {
 }
 ```
 
-Note: you can change the pattern of the word as your requirement from the configuration file [see regexList](#configuration)
+Note: you can change the pattern of the word as your requirement from the configuration file [regexList](#configuration)
 
 ### `Step 2`: Run the CLI
 
