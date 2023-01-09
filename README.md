@@ -69,7 +69,7 @@ Once your source code is obfuscated you can build the obfuscated version of your
 `Add prefixes to the words that you want to encrypt.`
 
 ```js
-//prefix your words with l_
+//as a starting point:  prefix the words that should be encrypted with l_
 class l_Calculator {
   l_sum(l_a, l_b) {
     const l_results = l_a + l_b;
@@ -139,11 +139,14 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
       /* install the dependencies of the new obfuscated project */
       npm install
 
+      /* run the obfuscated project */
+      ...
+
       /* build the obfuscated project */
-      npm run build // your build script
+      ...
 
       /* deploy the obfuscated project */
-      npm run deploy // your deploy script
+      ...
 ```
 
 ## Examples
