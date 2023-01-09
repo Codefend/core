@@ -199,12 +199,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
         name: "main",
         value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",//regex for variables,functions,classes ...
         flag: "g",
-      },
-      {
-        name: "file",
-        value: "((cmp|lib)+(-[a-zA-Z]+)+)",//regex for files (coming soon)
-        flag: "g",
-      },
+      }
     ],
   },
 }

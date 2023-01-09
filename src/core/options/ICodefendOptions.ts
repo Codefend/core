@@ -58,11 +58,6 @@ export const defaultOptions: ICodefendOptions = {
         value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",
         flag: "g",
       },
-      {
-        name: "file",
-        value: "((cmp|lib)+(-[a-zA-Z]+)+)",
-        flag: "g",
-      },
     ],
   },
 };
