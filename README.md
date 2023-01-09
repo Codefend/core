@@ -44,10 +44,10 @@ Usage: codefend [options]
 Defend Your Code By All Means Necessary. 💪 😎
 
 Options:
-  -v, --version    output the version number
   -i, --init       Create .codefendrc.json (configuration file)
   -c, --check      Check .codefendrc.json for potential warnings/errors
   -o, --obfuscate  Obfuscate your project (based on .codefendrc.json)
+  -v, --version    output the version number
   -h, --help       display help for command
 ```
 

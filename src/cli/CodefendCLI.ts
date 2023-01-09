@@ -23,7 +23,6 @@ export class CodefendCLI implements ICodefendCLI {
 
   buildCommand() {
     return new Command()
-      .version(version, "-v, --version", "output the version number")
       .description("Defend Your Code By All Means Necessary =)")
       .option("-i, --init", "Create .codefendrc.json (configuration file)")
       .option(
@@ -34,6 +33,7 @@ export class CodefendCLI implements ICodefendCLI {
         "-o, --obfuscate",
         "Obfuscate your project (based on .codefendrc.json)"
       )
+      .version(version, "-v, --version", "output the version number")
       .parse(process.argv);
   }
 
