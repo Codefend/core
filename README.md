@@ -32,7 +32,7 @@ npm install -D codefend
 In case you want to execute it directly without installing it on your machine:
 
 ```bash
-npx codefend -i  //generates .codefendrc.json
+npx codefend -i  //required only the first time, generates .codefendrc.json
 npx codefend -o  //obfuscates your whole project inside a new directory: 'codefend-output'
 ```
 
@@ -44,7 +44,7 @@ Usage: codefend [options]
 Defend Your Code By All Means Necessary. 💪 😎
 
 Options:
-  -i, --init       Create .codefendrc.json (configuration file)
+  -i, --init       Create the config file .codefendrc.json
   -c, --check      Check .codefendrc.json for potential warnings/errors
   -o, --obfuscate  Obfuscate your project (based on .codefendrc.json)
   -v, --version    output the version number
