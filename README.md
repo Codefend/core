@@ -53,12 +53,12 @@ Options:
 
 ## Philosophy
 
-1. Codefend first copy all the files of your project to another directory
-2. Then parse every word of every file of your project, searching for a pattern and obfuscated the words that match the pattern
-3. Once your source code is obfuscated `in folder: /codefend-output` you can then build the obfuscated version of your code and deploy it instead of building and deploying the original not obfuscated files
+1. Codefend first copy all the files of your project to another directory ` by default: /codefend-output`.
+2. Parse every word of every file of your project, searching for patterns in your code.
+3. Encrypts the detected words ( can be Class names, variables , functions ...) that matches the pattern.
 
-**The only thing Codefend needs from you** as a programmer is to `follow a specific naming convention for the words that you want to obfuscate` (variable/functions/classes...) `and Codefend will do the rest ✨`\
-This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source. \
+**The only thing Codefend needs from you as a programmer **is to `follow a specific naming convention for the words that you want to obfuscate` (variable/functions/classes...) `and Codefend will do the rest ✨`\
+This basic rule applies to all the languages and the frameworks that you will be programming with while using Codefend to defend your source.
 
 Once your source code is obfuscated you can build the obfuscated version of your code and deploy it
 
@@ -89,14 +89,32 @@ class Ox0 {
     return Ox4;
   }
 }
+
+//Note: you can add any prefix as long as it contains "_" in the middle of the word: myApp_var , l_var ....
+class l_Calculator {
+  l_sum(l_a, l_b) {
+    const l_results = l_a + l_b;
+    return l_results;
+  }
+}
+
+//>>>>>>==== Same results ======<<<<<<
+class Ox0 {
+  Ox1(Ox2, Ox3) {
+    const Ox4 = Ox2 + Ox3;
+    return Ox4;
+  }
+}
 ```
+
+Note: you can change the pattern of the word as your requirement from the configuration file [see regexList](#configuration)
 
 ### `Step 2`: Run the CLI
 
 `navigate to the root of your project and run the following commands:`
 
 ```bash
-codefend -i  //generates .codefendrc.json
+codefend -i  //required only the first time, generates .codefendrc.json
 
 ```
 
@@ -112,10 +130,17 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 ```bash
 
-      cd codefend-output  //navigate to the output folder (codefend-output by default)
-      npm install //install dependencies
-      npm run build //build the obfuscated project
-      npm run deploy  //deploy the obfuscated project
+      /* navigate to the output folder*/
+      cd codefend-output
+
+      /* install the dependencies of the new obfuscated project */
+      npm install
+
+      /* build the obfuscated project */
+      npm run build // your build script
+
+      /* deploy the obfuscated project */
+      npm run deploy // your deploy script
 ```
 
 ## Examples
@@ -183,7 +208,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 ```
 
-## Advanced Usage (beta)
+## Advanced Usage
 
 ### `Prefix`
 
