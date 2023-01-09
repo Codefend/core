@@ -110,7 +110,7 @@ class Ox0 {
 }
 ```
 
-Note: you can change the pattern of the word as your requirement from the configuration file [regexList](#configuration)
+For Advanced usage, please check the [Configuration](#configuration) section
 
 ### `Step 2`: Run the CLI
 
