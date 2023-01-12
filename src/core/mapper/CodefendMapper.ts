@@ -1,37 +1,22 @@
-import { CodefendLogger } from "../../logger/CodefendLogger";
+import { logger } from "../..";
 import {
-  ICodefendOptions,
+  IBuildMapOptions,
   ICodefendPredefinedWordOption,
 } from "../options/ICodefendOptions";
 import { ICodefendParserWord } from "../parser/ICodefendParser";
 import { ICodefendMapper } from "./ICodefendMapper";
 
 export class CodefendMapper implements ICodefendMapper {
-  options: ICodefendOptions;
-  logger: CodefendLogger;
-  scope: string;
-
-  constructor(options: ICodefendOptions, logger: CodefendLogger) {
-    this.options = options;
-    this.logger = logger;
-    this.scope = this.constructor.name.replace("Codefend", "");
-  }
-
-  setOptions(options: ICodefendOptions) {
-    this.options = options;
-  }
-
   buildMap(
     words: ICodefendParserWord[],
     map: Record<string, string>,
-    prefix?: string
+    options: IBuildMapOptions
   ) {
-    prefix = prefix ?? this.options.obfuscationOptions.prefix;
     let sequence = Object.keys(map).length;
     words.forEach((word) => {
       if (map[word.value]) return;
-      map[word.value] = `${prefix ?? ""}${sequence++}`;
-      this.logger.info("Codefend", `${word.value} --> ${map[word.value]}`);
+      map[word.value] = `${options.prefix}${sequence++}`;
+      logger.info("Codefend", `${word.value} --> ${map[word.value]}`);
     });
     return map;
   }
@@ -47,9 +32,7 @@ export class CodefendMapper implements ICodefendMapper {
       }, {});
   }
 
-  mapIgnoredWords(map: Record<string, string>, ignoredWords?: string[]) {
-    ignoredWords =
-      ignoredWords ?? this.options.obfuscationOptions.ignoredWords ?? [];
+  mapIgnoredWords(map: Record<string, string>, ignoredWords: string[]) {
     ignoredWords.forEach((word: string) => {
       map[word] = word;
     });
@@ -58,10 +41,8 @@ export class CodefendMapper implements ICodefendMapper {
 
   mapPredefinedWords(
     map: Record<string, string>,
-    predefinedWords?: ICodefendPredefinedWordOption[]
+    predefinedWords: ICodefendPredefinedWordOption[]
   ) {
-    predefinedWords =
-      predefinedWords ?? this.options.obfuscationOptions.predefinedWords ?? [];
     predefinedWords.forEach((predefinedWord) => {
       map[predefinedWord.originalWord] = predefinedWord.targetWord;
     });

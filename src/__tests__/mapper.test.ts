@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ICodefendPredefinedWordOption } from "../core/options/ICodefendOptions";
-import { CodefendCore } from "../index";
+import { CodefendCore, codefendDefaultOptions } from "../index";
 
 describe("Mapper", () => {
   describe("Build Map", () => {
@@ -9,7 +9,14 @@ describe("Mapper", () => {
       { value: "lib-file", fromRegex: "file" },
     ];
     it("with default options", () => {
-      const map = CodefendCore.mapper.buildMap(words, {}, "Ox");
+      const map = CodefendCore.mapper.buildMap(
+        words,
+        {},
+        {
+          prefix: codefendDefaultOptions.obfuscationOptions.prefix,
+          debug: codefendDefaultOptions.debug,
+        }
+      );
       expect(map).toEqual({ l_var: "Ox0", "lib-file": "Ox1" });
     });
   });
