@@ -16,7 +16,11 @@ export class CodefendMapper implements ICodefendMapper {
     words.forEach((word) => {
       if (map[word.value]) return;
       map[word.value] = `${options.prefix}${sequence++}`;
-      logger.info("Codefend", `${word.value} --> ${map[word.value]}`);
+      logger.debug(
+        "Codefend",
+        `${word.value} --> ${map[word.value]}`,
+        options.debug
+      );
     });
     return map;
   }
