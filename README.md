@@ -110,7 +110,39 @@ class Ox0 {
 }
 ```
 
-For Advanced usage, please check the [Configuration](#configuration) section
+```html
+<!-- Html example, can work also with Angular,React,Vue,Svelte... in the same way -->
+
+<html>
+  <head>
+    <style>
+      .l_red {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="l_red">l_secret</div>
+    <div class="l_red">Hello World</div>
+  </body>
+</html>
+
+<!-- Will Become -->
+
+<html>
+  <head>
+    <style>
+      .Ox1 {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="Ox1">Ox0</div>
+    <div class="Ox1">Hello World</div>
+  </body>
+</html>
+```
 
 ### `Step 2`: Run the CLI
 
@@ -145,6 +177,16 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
       /* build the obfuscated project */
       ...
 
+      /*⚠️⚠️⚠️ in case the run or the build fails, its likely because some reserved words have been obfuscated that should not have been obfuscated.
+
+      Solution:
+
+      1. set debug=true in .codefendrc.json (to display a list of the words that are being obfuscated)
+      2. detect what are the words that should not be obfuscated from the list displayed
+      3. add the words to the ignoredWords array inside .codefendrc.json
+      */
+
+
       /* deploy the obfuscated project */
       ...
 ```
@@ -170,13 +212,35 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 ## Configuration
 
 ```js
-//default configuration generated inside .codefendrc.json
+/* default configuration generated inside .codefendrc.json when executing codefend -i*/
+
 {
-  debug: true,    // for additional logs
+  /** debug: boolean
+  * Displays additional logs.
+  */
+  debug: true,
+
+
   generationOptions: {
-    inputDir: ".", // the folder that should be copied and obfuscated ( keep it . if you're running in the same directory)
-    outputDir: "codefend-output", // the output folder that will be an obfuscated clone of your code
-    ignoredFilesInGeneration: [ // the files that should not be copied to the output folder
+
+
+    /** inputDir: string
+     * the folder that should be copied and obfuscated by Codefend.
+     * Note: you can keep it "." if you're executing Codefend in the root of your project.
+    */
+    inputDir: ".",
+
+
+    /** outputDir: string
+     * the output folder where Codefend will generate the cloned obfuscated version of your project.
+    */
+    outputDir: "codefend-output",
+
+
+    /** outputDir: string []
+     * the files/folders that shouldn't be copied by Codefend to the output folder.
+    */
+    ignoredFilesInGeneration: [
       "codefend-output",
       ".codefendrc.json",
       "node_modules",
@@ -191,16 +255,37 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
   },
 
   obfuscationOptions: {
-    prefix: "Ox", // the prefix of each variable, make sure its a valid character to start with a variable ( e.g do not start with "-"" or a number)
-    predefinedWords: [], // words that you want to obfuscate them in a static way (determined output)
-                         // {"originalWord":"l_secretVar" , "targetWord": "123456"}
-                         // note that the original word should have a prefix 'l_' to be detected and replaced
 
-    ignoredWords: ["node_modules"], // words that you wish not to obfuscate them and they unfortunately match the regex :)
+
+    /** prefix: string
+    * the prefix of each variable generated.
+    * note: the first letter of the prefix must be either an alphabet or "_" so that the variable generated be valid.
+    */
+    prefix: "Ox",
+
+
+    /** predefinedWords: Array<{originalWord:string, targetWord:string}>
+    * words that you want to obfuscate them in a static way (determined output)
+    * {"originalWord":"l_secretVar" , "targetWord": "123456"}
+    * note: the original word must have a prefix 'l_' to be detected in the first place so that it gets replaced.
+    */
+    predefinedWords: [],
+
+
+    /** ignoredWords: Array<string>
+    * Words that matches the pattern to be obfuscated but should be kept as is without being obfuscated.
+    * useful for words that are being obfuscated and causing errors when running or building the code
+    */
+    ignoredWords: ["node_modules"],
+
+
+    /** regexList: Array<{name:string,value:string,flag:string}>
+    * Regex for detecting the words to be obfuscated
+    */
     regexList: [
       {
         name: "main",
-        value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",//regex for variables,functions,classes ...
+        value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",
         flag: "g",
       }
     ],
@@ -217,4 +302,4 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](./LICENSE.md)
