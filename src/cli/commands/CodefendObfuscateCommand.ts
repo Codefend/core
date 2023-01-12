@@ -16,13 +16,14 @@ export class CodefendObfuscateCommand {
     }
     this.applyTransformationsOnOptions(options);
 
-    logger.info("Codefend", "Obfuscation started...");
-    logger.info(
+    logger.debug("Codefend", "Obfuscation started...", options.debug);
+    logger.debug(
       "Codefend",
-      `removing existing output folder ${options.generationOptions.outputDir}...`
+      `Removing existing output folder ${options.generationOptions.outputDir}...`,
+      options.debug
     );
     fileSystem.folderManager.removeFolder(options.generationOptions.outputDir);
-    logger.info("Codefend", "copying new files...");
+    logger.debug("Codefend", "Copying new files...", options.debug);
     fileSystem.folderManager.copyFolderSync(
       options.generationOptions.inputDir,
       options.generationOptions.outputDir,
@@ -32,7 +33,7 @@ export class CodefendObfuscateCommand {
     const fileNames = fileSystem.folderManager.getAllFileNamesInDir(
       options.generationOptions.outputDir
     );
-    logger.success("Codefend", `copied ${fileNames.length} file(s)`);
+    logger.success("Codefend", `Copied ${fileNames.length} file(s)`);
     const map: Record<string, string> = {};
     let fileCode;
     fileNames.forEach((fileName) => {
