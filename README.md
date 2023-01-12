@@ -191,24 +191,6 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
       ...
 ```
 
-## Examples
-
-1. ### [`Node js`](./examples/nodejs)
-
-2. ### [`Angular`](./examples/angular)
-
-3. ### [`React`](./examples/react)
-
-4. ### [`Vue`](./examples/vue)
-
-5. ### [`Svelte`](./examples/svelte)
-
-6. ### [`Python`](./examples/python)
-
-7. ### [`C#`](./examples/C%23)
-
-8. ### [`C++`](./examples/C%2B%2B)
-
 ## Configuration
 
 ```js
@@ -293,6 +275,24 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 }
 
 ```
+
+## Examples
+
+1. ### [`Node js`](./examples/nodejs)
+
+2. ### [`Angular`](./examples/angular)
+
+3. ### [`React`](./examples/react)
+
+4. ### [`Vue`](./examples/vue)
+
+5. ### [`Svelte`](./examples/svelte)
+
+6. ### [`Python`](./examples/python)
+
+7. ### [`C#`](./examples/C%23)
+
+8. ### [`C++`](./examples/C%2B%2B)
 
 ## Contributing
 
