@@ -2,6 +2,8 @@ import { logger } from "../..";
 import {
   IBuildMapOptions,
   ICodefendPredefinedWordOption,
+  IMapIgnoredWordsOptions,
+  IMapPredefinedWordsOptions,
 } from "../options/ICodefendOptions";
 import { ICodefendParserWord } from "../parser/ICodefendParser";
 import { ICodefendMapper } from "./ICodefendMapper";
@@ -12,15 +14,21 @@ export class CodefendMapper implements ICodefendMapper {
     map: Record<string, string>,
     options: IBuildMapOptions
   ) {
+    const reserved = [
+      ...(options.ignoredWords ?? []),
+      ...(options.predefinedWords?.map((word) => word.originalWord) ?? []),
+    ];
     let sequence = Object.keys(map).length;
     words.forEach((word) => {
       if (map[word.value]) return;
       map[word.value] = `${options.prefix}${sequence++}`;
-      logger.debug(
-        "Codefend",
-        `${word.value} --> ${map[word.value]}`,
-        options.debug
-      );
+
+      if (!reserved.includes(word.value))
+        logger.debug(
+          "Codefend",
+          `${word.value} --> ${map[word.value]}`,
+          options.debug
+        );
     });
     return map;
   }
@@ -36,8 +44,15 @@ export class CodefendMapper implements ICodefendMapper {
       }, {});
   }
 
-  mapIgnoredWords(map: Record<string, string>, ignoredWords: string[]) {
+  mapIgnoredWords(
+    map: Record<string, string>,
+    ignoredWords: string[],
+    options: IMapIgnoredWordsOptions
+  ) {
     ignoredWords.forEach((word: string) => {
+      if (map[word]) {
+        logger.debug("Codefend", `${word} (Ignored word)`, options.debug);
+      }
       map[word] = word;
     });
     return map;
@@ -45,9 +60,19 @@ export class CodefendMapper implements ICodefendMapper {
 
   mapPredefinedWords(
     map: Record<string, string>,
-    predefinedWords: ICodefendPredefinedWordOption[]
+    predefinedWords: ICodefendPredefinedWordOption[],
+    options: IMapPredefinedWordsOptions
   ) {
     predefinedWords.forEach((predefinedWord) => {
+      if (map[predefinedWord.originalWord]) {
+        logger.debug(
+          "Codefend",
+          `${map[predefinedWord.originalWord]} --> ${
+            predefinedWord.targetWord
+          } (Predefined word)`,
+          options.debug
+        );
+      }
       map[predefinedWord.originalWord] = predefinedWord.targetWord;
     });
     return map;

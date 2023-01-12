@@ -51,15 +51,23 @@ export function obfuscate(
   CodefendCore.mapper.buildMap(words, map, {
     prefix: _options.obfuscationOptions.prefix,
     debug: _options.debug,
+    ignoredWords: _options.obfuscationOptions.ignoredWords,
+    predefinedWords: _options.obfuscationOptions.predefinedWords,
   });
   map = CodefendCore.mapper.sortMap(map);
   CodefendCore.mapper.mapPredefinedWords(
     map,
-    _options.obfuscationOptions.predefinedWords
+    _options.obfuscationOptions.predefinedWords,
+    {
+      debug: _options.debug,
+    }
   );
   CodefendCore.mapper.mapIgnoredWords(
     map,
-    _options.obfuscationOptions.ignoredWords
+    _options.obfuscationOptions.ignoredWords,
+    {
+      debug: _options.debug,
+    }
   );
   const output = CodefendCore.replacer.replace(code, map);
   return output;
