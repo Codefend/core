@@ -174,7 +174,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 {
   /** debug: boolean
-  * Display additional logs
+  * Displays additional logs.
   */
   debug: true,
 
@@ -184,13 +184,13 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
     /** inputDir: string
      * the folder that should be copied and obfuscated by Codefend.
-     * Note: you can keep it "." if you're executing Codefend in the root of your project
+     * Note: you can keep it "." if you're executing Codefend in the root of your project.
     */
     inputDir: ".",
 
 
     /** outputDir: string
-     * the output folder where Codefend will generate the cloned obfuscated folder.
+     * the output folder where Codefend will generate the cloned obfuscated version of your project.
     */
     outputDir: "codefend-output",
 
@@ -217,8 +217,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
     /** prefix: string
     * the prefix of each variable generated.
-    * note: make sure its a valid character to start with a variable
-    * ( e.g do not start with "-"" or a number)
+    * note: the first letter of the prefix must be either an alphabet or "_" so that the variable generated be valid.
     */
     prefix: "Ox",
 
