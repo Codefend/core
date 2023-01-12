@@ -34,6 +34,21 @@ export interface IBuildMapOptions {
   debug: boolean;
 }
 
+export interface IObfuscateOptions {
+  debug?: boolean;
+  generationOption?: {
+    inputDir?: string;
+    outputDir?: string;
+    ignoredFilesInGeneration?: string[];
+  };
+  obfuscationOptions?: {
+    prefix?: string;
+    predefinedWords?: ICodefendPredefinedWordOption[];
+    ignoredWords?: string[];
+    regexList?: ICodefendRegexListOption[];
+  };
+}
+
 export const defaultOptions: ICodefendOptions = {
   debug: true,
   generationOptions: {
