@@ -15,6 +15,9 @@ describe("Mapper", () => {
         {
           prefix: codefendDefaultOptions.obfuscationOptions.prefix,
           debug: codefendDefaultOptions.debug,
+          ignoredWords: codefendDefaultOptions.obfuscationOptions.ignoredWords,
+          predefinedWords:
+            codefendDefaultOptions.obfuscationOptions.predefinedWords,
         }
       );
       expect(map).toEqual({ l_var: "Ox0", "lib-file": "Ox1" });

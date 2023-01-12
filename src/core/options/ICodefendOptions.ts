@@ -32,6 +32,8 @@ export interface ICodefendRegexListOption {
 export interface IBuildMapOptions {
   prefix: string;
   debug: boolean;
+  predefinedWords?: ICodefendPredefinedWordOption[];
+  ignoredWords?: string[];
 }
 
 export interface IMapIgnoredWordsOptions {
