@@ -172,7 +172,12 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 ```js
 //default configuration generated inside .codefendrc.json
 {
-  debug: true,    // for additional logs
+  /** debug: boolean
+  * Display additional logs
+  */
+  debug: true,
+
+
   generationOptions: {
     inputDir: ".", // the folder that should be copied and obfuscated ( keep it . if you're running in the same directory)
     outputDir: "codefend-output", // the output folder that will be an obfuscated clone of your code
@@ -191,16 +196,38 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
   },
 
   obfuscationOptions: {
-    prefix: "Ox", // the prefix of each variable, make sure its a valid character to start with a variable ( e.g do not start with "-"" or a number)
-    predefinedWords: [], // words that you want to obfuscate them in a static way (determined output)
-                         // {"originalWord":"l_secretVar" , "targetWord": "123456"}
-                         // note that the original word should have a prefix 'l_' to be detected and replaced
 
-    ignoredWords: ["node_modules"], // words that you wish not to obfuscate them and they unfortunately match the regex :)
+
+    /** prefix: string
+    * the prefix of each variable generated,
+    * make sure its a valid character to start with a variable
+    * ( e.g do not start with "-"" or a number)
+    */
+    prefix: "Ox",
+
+
+    /** predefinedWords: Array<{originalWord:string, targetWord:string}>
+    * words that you want to obfuscate them in a static way (determined output)
+    ** {"originalWord":"l_secretVar" , "targetWord": "123456"}
+    * note that the original word should have a prefix 'l_' to be detected and replaced
+    */
+    predefinedWords: [],
+
+
+    /** ignoredWords: Array<string>
+    * Words that matches the pattern to be obfuscated but should be kept as is.
+    * useful for words that are being obfuscated and causing errors in build
+    */
+    ignoredWords: ["node_modules"],
+
+
+    /** regexList: Array<{name:string,value:string,flag:string}>
+    * Regex for detecting the words to be obfuscated
+    */
     regexList: [
       {
         name: "main",
-        value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",//regex for variables,functions,classes ...
+        value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",
         flag: "g",
       }
     ],
