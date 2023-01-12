@@ -170,7 +170,8 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 ## Configuration
 
 ```js
-//default configuration generated inside .codefendrc.json
+/* default configuration generated inside .codefendrc.json when executing codefend -i*/
+
 {
   /** debug: boolean
   * Display additional logs
@@ -182,19 +183,20 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 
     /** inputDir: string
-     * the folder that should be copied and obfuscated ( keep it "." if you're running in the same directory)
+     * the folder that should be copied and obfuscated by Codefend.
+     * Note: you can keep it "." if you're executing Codefend in the root of your project
     */
     inputDir: ".",
 
 
     /** outputDir: string
-     * the output folder that will be an obfuscated clone of your code
+     * the output folder where Codefend will generate the cloned obfuscated folder.
     */
     outputDir: "codefend-output",
 
 
     /** outputDir: string []
-     * the files that should not be copied to the output folder
+     * the files/folders that shouldn't be copied by Codefend to the output folder.
     */
     ignoredFilesInGeneration: [
       "codefend-output",
