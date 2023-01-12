@@ -3,6 +3,7 @@ import { CodefendMapper } from "./core/mapper/CodefendMapper";
 import { ICodefendMapper } from "./core/mapper/ICodefendMapper";
 import {
   ICodefendOptions,
+  IObfuscateOptions,
   defaultOptions,
 } from "./core/options/ICodefendOptions";
 import { CodefendParser } from "./core/parser/CodefendParser";
@@ -27,29 +28,46 @@ export const fileSystem: ICodefendFileSystem = {
 export const codefendDefaultOptions = defaultOptions;
 
 export const CodefendCore: ICodefendCore = {
-  parser: new CodefendParser(defaultOptions, logger),
-  mapper: new CodefendMapper(defaultOptions, logger),
-  replacer: new CodefendReplacer(logger),
+  parser: new CodefendParser(),
+  mapper: new CodefendMapper(),
+  replacer: new CodefendReplacer(),
 };
 
 export function obfuscate(
   code: string,
   map: Record<string, string> = {},
-  options?: ICodefendOptions
+  options?: IObfuscateOptions
 ) {
+  options = options ?? ({} as IObfuscateOptions);
+  const _options = {
+    ...codefendDefaultOptions,
+    ...options,
+  } as ICodefendOptions;
+
   const words = CodefendCore.parser.parse(
     code,
-    options?.obfuscationOptions.regexList
+    _options.obfuscationOptions.regexList
   );
-  CodefendCore.mapper.buildMap(words, map, options?.obfuscationOptions.prefix);
+  CodefendCore.mapper.buildMap(words, map, {
+    prefix: _options.obfuscationOptions.prefix,
+    debug: _options.debug,
+    ignoredWords: _options.obfuscationOptions.ignoredWords,
+    predefinedWords: _options.obfuscationOptions.predefinedWords,
+  });
   map = CodefendCore.mapper.sortMap(map);
   CodefendCore.mapper.mapPredefinedWords(
     map,
-    options?.obfuscationOptions.predefinedWords
+    _options.obfuscationOptions.predefinedWords,
+    {
+      debug: _options.debug,
+    }
   );
   CodefendCore.mapper.mapIgnoredWords(
     map,
-    options?.obfuscationOptions.ignoredWords
+    _options.obfuscationOptions.ignoredWords,
+    {
+      debug: _options.debug,
+    }
   );
   const output = CodefendCore.replacer.replace(code, map);
   return output;

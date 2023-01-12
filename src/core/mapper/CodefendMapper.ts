@@ -1,37 +1,34 @@
-import { CodefendLogger } from "../../logger/CodefendLogger";
+import { logger } from "../..";
 import {
-  ICodefendOptions,
+  IBuildMapOptions,
   ICodefendPredefinedWordOption,
+  IMapIgnoredWordsOptions,
+  IMapPredefinedWordsOptions,
 } from "../options/ICodefendOptions";
 import { ICodefendParserWord } from "../parser/ICodefendParser";
 import { ICodefendMapper } from "./ICodefendMapper";
 
 export class CodefendMapper implements ICodefendMapper {
-  options: ICodefendOptions;
-  logger: CodefendLogger;
-  scope: string;
-
-  constructor(options: ICodefendOptions, logger: CodefendLogger) {
-    this.options = options;
-    this.logger = logger;
-    this.scope = this.constructor.name.replace("Codefend", "");
-  }
-
-  setOptions(options: ICodefendOptions) {
-    this.options = options;
-  }
-
   buildMap(
     words: ICodefendParserWord[],
     map: Record<string, string>,
-    prefix?: string
+    options: IBuildMapOptions
   ) {
-    prefix = prefix ?? this.options.obfuscationOptions.prefix;
+    const reserved = [
+      ...(options.ignoredWords ?? []),
+      ...(options.predefinedWords?.map((word) => word.originalWord) ?? []),
+    ];
     let sequence = Object.keys(map).length;
     words.forEach((word) => {
       if (map[word.value]) return;
-      map[word.value] = `${prefix ?? ""}${sequence++}`;
-      this.logger.info("Codefend", `${word.value} --> ${map[word.value]}`);
+      map[word.value] = `${options.prefix}${sequence++}`;
+
+      if (!reserved.includes(word.value))
+        logger.debug(
+          "Codefend",
+          `${word.value} --> ${map[word.value]}`,
+          options.debug
+        );
     });
     return map;
   }
@@ -47,10 +44,15 @@ export class CodefendMapper implements ICodefendMapper {
       }, {});
   }
 
-  mapIgnoredWords(map: Record<string, string>, ignoredWords?: string[]) {
-    ignoredWords =
-      ignoredWords ?? this.options.obfuscationOptions.ignoredWords ?? [];
+  mapIgnoredWords(
+    map: Record<string, string>,
+    ignoredWords: string[],
+    options: IMapIgnoredWordsOptions
+  ) {
     ignoredWords.forEach((word: string) => {
+      if (map[word]) {
+        logger.debug("Codefend", `${word} (Ignored word)`, options.debug);
+      }
       map[word] = word;
     });
     return map;
@@ -58,11 +60,19 @@ export class CodefendMapper implements ICodefendMapper {
 
   mapPredefinedWords(
     map: Record<string, string>,
-    predefinedWords?: ICodefendPredefinedWordOption[]
+    predefinedWords: ICodefendPredefinedWordOption[],
+    options: IMapPredefinedWordsOptions
   ) {
-    predefinedWords =
-      predefinedWords ?? this.options.obfuscationOptions.predefinedWords ?? [];
     predefinedWords.forEach((predefinedWord) => {
+      if (map[predefinedWord.originalWord]) {
+        logger.debug(
+          "Codefend",
+          `${map[predefinedWord.originalWord]} --> ${
+            predefinedWord.targetWord
+          } (Predefined word)`,
+          options.debug
+        );
+      }
       map[predefinedWord.originalWord] = predefinedWord.targetWord;
     });
     return map;

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ICodefendPredefinedWordOption } from "../core/options/ICodefendOptions";
-import { CodefendCore } from "../index";
+import { CodefendCore, codefendDefaultOptions } from "../index";
 
 describe("Mapper", () => {
   describe("Build Map", () => {
@@ -9,7 +9,17 @@ describe("Mapper", () => {
       { value: "lib-file", fromRegex: "file" },
     ];
     it("with default options", () => {
-      const map = CodefendCore.mapper.buildMap(words, {}, "Ox");
+      const map = CodefendCore.mapper.buildMap(
+        words,
+        {},
+        {
+          prefix: codefendDefaultOptions.obfuscationOptions.prefix,
+          debug: codefendDefaultOptions.debug,
+          ignoredWords: codefendDefaultOptions.obfuscationOptions.ignoredWords,
+          predefinedWords:
+            codefendDefaultOptions.obfuscationOptions.predefinedWords,
+        }
+      );
       expect(map).toEqual({ l_var: "Ox0", "lib-file": "Ox1" });
     });
   });
@@ -34,7 +44,9 @@ describe("Mapper", () => {
     };
 
     it("should ignore the word", () => {
-      map = CodefendCore.mapper.mapIgnoredWords(map, ignoredWords);
+      map = CodefendCore.mapper.mapIgnoredWords(map, ignoredWords, {
+        debug: true,
+      });
       expect(map[ignoredWords[0]]).toEqual(ignoredWords[0]);
     });
   });
@@ -50,7 +62,9 @@ describe("Mapper", () => {
     };
 
     it("should replace with the target word", () => {
-      map = CodefendCore.mapper.mapPredefinedWords(map, predefinedWords);
+      map = CodefendCore.mapper.mapPredefinedWords(map, predefinedWords, {
+        debug: true,
+      });
       expect(map[predefinedWords[0].originalWord]).toEqual(
         predefinedWords[0].targetWord
       );
@@ -72,8 +86,12 @@ describe("Mapper", () => {
     };
 
     it("ignore > predefined", () => {
-      map = CodefendCore.mapper.mapIgnoredWords(map, ignoredWords);
-      map = CodefendCore.mapper.mapPredefinedWords(map, predefinedWords);
+      map = CodefendCore.mapper.mapIgnoredWords(map, ignoredWords, {
+        debug: true,
+      });
+      map = CodefendCore.mapper.mapPredefinedWords(map, predefinedWords, {
+        debug: true,
+      });
       expect(map[predefinedWords[0].originalWord]).toEqual(
         predefinedWords[0].targetWord
       );
