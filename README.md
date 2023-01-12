@@ -110,7 +110,39 @@ class Ox0 {
 }
 ```
 
-For Advanced usage, please check the [Configuration](#configuration) section
+```html
+<!-- Html example, can work also with Angular,React,Vue,Svelte... in the same way -->
+
+<html>
+  <head>
+    <style>
+      .l_red {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="l_red">l_secret</div>
+    <div class="l_red">Hello World</div>
+  </body>
+</html>
+
+<!-- Will Become -->
+
+<html>
+  <head>
+    <style>
+      .Ox1 {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="Ox1">Ox0</div>
+    <div class="Ox1">Hello World</div>
+  </body>
+</html>
+```
 
 ### `Step 2`: Run the CLI
 
@@ -144,6 +176,16 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
       /* build the obfuscated project */
       ...
+
+      /*⚠️⚠️⚠️ in case the run or the build fails, its likely because some reserved words have been obfuscated that should not have been obfuscated.
+
+      Solution:
+
+      1. set debug=true in .codefendrc.json (to display a list of the words that are being obfuscated)
+      2. detect what are the words that should not be obfuscated from the list displayed
+      3. add the words to the ignoredWords array inside .codefendrc.json
+      */
+
 
       /* deploy the obfuscated project */
       ...
