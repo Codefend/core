@@ -17,9 +17,9 @@ describe("Obfuscate", () => {
         code,
         {},
         {
-          debug: false,
+          debug: codefendDefaultOptions.debug,
           obfuscationOptions: {
-            prefix: "Ox",
+            prefix: codefendDefaultOptions.obfuscationOptions.prefix,
             regexList: codefendDefaultOptions.obfuscationOptions.regexList,
             ignoredWords: ["l_predefined_and_ignored"],
             predefinedWords: [
