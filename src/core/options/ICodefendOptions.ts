@@ -34,6 +34,14 @@ export interface IBuildMapOptions {
   debug: boolean;
 }
 
+export interface IMapIgnoredWordsOptions {
+  debug: boolean;
+}
+
+export interface IMapPredefinedWordsOptions {
+  debug: boolean;
+}
+
 export interface IObfuscateOptions {
   debug?: boolean;
   generationOption?: {
