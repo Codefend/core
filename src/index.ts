@@ -27,9 +27,9 @@ export const fileSystem: ICodefendFileSystem = {
 export const codefendDefaultOptions = defaultOptions;
 
 export const CodefendCore: ICodefendCore = {
-  parser: new CodefendParser(defaultOptions, logger),
-  mapper: new CodefendMapper(defaultOptions, logger),
-  replacer: new CodefendReplacer(logger),
+  parser: new CodefendParser(),
+  mapper: new CodefendMapper(),
+  replacer: new CodefendReplacer(),
 };
 
 export function obfuscate(
@@ -37,19 +37,25 @@ export function obfuscate(
   map: Record<string, string> = {},
   options?: ICodefendOptions
 ) {
+  options = options ?? ({} as ICodefendOptions);
+  options = { ...codefendDefaultOptions, ...options };
+
   const words = CodefendCore.parser.parse(
     code,
-    options?.obfuscationOptions.regexList
+    options.obfuscationOptions.regexList
   );
-  CodefendCore.mapper.buildMap(words, map, options?.obfuscationOptions.prefix);
+  CodefendCore.mapper.buildMap(words, map, {
+    prefix: options.obfuscationOptions.prefix,
+    debug: options.debug,
+  });
   map = CodefendCore.mapper.sortMap(map);
   CodefendCore.mapper.mapPredefinedWords(
     map,
-    options?.obfuscationOptions.predefinedWords
+    options.obfuscationOptions.predefinedWords
   );
   CodefendCore.mapper.mapIgnoredWords(
     map,
-    options?.obfuscationOptions.ignoredWords
+    options.obfuscationOptions.ignoredWords
   );
   const output = CodefendCore.replacer.replace(code, map);
   return output;

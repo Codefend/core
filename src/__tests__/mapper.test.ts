@@ -9,7 +9,11 @@ describe("Mapper", () => {
       { value: "lib-file", fromRegex: "file" },
     ];
     it("with default options", () => {
-      const map = CodefendCore.mapper.buildMap(words, {}, "Ox");
+      const map = CodefendCore.mapper.buildMap(
+        words,
+        {},
+        { prefix: "Ox", debug: true }
+      );
       expect(map).toEqual({ l_var: "Ox0", "lib-file": "Ox1" });
     });
   });

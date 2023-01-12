@@ -1,7 +1,7 @@
 export interface ICodefendOptions {
   generationOptions?: ICodefendGenerationOptions;
   obfuscationOptions: ICodefendObfuscationOptions;
-  debug?: boolean;
+  debug: boolean;
 }
 
 export interface ICodefendGenerationOptions {
@@ -11,10 +11,10 @@ export interface ICodefendGenerationOptions {
 }
 
 export interface ICodefendObfuscationOptions {
-  prefix?: string;
-  predefinedWords?: ICodefendPredefinedWordOption[];
-  ignoredWords?: string[];
-  regexList?: ICodefendRegexListOption[];
+  prefix: string;
+  predefinedWords: ICodefendPredefinedWordOption[];
+  ignoredWords: string[];
+  regexList: ICodefendRegexListOption[];
 }
 
 export interface ICodefendPredefinedWordOption {
@@ -27,6 +27,11 @@ export interface ICodefendRegexListOption {
   name: string;
   flag: string;
   _regExp?: RegExp;
+}
+
+export interface IBuildMapOptions {
+  prefix: string;
+  debug: boolean;
 }
 
 export const defaultOptions: ICodefendOptions = {

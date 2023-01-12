@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { obfuscate } from "../index";
+import { obfuscate, codefendDefaultOptions } from "../index";
 
 describe("Obfuscate", () => {
   describe("main-regex", () => {
@@ -17,7 +17,10 @@ describe("Obfuscate", () => {
         code,
         {},
         {
+          debug: false,
           obfuscationOptions: {
+            prefix: "Ox",
+            regexList: codefendDefaultOptions.obfuscationOptions.regexList,
             ignoredWords: ["l_predefined_and_ignored"],
             predefinedWords: [
               {
