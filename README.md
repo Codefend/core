@@ -179,9 +179,24 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 
   generationOptions: {
-    inputDir: ".", // the folder that should be copied and obfuscated ( keep it . if you're running in the same directory)
-    outputDir: "codefend-output", // the output folder that will be an obfuscated clone of your code
-    ignoredFilesInGeneration: [ // the files that should not be copied to the output folder
+
+
+    /** inputDir: string
+     * the folder that should be copied and obfuscated ( keep it "." if you're running in the same directory)
+    */
+    inputDir: ".",
+
+
+    /** outputDir: string
+     * the output folder that will be an obfuscated clone of your code
+    */
+    outputDir: "codefend-output",
+
+
+    /** outputDir: string []
+     * the files that should not be copied to the output folder
+    */
+    ignoredFilesInGeneration: [
       "codefend-output",
       ".codefendrc.json",
       "node_modules",
