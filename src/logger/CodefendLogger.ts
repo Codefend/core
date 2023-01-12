@@ -13,8 +13,12 @@ export class CodefendLogger implements ICodefendLogger {
     console.log("");
   }
 
+  debug(prefix: string, message: string, debug: boolean) {
+    if (!debug) return;
+    this.info(prefix, message);
+  }
+
   info(prefix: string, message: string) {
-    if (!this.options.debug) return;
     console.log(
       this.buildPrefixColor()(this.buildPrefix(prefix)) +
         this.buildMessageColor("info")(this.buildMessage(message))
