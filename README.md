@@ -243,7 +243,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 
     /** outputDir: string
-     * Output folder where Codefend will generate the cloned obfuscated version of the project.
+     * Folder where Codefend will generate the cloned obfuscated version of the project.
     */
     outputDir: "codefend-output",
 
