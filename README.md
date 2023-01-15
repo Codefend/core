@@ -176,29 +176,30 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 ```bash
 
-      /* navigate to the output folder*/
+        /* 1. Navigate to the output folder*/
       cd codefend-output
 
-      /* install the dependencies of the new obfuscated project */
+      /* 2. Install the dependencies of the new obfuscated project */
       npm install
 
-      /* run the obfuscated project */
+      /* 3. Run the obfuscated project */
       ...
 
-      /* build the obfuscated project */
+      /* 4. Build the obfuscated project */
       ...
 
-      /*⚠️⚠️⚠️ in case the run or the build fails, its likely because some reserved words have been obfuscated that should not have been obfuscated.
+      /*⚠️ In case the run or the build fails, most likely its because some reserved words related to your dependencies have been obfuscated.
 
       Solution:
 
-      1. set debug=true in .codefendrc.json (to display a list of the words that are being obfuscated)
-      2. detect what are the words that should not be obfuscated from the list displayed
-      3. add the words to the ignoredWords array inside .codefendrc.json
+      a. Set debug=true in .codefendrc.json (to display a list of the words that are being obfuscated)
+      b. Detect what are the words that should not be obfuscated from the list displayed
+      c. Add the words to the ignoredWords array inside .codefendrc.json
+      d. Repeat 3 and 4 until no Run/Build errors
       */
 
 
-      /* deploy the obfuscated project */
+      /* 5.deploy the obfuscated project */
       ...
 ```
 
