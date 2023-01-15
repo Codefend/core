@@ -15,6 +15,17 @@ The complete list of examples for different programming languages/frameworks can
 
 ## Installation
 
+#### `Webpack`
+
+If you're using Webpack, you can install
+[webpack-plugin-codefend](https://www.npmjs.com/package/webpack-plugin-codefend) instead of directly using the CLI
+
+#### `Rollup/Vite`
+
+If you're using Rollup or Vite, you can install
+[rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend)
+instead of directly using the CLI
+
 #### `Globally`
 
 ```bash
