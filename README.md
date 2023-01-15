@@ -176,7 +176,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 ```bash
 
-        /* 1. Navigate to the output folder*/
+      /* 1. Navigate to the output folder*/
       cd codefend-output
 
       /* 2. Install the dependencies of the new obfuscated project */
