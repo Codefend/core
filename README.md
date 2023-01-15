@@ -298,7 +298,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
     * => one or multiple "_" in the middle of the word
     *
     * Note: the regex can be changed, do it on your own risk
-    * Note: multiple regexes can be applied together, they will run sequentially, do it on your own risk.
+    * Note: multiple regex can be applied together, they will run sequentially, do it on your own risk.
     * more examples on regex coming soon in Codefend v2
     */
     regexList: [
