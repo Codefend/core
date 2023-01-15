@@ -16,14 +16,25 @@ export class CodefendObfuscateCommand {
     }
     this.applyTransformationsOnOptions(options);
 
-    logger.debug("Codefend", "Obfuscation started...", options.debug);
+    logger.debug(
+      "Codefend",
+      "Obfuscation started...",
+      options.debug,
+      logger.info
+    );
     logger.debug(
       "Codefend",
       `Removing existing output folder ${options.generationOptions.outputDir}...`,
-      options.debug
+      options.debug,
+      logger.info
     );
     fileSystem.folderManager.removeFolder(options.generationOptions.outputDir);
-    logger.debug("Codefend", "Copying new files...", options.debug);
+    logger.debug(
+      "Codefend",
+      "Copying new files...",
+      options.debug,
+      logger.info
+    );
     fileSystem.folderManager.copyFolderSync(
       options.generationOptions.inputDir,
       options.generationOptions.outputDir,

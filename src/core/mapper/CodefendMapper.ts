@@ -27,7 +27,8 @@ export class CodefendMapper implements ICodefendMapper {
         logger.debug(
           "Codefend",
           `${word.value} --> ${map[word.value]}`,
-          options.debug
+          options.debug,
+          logger.info
         );
     });
     return map;
@@ -51,7 +52,12 @@ export class CodefendMapper implements ICodefendMapper {
   ) {
     ignoredWords.forEach((word: string) => {
       if (map[word]) {
-        logger.debug("Codefend", `${word} (Ignored word)`, options.debug);
+        logger.debug(
+          "Codefend",
+          `${word} (Ignored word)`,
+          options.debug,
+          logger.warning
+        );
       }
       map[word] = word;
     });
@@ -70,7 +76,8 @@ export class CodefendMapper implements ICodefendMapper {
           `${map[predefinedWord.originalWord]} --> ${
             predefinedWord.targetWord
           } (Predefined word)`,
-          options.debug
+          options.debug,
+          logger.warning
         );
       }
       map[predefinedWord.originalWord] = predefinedWord.targetWord;

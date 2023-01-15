@@ -13,35 +13,40 @@ export class CodefendLogger implements ICodefendLogger {
     console.log("");
   }
 
-  debug(prefix: string, message: string, debug: boolean) {
+  debug = (
+    prefix: string,
+    message: string,
+    debug: boolean,
+    logFunction: (prefix: string, message: string) => void
+  ) => {
     if (!debug) return;
-    this.info(prefix, message);
-  }
+    logFunction(prefix, message);
+  };
 
-  info(prefix: string, message: string) {
+  info = (prefix: string, message: string) => {
     console.log(
       this.buildPrefixColor()(this.buildPrefix(prefix)) +
         this.buildMessageColor("info")(this.buildMessage(message))
     );
-  }
-  success(prefix: string, message: string) {
+  };
+  success = (prefix: string, message: string) => {
     console.log(
       this.buildPrefixColor()(this.buildPrefix(prefix)) +
         this.buildMessageColor("success")(this.buildMessage(message))
     );
-  }
-  warning(prefix: string, message: string) {
+  };
+  warning = (prefix: string, message: string) => {
     console.log(
       this.buildPrefixColor()(this.buildPrefix(prefix)) +
         this.buildMessageColor("warning")(this.buildMessage(message))
     );
-  }
-  error(prefix: string, message: string) {
+  };
+  error = (prefix: string, message: string) => {
     console.log(
       this.buildPrefixColor()(this.buildPrefix(prefix)) +
         this.buildMessageColor("error")(this.buildMessage(message))
     );
-  }
+  };
 
   buildPrefix(prefix: string) {
     return ` ${prefix.padEnd(LOG_OPTIONS.PREFIX_SIZE, " ")}`;
