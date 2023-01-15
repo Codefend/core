@@ -293,12 +293,12 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
     /** regexList: Array<{name:string,value:string,flag:string}>
     * Regex for detecting the words to be obfuscated
     *
-    * Default regex accept the following words format:
+    * Default regex accepts the following words format:
     * l_John node_John node_John_Doe ...
-    * => any word having "_" not as first character
+    * => one or multiple "_" in the middle of the word
     *
-    * Note: the regex can be changed, do that on your own risk
-    * Note: multiple regexes can be applied together, they will run sequentially, do that on your own risk.
+    * Note: the regex can be changed, do it on your own risk
+    * Note: multiple regexes can be applied together, they will run sequentially, do it on your own risk.
     * more examples on regex coming soon in Codefend v2
     */
     regexList: [
