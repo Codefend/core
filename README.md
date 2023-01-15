@@ -17,14 +17,14 @@ The complete list of examples for different programming languages/frameworks can
 
 #### `Webpack`
 
-If you're using Webpack, you can install
-[webpack-plugin-codefend](https://www.npmjs.com/package/webpack-plugin-codefend) instead of directly using the CLI
+If you're using Webpack, it is recommended to use
+[webpack-plugin-codefend](https://www.npmjs.com/package/webpack-plugin-codefend) instead of directly using the CLI, you can skip the installation and jump directly to the [plugin documentation](https://github.com/Codefend/webpack-plugin-codefend#readme)
 
 #### `Rollup/Vite`
 
-If you're using Rollup or Vite, you can install
+If you're using Rollup or Vite, it is recommended to use
 [rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend)
-instead of directly using the CLI
+instead of directly using the CLI, you can skip the installation and jump directly to the [plugin documentation](https://github.com/Codefend/rollup-plugin-codefend#readme)
 
 #### `Globally`
 
