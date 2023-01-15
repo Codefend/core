@@ -4,7 +4,7 @@ export class CodefendInitCommand {
   execute() {
     const options = { ...codefendDefaultOptions };
 
-    if (options.obfuscationOptions.regexList?.length) {
+    if (options.obfuscationOptions.regexList.length) {
       options.obfuscationOptions.regexList.forEach((regex) => {
         delete regex._regExp;
       });

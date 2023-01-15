@@ -52,7 +52,7 @@ export class CodefendObfuscateCommand {
   }
 
   initializeRegexList(options: ICodefendOptions) {
-    options.obfuscationOptions.regexList?.forEach((regexListOption) => {
+    options.obfuscationOptions.regexList.forEach((regexListOption) => {
       regexListOption._regExp =
         CodefendCore.parser.initializeRegex(regexListOption);
     });
