@@ -37,6 +37,10 @@
   "bin": {
     "codefend": "./bin/codefend"
   },
+  "files": [
+    "build/**/*",
+    "bin/**"
+  ],
   "engines": {
     "node": "^18.7.0 || >= 16",
     "npm": "^8.16.0 || >= 8"
