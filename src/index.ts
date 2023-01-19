@@ -1,6 +1,7 @@
 import { CodefendCLI } from "./cli/CodefendCLI";
 import { CodefendMapper } from "./core/mapper/CodefendMapper";
 import { ICodefendMapper } from "./core/mapper/ICodefendMapper";
+import { ICodefendRuntimeOptions } from "./core/options/CodefendRuntimeOptions";
 import {
   ICodefendOptions,
   IObfuscateOptions,
@@ -33,9 +34,12 @@ export const CodefendCore: ICodefendCore = {
   replacer: new CodefendReplacer(),
 };
 
+export { createRuntimeOptions } from "./core/options/CodefendRuntimeOptions";
+
 export function obfuscate(
   code: string,
   map: Record<string, string> = {},
+  runtimeOptions: ICodefendRuntimeOptions,
   options?: IObfuscateOptions
 ) {
   options = options ?? ({} as IObfuscateOptions);
@@ -60,14 +64,16 @@ export function obfuscate(
     _options.obfuscationOptions.predefinedWords,
     {
       debug: _options.debug,
-    }
+    },
+    runtimeOptions
   );
   CodefendCore.mapper.mapIgnoredWords(
     map,
     _options.obfuscationOptions.ignoredWords,
     {
       debug: _options.debug,
-    }
+    },
+    runtimeOptions
   );
   const output = CodefendCore.replacer.replace(code, map);
   return output;

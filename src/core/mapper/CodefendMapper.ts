@@ -1,4 +1,5 @@
 import { logger } from "../..";
+import { ICodefendRuntimeOptions } from "../options/CodefendRuntimeOptions";
 import {
   IBuildMapOptions,
   ICodefendPredefinedWordOption,
@@ -48,10 +49,11 @@ export class CodefendMapper implements ICodefendMapper {
   mapIgnoredWords(
     map: Record<string, string>,
     ignoredWords: string[],
-    options: IMapIgnoredWordsOptions
+    options: IMapIgnoredWordsOptions,
+    runtimeOptions: ICodefendRuntimeOptions
   ) {
     ignoredWords.forEach((word: string) => {
-      if (map[word]) {
+      if (map[word] && !runtimeOptions.processed.ignoredWords.has(word)) {
         logger.debug(
           "Codefend",
           `${word} (Ignored word)`,
@@ -60,6 +62,7 @@ export class CodefendMapper implements ICodefendMapper {
         );
       }
       map[word] = word;
+      runtimeOptions.processed.ignoredWords.add(word);
     });
     return map;
   }
@@ -67,20 +70,25 @@ export class CodefendMapper implements ICodefendMapper {
   mapPredefinedWords(
     map: Record<string, string>,
     predefinedWords: ICodefendPredefinedWordOption[],
-    options: IMapPredefinedWordsOptions
+    options: IMapPredefinedWordsOptions,
+    runtimeOptions: ICodefendRuntimeOptions
   ) {
     predefinedWords.forEach((predefinedWord) => {
-      if (map[predefinedWord.originalWord]) {
+      if (
+        map[predefinedWord.originalWord] &&
+        !runtimeOptions.processed.predefinedWords.has(
+          predefinedWord.originalWord
+        )
+      ) {
         logger.debug(
           "Codefend",
-          `${map[predefinedWord.originalWord]} --> ${
-            predefinedWord.targetWord
-          } (Predefined word)`,
+          `${predefinedWord.originalWord} --> ${predefinedWord.targetWord} (Predefined word)`,
           options.debug,
           logger.warning
         );
       }
       map[predefinedWord.originalWord] = predefinedWord.targetWord;
+      runtimeOptions.processed.predefinedWords.add(predefinedWord.originalWord);
     });
     return map;
   }

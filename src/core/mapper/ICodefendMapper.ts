@@ -1,3 +1,4 @@
+import { ICodefendRuntimeOptions } from "../options/CodefendRuntimeOptions";
 import {
   IBuildMapOptions,
   ICodefendPredefinedWordOption,
@@ -15,11 +16,13 @@ export interface ICodefendMapper {
   mapIgnoredWords: (
     map: Record<string, string>,
     ignoredWords: string[],
-    options: IMapIgnoredWordsOptions
+    options: IMapIgnoredWordsOptions,
+    runtimeOptions: ICodefendRuntimeOptions
   ) => Record<string, string>;
   mapPredefinedWords: (
     map: Record<string, string>,
     predefinedWords: ICodefendPredefinedWordOption[],
-    options: IMapPredefinedWordsOptions
+    options: IMapPredefinedWordsOptions,
+    runtimeOptions: ICodefendRuntimeOptions
   ) => Record<string, string>;
 }

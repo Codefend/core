@@ -1,4 +1,10 @@
-import { fileSystem, CodefendCore, obfuscate, logger } from "../../";
+import {
+  fileSystem,
+  CodefendCore,
+  obfuscate,
+  logger,
+  createRuntimeOptions,
+} from "../../";
 import { ICodefendOptions } from "../../core/options/ICodefendOptions";
 
 export class CodefendObfuscateCommand {
@@ -46,12 +52,13 @@ export class CodefendObfuscateCommand {
     );
     logger.success("Codefend", `Copied ${fileNames.length} file(s)`);
     const map: Record<string, string> = {};
+    const runtimeOptions = createRuntimeOptions();
     let fileCode;
     fileNames.forEach((fileName) => {
       fileCode = fileSystem.fileReader.readFile(fileName as string);
       fileSystem.fileWriter.writeFile(
         fileName as string,
-        obfuscate(fileCode ?? "", map, options)
+        obfuscate(fileCode ?? "", map, runtimeOptions, options)
       );
     });
     logger.success("Codefend", `Obfuscated ${Object.keys(map).length} word(s)`);
