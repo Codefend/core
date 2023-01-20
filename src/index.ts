@@ -2,11 +2,7 @@ import { CodefendCLI } from "./cli/CodefendCLI";
 import { CodefendMapper } from "./core/mapper/CodefendMapper";
 import { ICodefendMapper } from "./core/mapper/ICodefendMapper";
 import { ICodefendRuntimeOptions } from "./core/options/CodefendRuntimeOptions";
-import {
-  ICodefendOptions,
-  IObfuscateOptions,
-  defaultOptions,
-} from "./core/options/ICodefendOptions";
+import { ICodefendOptions, IObfuscateOptions, defaultOptions } from "./core/options/ICodefendOptions";
 import { CodefendParser } from "./core/parser/CodefendParser";
 import { ICodefendParser } from "./core/parser/ICodefendParser";
 import { CodefendReplacer } from "./core/replacer/CodefendReplacer";
@@ -48,10 +44,7 @@ export function obfuscate(
     ...options,
   } as ICodefendOptions;
 
-  const words = CodefendCore.parser.parse(
-    code,
-    _options.obfuscationOptions.regexList
-  );
+  const words = CodefendCore.parser.parse(code, _options.obfuscationOptions.regexList);
   CodefendCore.mapper.buildMap(words, map, {
     prefix: _options.obfuscationOptions.prefix,
     debug: _options.debug,

@@ -10,11 +10,7 @@ export class CodefendFolderManager implements ICodefendFolderManager {
       if (fs.lstatSync(path.join(from, element)).isFile()) {
         fs.copyFileSync(path.join(from, element), path.join(to, element));
       } else {
-        this.copyFolderSync(
-          path.join(from, element),
-          path.join(to, element),
-          ignoredFilesInGeneration
-        );
+        this.copyFolderSync(path.join(from, element), path.join(to, element), ignoredFilesInGeneration);
       }
     });
   }
@@ -30,10 +26,7 @@ export class CodefendFolderManager implements ICodefendFolderManager {
     for (const item of items) {
       if (item.isDirectory()) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        files = [
-          ...files,
-          ...this.getAllFileNamesInDir(`${dirName}/${item.name}`),
-        ];
+        files = [...files, ...this.getAllFileNamesInDir(`${dirName}/${item.name}`)];
       } else {
         files.push(`${dirName}/${item.name}`);
       }

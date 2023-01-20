@@ -10,9 +10,7 @@ export class CodefendParser implements ICodefendParser {
     const words: ICodefendParserWord[] = [];
     let match;
     regexList.forEach((regexListOption) => {
-      match = code.match(
-        regexListOption._regExp ?? this.initializeRegex(regexListOption)
-      );
+      match = code.match(regexListOption._regExp ?? this.initializeRegex(regexListOption));
       if (!match) return;
       match.forEach((word: string) => {
         words.push({ value: word, fromRegex: regexListOption.name });

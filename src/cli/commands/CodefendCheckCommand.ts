@@ -16,21 +16,15 @@ export class CodefendCheckCommand {
 
     const file = fileSystem.fileReader.readFile(OPTIONS_FILE_PATH);
     if (!file) {
-      checkResults.errors.push(
-        ".codefendrc.json not found. Please run codefend -i first to create it."
-      );
+      checkResults.errors.push(".codefendrc.json not found. Please run codefend -i first to create it.");
       this.printCheckResults(checkResults);
       return null;
     }
 
-    const options = fileSystem.fileReader.tryParse(
-      file
-    ) as ICodefendOptions | null;
+    const options = fileSystem.fileReader.tryParse(file) as ICodefendOptions | null;
 
     if (!options) {
-      checkResults.errors.push(
-        ".codefendrc.json does not contains a valid json format"
-      );
+      checkResults.errors.push(".codefendrc.json does not contains a valid json format");
       this.printCheckResults(checkResults);
       return null;
     }

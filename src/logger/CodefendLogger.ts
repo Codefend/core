@@ -13,38 +13,29 @@ export class CodefendLogger implements ICodefendLogger {
     console.log("");
   }
 
-  debug = (
-    prefix: string,
-    message: string,
-    debug: boolean,
-    logFunction: (prefix: string, message: string) => void
-  ) => {
+  debug = (prefix: string, message: string, debug: boolean, logFunction: (prefix: string, message: string) => void) => {
     if (!debug) return;
     logFunction(prefix, message);
   };
 
   info = (prefix: string, message: string) => {
     console.log(
-      this.buildPrefixColor()(this.buildPrefix(prefix)) +
-        this.buildMessageColor("info")(this.buildMessage(message))
+      this.buildPrefixColor()(this.buildPrefix(prefix)) + this.buildMessageColor("info")(this.buildMessage(message))
     );
   };
   success = (prefix: string, message: string) => {
     console.log(
-      this.buildPrefixColor()(this.buildPrefix(prefix)) +
-        this.buildMessageColor("success")(this.buildMessage(message))
+      this.buildPrefixColor()(this.buildPrefix(prefix)) + this.buildMessageColor("success")(this.buildMessage(message))
     );
   };
   warning = (prefix: string, message: string) => {
     console.log(
-      this.buildPrefixColor()(this.buildPrefix(prefix)) +
-        this.buildMessageColor("warning")(this.buildMessage(message))
+      this.buildPrefixColor()(this.buildPrefix(prefix)) + this.buildMessageColor("warning")(this.buildMessage(message))
     );
   };
   error = (prefix: string, message: string) => {
     console.log(
-      this.buildPrefixColor()(this.buildPrefix(prefix)) +
-        this.buildMessageColor("error")(this.buildMessage(message))
+      this.buildPrefixColor()(this.buildPrefix(prefix)) + this.buildMessageColor("error")(this.buildMessage(message))
     );
   };
 
@@ -57,9 +48,7 @@ export class CodefendLogger implements ICodefendLogger {
   }
 
   buildPrefixColor() {
-    return chalk
-      .hex(LOG_OPTIONS.COLORS.PREFIX_FG)
-      .bgHex(LOG_OPTIONS.COLORS.PREFIX_BG).bold;
+    return chalk.hex(LOG_OPTIONS.COLORS.PREFIX_FG).bgHex(LOG_OPTIONS.COLORS.PREFIX_BG).bold;
   }
 
   buildMessageColor(type: string) {

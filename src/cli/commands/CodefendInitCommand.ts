@@ -10,10 +10,7 @@ export class CodefendInitCommand {
       });
     }
 
-    fileSystem.fileWriter.writeFile(
-      OPTIONS_FILE_PATH,
-      JSON.stringify(options, null, 4)
-    );
+    fileSystem.fileWriter.writeFile(OPTIONS_FILE_PATH, JSON.stringify(options, null, 4));
     logger.success("Codefend", ".codefendrc.json created.");
   }
 }

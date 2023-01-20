@@ -26,10 +26,7 @@ export class CodefendCLI implements ICodefendCLI {
       .description("Defend Your Code By All Means Necessary =)")
       .option("-i, --init", "Creates the config file (.codefendrc.json)")
       .option("-o, --obfuscate", "Obfuscate the project")
-      .option(
-        "-c, --check",
-        "Check the config file for potential warnings/errors"
-      )
+      .option("-c, --check", "Check the config file for potential warnings/errors")
       .version(version, "-v, --version", "Output the version number")
       .helpOption("-h, --help", "Display help for command")
       .parse(process.argv);

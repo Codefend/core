@@ -1,10 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ICodefendPredefinedWordOption } from "../core/options/ICodefendOptions";
-import {
-  CodefendCore,
-  codefendDefaultOptions,
-  createRuntimeOptions,
-} from "../index";
+import { CodefendCore, codefendDefaultOptions, createRuntimeOptions } from "../index";
 
 describe("Mapper", () => {
   describe("Build Map", () => {
@@ -20,8 +16,7 @@ describe("Mapper", () => {
           prefix: codefendDefaultOptions.obfuscationOptions.prefix,
           debug: codefendDefaultOptions.debug,
           ignoredWords: codefendDefaultOptions.obfuscationOptions.ignoredWords,
-          predefinedWords:
-            codefendDefaultOptions.obfuscationOptions.predefinedWords,
+          predefinedWords: codefendDefaultOptions.obfuscationOptions.predefinedWords,
         }
       );
       expect(map).toEqual({ l_var: "Ox0", "lib-file": "Ox1" });
@@ -33,9 +28,7 @@ describe("Mapper", () => {
 
     it("should sort map by key length desc", () => {
       map = CodefendCore.mapper.sortMap(map);
-      expect(JSON.stringify(map)).toEqual(
-        JSON.stringify({ "lib-file": "Ox1", l_var: "Ox0" })
-      );
+      expect(JSON.stringify(map)).toEqual(JSON.stringify({ "lib-file": "Ox1", l_var: "Ox0" }));
     });
   });
 
@@ -83,9 +76,7 @@ describe("Mapper", () => {
         },
         runtimeOptions
       );
-      expect(map[predefinedWords[0].originalWord]).toEqual(
-        predefinedWords[0].targetWord
-      );
+      expect(map[predefinedWords[0].originalWord]).toEqual(predefinedWords[0].targetWord);
     });
   });
 
@@ -121,9 +112,7 @@ describe("Mapper", () => {
         },
         runtimeOptions
       );
-      expect(map[predefinedWords[0].originalWord]).toEqual(
-        predefinedWords[0].targetWord
-      );
+      expect(map[predefinedWords[0].originalWord]).toEqual(predefinedWords[0].targetWord);
     });
   });
 });

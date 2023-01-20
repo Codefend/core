@@ -1,10 +1,7 @@
 import { ICodefendRegexListOption } from "./../options/ICodefendOptions";
 
 export interface ICodefendParser {
-  parse: (
-    code: string,
-    regexList: ICodefendRegexListOption[]
-  ) => ICodefendParserWord[];
+  parse: (code: string, regexList: ICodefendRegexListOption[]) => ICodefendParserWord[];
 
   initializeRegex(regexList: ICodefendRegexListOption): RegExp;
 }

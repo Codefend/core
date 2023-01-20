@@ -1,9 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  obfuscate,
-  codefendDefaultOptions,
-  createRuntimeOptions,
-} from "../index";
+import { obfuscate, codefendDefaultOptions, createRuntimeOptions } from "../index";
 
 describe("Obfuscate", () => {
   describe("main-regex", () => {
@@ -35,9 +31,7 @@ describe("Obfuscate", () => {
           ],
         },
       });
-      expect(output).toEqual(
-        `import * from "./lib-file";const Ox0 = 0;const l_predefined_and_ignored = 0;`
-      );
+      expect(output).toEqual(`import * from "./lib-file";const Ox0 = 0;const l_predefined_and_ignored = 0;`);
     });
   });
 });
