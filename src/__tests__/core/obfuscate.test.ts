@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildObfuscationOptions, IObfuscationOptions } from "../../core/options";
+import { buildDefaultOptions, buildObfuscationOptions, IObfuscationOptions } from "../../core/options";
 import { obfuscate, buildRuntimeOptions } from "../../index";
 
 describe("Obfuscate", () => {
@@ -27,6 +27,23 @@ describe("Obfuscate", () => {
       const runtimeOptions = buildRuntimeOptions();
       const output = obfuscate(code, options, runtimeOptions);
       expect(output).toEqual(`import * from "./lib-file";const Ox0 = 0;const l_predefined_and_ignored = 0;`);
+    });
+  });
+
+  describe("override options", () => {
+    const code = "const l_var = 0;";
+    const defaultOptions = buildDefaultOptions();
+    const options: IObfuscationOptions = buildObfuscationOptions({
+      prefix: "Zx",
+      ignoredWords: [],
+      predefinedWords: [],
+      stats: false,
+      regexList: defaultOptions.obfuscationOptions.regexList,
+    });
+    it("prefix overriden", () => {
+      const runtimeOptions = buildRuntimeOptions();
+      const output = obfuscate(code, options, runtimeOptions);
+      expect(output).toEqual("const Zx = 0;");
     });
   });
 });
