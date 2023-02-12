@@ -5,3 +5,4 @@ export { obfuscate } from "./obfuscate";
 export { buildObfuscateOptions } from "./obfuscate";
 export { buildDefaultOptions } from "./options";
 export { buildRuntimeOptions } from "./runtime";
+export { stats } from "./stats";

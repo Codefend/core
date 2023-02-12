@@ -1,10 +1,20 @@
 import { IPredefinedWordOption } from "./options";
-import { IRuntimeOptions } from "./runtime";
+import { IRuntimeOptions, WordEncryptionType } from "./runtime";
 
 export function mapPredefinedWords(options: IMapPredefinedWords, runtimeOptions: IRuntimeOptions) {
   options.predefinedWords.forEach((predefinedWord) => {
     runtimeOptions.map[predefinedWord.originalWord] = predefinedWord.targetWord;
-    runtimeOptions.processed.predefinedWords.add(predefinedWord.originalWord);
+
+    if (predefinedWord.originalWord in runtimeOptions.processed.map) {
+      runtimeOptions.processed.map[predefinedWord.originalWord].target = predefinedWord.targetWord;
+      runtimeOptions.processed.map[predefinedWord.originalWord].type = WordEncryptionType.predefined;
+    } else {
+      runtimeOptions.processed.map[predefinedWord.originalWord] = {
+        count: 0,
+        target: predefinedWord.targetWord,
+        type: WordEncryptionType.predefined,
+      };
+    }
   });
 }
 

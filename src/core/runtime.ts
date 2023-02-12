@@ -1,8 +1,7 @@
 export interface IRuntimeOptions {
   map: Record<string, string>;
   processed: {
-    ignoredWords: Set<string>;
-    predefinedWords: Set<string>;
+    map: Record<string, IMapProcessed>;
   };
 }
 
@@ -10,8 +9,19 @@ export function buildRuntimeOptions(): IRuntimeOptions {
   return {
     map: {},
     processed: {
-      ignoredWords: new Set(),
-      predefinedWords: new Set(),
+      map: {},
     },
   };
+}
+
+export enum WordEncryptionType {
+  default,
+  ignored,
+  predefined,
+}
+
+export interface IMapProcessed {
+  count: number;
+  target: string;
+  type?: WordEncryptionType;
 }

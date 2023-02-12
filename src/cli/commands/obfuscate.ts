@@ -6,7 +6,7 @@ import { copyFolder } from "../../fs/copier";
 import { getAllFileNamesInDir, readFile } from "../../fs/reader";
 import { removeFolder } from "../../fs/remover";
 import { writeFile } from "../../fs/writer";
-import { log } from "../../index";
+import { log, stats } from "../../index";
 
 export function obfuscateCommand(options: IOptions | null) {
   if (!options) {
@@ -43,7 +43,7 @@ export function obfuscateCommand(options: IOptions | null) {
     fileCode = readFile(fileName as string);
     writeFile(fileName as string, obfuscate(fileCode ?? "", obfuscationOptions, runtimeOptions));
   });
-
+  stats(runtimeOptions);
   log.success("Codefend", `Obfuscated ${Object.keys(runtimeOptions.map).length} word(s)`);
   log.success("Codefend", `Obfuscation completed.`);
 }
