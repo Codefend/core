@@ -1,4 +1,3 @@
-import { IObfuscateOptions } from "./obfuscate";
 import { initializeRegex } from "./parser";
 export interface IOptions {
   generationOptions?: IGenerationOptions;
