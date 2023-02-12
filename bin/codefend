@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require("../build/cjs/index.js").cli.start();
+require("../build/cjs/index.js").startCLI();
