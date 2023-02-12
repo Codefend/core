@@ -1,7 +1,10 @@
+import { version } from "../../package.json";
+import { RC_VERSION } from "../common/constants";
 import { initializeRegex } from "./parser";
 export interface IOptions {
   generationOptions?: IGenerationOptions;
   obfuscationOptions: IObfuscationOptions;
+  __meta?: IMetaOptions;
 }
 
 export interface IGenerationOptions {
@@ -28,6 +31,11 @@ export interface IRegexListOption {
 export interface IPredefinedWordOption {
   originalWord: string;
   targetWord: string;
+}
+
+export interface IMetaOptions {
+  version: string;
+  rcVersion: string;
 }
 
 export function buildDefaultOptions(): IOptions {
@@ -61,6 +69,11 @@ export function buildDefaultOptions(): IOptions {
           flag: "g",
         },
       ],
+    },
+
+    __meta: {
+      version: version,
+      rcVersion: RC_VERSION,
     },
   } as IOptions;
 
