@@ -192,7 +192,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
       Solution:
 
-      a. Set debug=true in .codefendrc.json (to display a list of the words that are being obfuscated)
+      a. Set stats=true in .codefendrc.json (to display a list of the words that are being obfuscated)
       b. Detect what are the words that should not be obfuscated from the list displayed
       c. Add the words to the ignoredWords array inside .codefendrc.json
       d. Repeat 3 and 4 until no Run/Build errors
@@ -227,11 +227,6 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 /* default configuration generated inside .codefendrc.json when executing codefend -i*/
 
 {
-  /** debug: boolean
-  * Displays additional logs.
-  */
-  debug: true,
-
 
   generationOptions: {
 
@@ -267,6 +262,15 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
   },
 
   obfuscationOptions: {
+
+    /** stats: boolean
+      * Displays detailed stats about the obfuscated words:
+      * e.g:
+      * Ignored node_modules (5 times)
+      * Predefined l_Hello -> l_Hi (2 times)
+      * Encrypted l_a -> Ox0 (15 times)
+    */
+    stats: true,
 
 
     /** prefix: string
