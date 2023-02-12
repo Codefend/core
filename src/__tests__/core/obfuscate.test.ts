@@ -40,7 +40,7 @@ describe("Obfuscate", () => {
       stats: false,
       regexList: defaultOptions.obfuscationOptions.regexList,
     });
-    it("prefix overriden", () => {
+    it("prefix overridden", () => {
       const runtimeOptions = buildRuntimeOptions();
       const output = obfuscate(code, options, runtimeOptions);
       expect(output).toEqual("const Zx = 0;");
