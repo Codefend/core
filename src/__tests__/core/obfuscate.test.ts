@@ -43,7 +43,7 @@ describe("Obfuscate", () => {
     it("prefix overridden", () => {
       const runtimeOptions = buildRuntimeOptions();
       const output = obfuscate(code, options, runtimeOptions);
-      expect(output).toEqual("const Zx = 0;");
+      expect(output).toEqual("const Zx0 = 0;");
     });
   });
 });
