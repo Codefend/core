@@ -2,7 +2,6 @@ import { initializeRegex } from "./parser";
 export interface IOptions {
   generationOptions?: IGenerationOptions;
   obfuscationOptions: IObfuscationOptions;
-  debug: boolean;
 }
 
 export interface IGenerationOptions {
@@ -12,6 +11,7 @@ export interface IGenerationOptions {
 }
 
 export interface IObfuscationOptions {
+  stats: boolean;
   prefix: string;
   predefinedWords: IPredefinedWordOption[];
   ignoredWords: string[];
@@ -32,7 +32,6 @@ export interface IPredefinedWordOption {
 
 export function buildDefaultOptions(): IOptions {
   const options = {
-    debug: true,
     generationOptions: {
       inputDir: ".",
       outputDir: "codefend-output",
@@ -51,6 +50,7 @@ export function buildDefaultOptions(): IOptions {
     },
 
     obfuscationOptions: {
+      stats: true,
       prefix: "Ox",
       predefinedWords: [],
       ignoredWords: ["node_modules"],
@@ -67,4 +67,14 @@ export function buildDefaultOptions(): IOptions {
   options.obfuscationOptions.regexList.forEach((e) => (e._regExp = initializeRegex(e)));
 
   return options;
+}
+
+export function buildObfuscationOptions(options?: IObfuscationOptions) {
+  options = options ?? ({} as IObfuscationOptions);
+  const defaultOptions = buildDefaultOptions();
+
+  return {
+    ...defaultOptions.obfuscationOptions,
+    ...options,
+  };
 }

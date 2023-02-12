@@ -1,4 +1,4 @@
-import { buildObfuscateOptions, obfuscate } from "../../core/obfuscate";
+import { obfuscate } from "../../core/obfuscate";
 import { IOptions } from "../../core/options";
 import { initializeRegex } from "../../core/parser";
 import { buildRuntimeOptions } from "../../core/runtime";
@@ -6,7 +6,7 @@ import { copyFolder } from "../../fs/copier";
 import { getAllFileNamesInDir, readFile } from "../../fs/reader";
 import { removeFolder } from "../../fs/remover";
 import { writeFile } from "../../fs/writer";
-import { log, stats } from "../../index";
+import { buildObfuscationOptions, log, stats } from "../../index";
 
 export function obfuscateCommand(options: IOptions | null) {
   if (!options) {
@@ -19,15 +19,10 @@ export function obfuscateCommand(options: IOptions | null) {
   }
   applyTransformationsOnOptions(options);
 
-  log.debug("Codefend", "Obfuscation started...", options.debug, log.info);
-  log.debug(
-    "Codefend",
-    `Removing existing output folder ${options.generationOptions.outputDir}...`,
-    options.debug,
-    log.info
-  );
+  log.debug("Codefend", "Obfuscation started...", log.info);
+  log.debug("Codefend", `Removing existing output folder ${options.generationOptions.outputDir}...`, log.info);
   removeFolder(options.generationOptions.outputDir);
-  log.debug("Codefend", "Copying new files...", options.debug, log.info);
+  log.debug("Codefend", "Copying new files...", log.info);
   copyFolder(
     options.generationOptions.inputDir,
     options.generationOptions.outputDir,
@@ -36,14 +31,14 @@ export function obfuscateCommand(options: IOptions | null) {
 
   const fileNames = getAllFileNamesInDir(options.generationOptions.outputDir);
   log.success("Codefend", `Copied ${fileNames.length} file(s)`);
-  const obfuscationOptions = buildObfuscateOptions(options);
+  const obfuscationOptions = buildObfuscationOptions(options.obfuscationOptions);
   const runtimeOptions = buildRuntimeOptions();
   let fileCode;
   fileNames.forEach((fileName) => {
     fileCode = readFile(fileName as string);
     writeFile(fileName as string, obfuscate(fileCode ?? "", obfuscationOptions, runtimeOptions));
   });
-  stats(runtimeOptions);
+  stats({ stats: obfuscationOptions.stats }, runtimeOptions);
   log.success("Codefend", `Obfuscated ${Object.keys(runtimeOptions.map).length} word(s)`);
   log.success("Codefend", `Obfuscation completed.`);
 }

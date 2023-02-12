@@ -1,5 +1,5 @@
 export {
-  buildObfuscateOptions,
+  buildObfuscationOptions,
   buildDefaultOptions,
   buildRuntimeOptions,
   mapIgnoredWords,
