@@ -1,7 +1,11 @@
 import { log } from "../index";
 import { IRuntimeOptions, WordEncryptionType } from "./runtime";
 
-export function stats(runtimeOptions: IRuntimeOptions) {
+export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions) {
+  if (!options.stats) {
+    log.info("Codefend", "Obfuscation Stats disabled");
+    return;
+  }
   log.info("Codefend", "Obfuscation Stats:");
   for (const key in runtimeOptions.processed.map) {
     if (runtimeOptions.processed.map[key].type === WordEncryptionType.ignored) {
@@ -26,4 +30,8 @@ export function stats(runtimeOptions: IRuntimeOptions) {
       );
     }
   }
+}
+
+export interface IStatsOptions {
+  stats: boolean;
 }

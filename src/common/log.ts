@@ -5,13 +5,7 @@ export function newLine() {
   console.log("");
 }
 
-export const debug = (
-  prefix: string,
-  message: string,
-  debug: boolean,
-  logFunction: (prefix: string, message: string) => void
-) => {
-  if (!debug) return;
+export const debug = (prefix: string, message: string, logFunction: (prefix: string, message: string) => void) => {
   logFunction(prefix, message);
 };
 
