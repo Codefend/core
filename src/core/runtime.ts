@@ -1,12 +1,14 @@
-export interface ICodefendRuntimeOptions {
+export interface IRuntimeOptions {
+  map: Record<string, string>;
   processed: {
     ignoredWords: Set<string>;
     predefinedWords: Set<string>;
   };
 }
 
-export function createRuntimeOptions(): ICodefendRuntimeOptions {
+export function buildRuntimeOptions(): IRuntimeOptions {
   return {
+    map: {},
     processed: {
       ignoredWords: new Set(),
       predefinedWords: new Set(),
