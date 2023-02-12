@@ -1,5 +1,5 @@
 import { log } from "../../common";
-import { OPTIONS_FILE_PATH } from "../../common/constants";
+import { OPTIONS_FILE_PATH, RC_VERSION } from "../../common/constants";
 import { IOptions } from "../../core/options";
 import { readFile, tryParse } from "../../fs/reader";
 
@@ -27,6 +27,14 @@ export function checkCommand(): IOptions | null {
     checkResults.errors.push(".codefendrc.json does not contains a valid json format");
     printCheckResults(checkResults);
     return null;
+  }
+
+  if (options.__meta) {
+    if (options.__meta.rcVersion !== RC_VERSION) {
+      checkResults.warnings.push(
+        ".codefendrc.json was generated in an older version of Codefend and need to upgraded."
+      );
+    }
   }
 
   if (!options.generationOptions) {
