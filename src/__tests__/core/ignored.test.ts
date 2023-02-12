@@ -13,8 +13,15 @@ describe("Ignored words", () => {
     "lib-file": "Ox1",
     l_ignored: "Ox2",
   };
-  it("should ignore the word", () => {
+  describe("should ignore the word", () => {
     mapIgnoredWords(options, runtimeOptions);
-    expect(runtimeOptions.map[options.ignoredWords[0]]).toEqual(options.ignoredWords[0]);
+
+    it("ensure correct mapping", () => {
+      expect(runtimeOptions.map[options.ignoredWords[0]]).toEqual(options.ignoredWords[0]);
+    });
+
+    it("ensure correct stats", () => {
+      expect(runtimeOptions.processed.map[options.ignoredWords[0]].count).toEqual(0);
+    });
   });
 });

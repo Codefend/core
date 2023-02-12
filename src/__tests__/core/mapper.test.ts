@@ -13,10 +13,14 @@ describe("Mapper", () => {
     };
     const runtimeOptions = buildRuntimeOptions();
 
-    it("with default options", () => {
+    describe("with default options", () => {
       buildMap(options, runtimeOptions);
-
-      expect(runtimeOptions.map).toEqual({ l_var: "Ox0", "lib-file": "Ox1" });
+      it("ensure correct mapping", () => {
+        expect(runtimeOptions.map).toEqual({ l_var: "Ox0", "lib-file": "Ox1" });
+      });
+      it("ensure correct stats", () => {
+        expect(runtimeOptions.processed.map[options.words[0].value].count).toEqual(1);
+      });
     });
   });
 

@@ -14,8 +14,17 @@ describe("Predefined words", () => {
     l_predefined: "Ox2",
   };
 
-  it("should replace with the target word", () => {
+  describe("should replace with the target word", () => {
     mapPredefinedWords(options, runtimeOptions);
-    expect(runtimeOptions.map[options.predefinedWords[0].originalWord]).toEqual(options.predefinedWords[0].targetWord);
+
+    it("ensure correct mapping", () => {
+      expect(runtimeOptions.map[options.predefinedWords[0].originalWord]).toEqual(
+        options.predefinedWords[0].targetWord
+      );
+    });
+
+    it("ensure correct stats", () => {
+      expect(runtimeOptions.processed.map[options.predefinedWords[0].originalWord].count).toEqual(0);
+    });
   });
 });
