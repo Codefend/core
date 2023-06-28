@@ -10,3 +10,5 @@ export const LOG_OPTIONS = {
     PREFIX_FG: "#ff4067",
   },
 };
+
+export const PREFIX_REGEX = /^([a-zA-Z]|_)/g;

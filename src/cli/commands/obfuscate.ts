@@ -10,7 +10,7 @@ import { buildObfuscationOptions, log, stats } from "../../index";
 
 export function obfuscateCommand(options: IOptions | null) {
   if (!options) {
-    log.error("Codefend", "Could not start with Obfuscation. Please resolve errors first.");
+    log.error("Codefend", "Obfuscation process canceled due to unresolved errors.");
     return;
   }
 
