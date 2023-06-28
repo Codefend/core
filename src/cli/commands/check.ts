@@ -1,5 +1,5 @@
 import { log } from "../../common";
-import { OPTIONS_FILE_PATH, RC_VERSION } from "../../common/constants";
+import { OPTIONS_FILE_PATH, RC_VERSION, PREFIX_REGEX } from "../../common/constants";
 import { IOptions } from "../../core/options";
 import { readFile, tryParse } from "../../fs/reader";
 
@@ -31,9 +31,7 @@ export function checkCommand(): IOptions | null {
 
   if (options.__meta) {
     if (options.__meta.rcVersion !== RC_VERSION) {
-      checkResults.warnings.push(
-        ".codefendrc.json was generated in an older version of Codefend and need to upgraded."
-      );
+      checkResults.warnings.push(".codefendrc.json was generated in an older version of Codefend.");
     }
   }
 
@@ -41,6 +39,12 @@ export function checkCommand(): IOptions | null {
     checkResults.errors.push(
       ".codefendrc.json is missing generationOptions. please run codefend -i to create a new one"
     );
+    printCheckResults(checkResults);
+    return null;
+  }
+
+  if (!PREFIX_REGEX.test(options.obfuscationOptions.prefix)) {
+    checkResults.errors.push("Invalid 'prefix' in .codefendrc.json.");
     printCheckResults(checkResults);
     return null;
   }
@@ -53,14 +57,9 @@ export function checkCommand(): IOptions | null {
 
 function printCheckResults(checkResults: ICheckResults) {
   const message = `Check completed. ${checkResults.errors.length} error(s)  ${checkResults.warnings.length} warning(s) `;
+  const logFunction = checkResults.errors.length ? "error" : checkResults.warnings.length ? "warning" : "success";
+  log[logFunction]("Codefend", message);
 
-  if (checkResults.errors.length) {
-    log.error("Codefend", message);
-  } else if (checkResults.warnings.length) {
-    log.warning("Codefend", message);
-  } else {
-    log.success("Codefend", message);
-  }
   checkResults.errors.forEach((error) => {
     log.error("Codefend", `Error: ${error}`);
   });
