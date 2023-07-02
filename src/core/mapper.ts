@@ -1,18 +1,17 @@
 import { IParsedWord } from "./parser";
-import { IRuntimeOptions } from "./runtime";
+import { IRuntimeOptions, WordEncryptionType } from "./runtime";
 
 export function buildMap(options: IBuildMapOptions, runtimeOptions: IRuntimeOptions) {
-  let sequence = Object.keys(runtimeOptions.map).length;
   options.words.forEach((word) => {
     if (runtimeOptions.map[word.value]) {
       runtimeOptions.processed.map[word.value].count++;
       return;
     }
-    const target = `${options.prefix}${sequence++}`;
-    runtimeOptions.map[word.value] = target;
+    runtimeOptions.map[word.value] = "";
     runtimeOptions.processed.map[word.value] = {
       count: 1,
-      target: target,
+      target: "",
+      type: WordEncryptionType.default,
     };
   });
 }
@@ -28,6 +27,5 @@ export function sortMap(runtimeOptions: IRuntimeOptions) {
 }
 
 export interface IBuildMapOptions {
-  prefix: string;
   words: IParsedWord[];
 }

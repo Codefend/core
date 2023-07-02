@@ -279,6 +279,12 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
     */
     prefix: "Ox",
 
+    /** customGeneratedWords: string[]
+    * a unique list from which codefend will generate the variable names
+    * Note: it will fallback to prefix when the list is totally consumed
+    */
+    customGeneratedWords: [ "iLove", "bananas" ],
+
 
     /** predefinedWords: Array<{originalWord:string, targetWord:string}>
     * Words that should be obfuscated in a special (determined output)
