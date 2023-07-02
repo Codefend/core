@@ -19,6 +19,7 @@ export interface IObfuscationOptions {
   predefinedWords: IPredefinedWordOption[];
   ignoredWords: string[];
   regexList: IRegexListOption[];
+  customGeneratedWords: string[];
 }
 
 export interface IRegexListOption {
@@ -69,6 +70,7 @@ export function buildDefaultOptions(): IOptions {
           flag: "g",
         },
       ],
+      customGeneratedWords: [],
     },
 
     __meta: {

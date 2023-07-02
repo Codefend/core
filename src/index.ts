@@ -4,6 +4,7 @@ export {
   buildRuntimeOptions,
   mapIgnoredWords,
   mapPredefinedWords,
+  mapCustomGeneratedWords,
   obfuscate,
   stats,
 } from "./core";

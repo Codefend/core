@@ -39,6 +39,7 @@ describe("Obfuscate", () => {
       predefinedWords: [],
       stats: false,
       regexList: defaultOptions.obfuscationOptions.regexList,
+      customGeneratedWords: [],
     });
     it("prefix overridden", () => {
       const runtimeOptions = buildRuntimeOptions();

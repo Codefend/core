@@ -1,5 +1,5 @@
 import { log } from "../../common";
-import { OPTIONS_FILE_PATH, RC_VERSION, PREFIX_REGEX } from "../../common/constants";
+import { OPTIONS_FILE_PATH, RC_VERSION, VALID_VAR_REGEX } from "../../common/constants";
 import { IOptions } from "../../core/options";
 import { readFile, tryParse } from "../../fs/reader";
 
@@ -43,11 +43,11 @@ export function checkCommand(): IOptions | null {
     return null;
   }
 
-  if (!PREFIX_REGEX.test(options.obfuscationOptions.prefix)) {
+  if (!VALID_VAR_REGEX.test(options.obfuscationOptions.prefix)) {
     checkResults.errors.push("Invalid 'prefix' in .codefendrc.json.");
-    printCheckResults(checkResults);
-    return null;
   }
+
+  checkCustomGeneratedWords(checkResults, options);
 
   const success = !checkResults.errors.length;
   printCheckResults(checkResults);
@@ -65,5 +65,21 @@ function printCheckResults(checkResults: ICheckResults) {
   });
   checkResults.warnings.forEach((warning) => {
     log.warning("Codefend", `Warning: ${warning}`);
+  });
+}
+
+function isDuplicateExists(arr: string[]) {
+  return new Set(arr).size !== arr.length;
+}
+
+function checkCustomGeneratedWords(checkResults: ICheckResults, options: IOptions) {
+  if (isDuplicateExists(options.obfuscationOptions.customGeneratedWords)) {
+    checkResults.errors.push("Invalid 'customGeneratedWords' in .codefendrc.json. (duplicates)");
+  }
+
+  options.obfuscationOptions.customGeneratedWords.forEach((word) => {
+    if (!VALID_VAR_REGEX.test(word)) {
+      checkResults.errors.push(`Invalid 'customGeneratedWords' in .codefendrc.json. word:"${word}"`);
+    }
   });
 }

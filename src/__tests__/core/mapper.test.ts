@@ -5,7 +5,6 @@ import { buildRuntimeOptions } from "../../index";
 describe("Mapper", () => {
   describe("Build Map", () => {
     const options: IBuildMapOptions = {
-      prefix: "Ox",
       words: [
         { value: "l_var", fromRegex: "main" },
         { value: "lib-file", fromRegex: "file" },
@@ -16,7 +15,7 @@ describe("Mapper", () => {
     describe("with default options", () => {
       buildMap(options, runtimeOptions);
       it("ensure correct mapping", () => {
-        expect(runtimeOptions.map).toEqual({ l_var: "Ox0", "lib-file": "Ox1" });
+        expect(runtimeOptions.map).toEqual({ l_var: "", "lib-file": "" });
       });
       it("ensure correct stats", () => {
         expect(runtimeOptions.processed.map[options.words[0].value].count).toEqual(1);
@@ -26,11 +25,11 @@ describe("Mapper", () => {
 
   describe("Sort Map", () => {
     const runtimeOptions = buildRuntimeOptions();
-    runtimeOptions.map = { l_var: "Ox0", "lib-file": "Ox1" };
+    runtimeOptions.map = { l_var: "", "lib-file": "" };
 
     it("should sort map by key length desc", () => {
       sortMap(runtimeOptions);
-      expect(JSON.stringify(runtimeOptions.map)).toEqual(JSON.stringify({ "lib-file": "Ox1", l_var: "Ox0" }));
+      expect(JSON.stringify(runtimeOptions.map)).toEqual(JSON.stringify({ "lib-file": "", l_var: "" }));
     });
   });
 });
