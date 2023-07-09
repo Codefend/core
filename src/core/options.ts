@@ -69,6 +69,11 @@ export function buildDefaultOptions(): IOptions {
           value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",
           flag: "g",
         },
+        {
+          name: "file",
+          value: "((cmp|lib)+(-[a-zA-Z0-9]+)+)",
+          flag: "g",
+        },
       ],
       customGeneratedWords: [],
     },

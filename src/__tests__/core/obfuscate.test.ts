@@ -26,7 +26,7 @@ describe("Obfuscate", () => {
       ];
       const runtimeOptions = buildRuntimeOptions();
       const output = obfuscate(code, options, runtimeOptions);
-      expect(output).toEqual(`import * from "./lib-file";const Ox0 = 0;const l_predefined_and_ignored = 0;`);
+      expect(output).toEqual(`import * from "./Ox1";const Ox0 = 0;const l_predefined_and_ignored = 0;`);
     });
   });
 
