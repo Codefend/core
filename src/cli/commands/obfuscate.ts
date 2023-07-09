@@ -22,17 +22,22 @@ export function obfuscateCommand(options: IOptions | null) {
   log.debug("Codefend", "Obfuscation started...", log.info);
   log.debug("Codefend", `Removing existing output folder ${options.generationOptions.outputDir}...`, log.info);
   removeFolder(options.generationOptions.outputDir);
+  
+  const obfuscationOptions = buildObfuscationOptions(options.obfuscationOptions);
+  const runtimeOptions = buildRuntimeOptions();
+
   log.debug("Codefend", "Copying new files...", log.info);
   copyFolder(
     options.generationOptions.inputDir,
     options.generationOptions.outputDir,
-    options.generationOptions.ignoredFilesInGeneration
+    options.generationOptions.ignoredFilesInGeneration,
+    obfuscationOptions,
+    runtimeOptions
   );
 
   const fileNames = getAllFileNamesInDir(options.generationOptions.outputDir);
   log.success("Codefend", `Copied ${fileNames.length} file(s)`);
-  const obfuscationOptions = buildObfuscationOptions(options.obfuscationOptions);
-  const runtimeOptions = buildRuntimeOptions();
+
   let fileCode;
   fileNames.forEach((fileName) => {
     fileCode = readFile(fileName as string);
