@@ -1,6 +1,6 @@
 import { obfuscate } from "../../core/obfuscate";
 import {
-  buildTranformationOptions,
+  buildTransformationOptions,
   buildParserOptions,
   buildGenerationOptions,
   buildDebugOptions,
@@ -20,7 +20,7 @@ export function obfuscateCommand(options: IOptions | null) {
   }
 
   const generationOptions = buildGenerationOptions(options);
-  const transformationOptions = buildTranformationOptions(options);
+  const transformationOptions = buildTransformationOptions(options);
   const parserOptions = buildParserOptions(options);
   const debugOptions = buildDebugOptions(options);
   const runtimeOptions = buildRuntimeOptions();

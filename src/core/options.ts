@@ -57,7 +57,7 @@ export function buildDefaultOptions(): IOptions {
   return options;
 }
 
-export function buildTranformationOptions(options: IOptions): IInternalTransformationOptions {
+export function buildTransformationOptions(options: IOptions): IInternalTransformationOptions {
   return {
     prefix: options.transformation.prefix,
     static: options.transformation.static ?? [],

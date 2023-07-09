@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildDefaultOptions, buildParserOptions, buildTranformationOptions } from "../../core/options";
+import { buildDefaultOptions, buildParserOptions, buildTransformationOptions } from "../../core/options";
 import { obfuscate, buildRuntimeOptions } from "../../index";
 import { IOptions } from "../../models/options";
 
@@ -8,7 +8,7 @@ describe("Obfuscate", () => {
     const code = "const l_var = 0;";
     it("with default options", () => {
       const options: IOptions = buildDefaultOptions();
-      const transformationOptions = buildTranformationOptions(options);
+      const transformationOptions = buildTransformationOptions(options);
       const parserOptions = buildParserOptions(options);
       const runtimeOptions = buildRuntimeOptions();
       const output = obfuscate(code, transformationOptions, parserOptions, runtimeOptions);
@@ -20,7 +20,7 @@ describe("Obfuscate", () => {
     const code = `import * from "./lib-file";const l_var = 0;const l_predefined_and_ignored = 0;`;
     it("with default options", () => {
       const options: IOptions = buildDefaultOptions();
-      const transformationOptions = buildTranformationOptions(options);
+      const transformationOptions = buildTransformationOptions(options);
       const parserOptions = buildParserOptions(options);
 
       transformationOptions.ignore = ["l_predefined_and_ignored"];
@@ -39,7 +39,7 @@ describe("Obfuscate", () => {
   describe("override options", () => {
     const code = "const l_var = 0;";
     const defaultOptions: IOptions = buildDefaultOptions();
-    const transformationOptions = buildTranformationOptions(defaultOptions);
+    const transformationOptions = buildTransformationOptions(defaultOptions);
     transformationOptions.prefix = "Zx";
     const parserOptions = buildParserOptions(defaultOptions);
     it("prefix overridden", () => {
