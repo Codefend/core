@@ -1,14 +1,15 @@
 import fs from "fs";
 import path from "path";
 import { obfuscate } from "../core/obfuscate";
-import { IObfuscationOptions } from "../core/options";
 import { IRuntimeOptions } from "../core/runtime";
+import { IInternalParserOptions, IInternalTransformationOptions } from "../models/internal";
 
 export function copyFolder(
   from: string,
   to: string,
   ignoredFilesInGeneration: string[],
-  obfuscationOptions: IObfuscationOptions,
+  transformationOptions: IInternalTransformationOptions,
+  parserOptions: IInternalParserOptions,
   runtimeOptions: IRuntimeOptions
 ) {
   if (!fs.existsSync(to)) fs.mkdirSync(to);
@@ -18,19 +19,20 @@ export function copyFolder(
       fs.copyFileSync(
         path.join(from, element),
         path.join(
-          obfuscate(to, obfuscationOptions, runtimeOptions),
-          obfuscate(element, obfuscationOptions, runtimeOptions)
+          obfuscate(to, transformationOptions, parserOptions, runtimeOptions),
+          obfuscate(element, transformationOptions, parserOptions, runtimeOptions)
         )
       );
     } else {
       copyFolder(
         path.join(from, element),
         path.join(
-          obfuscate(to, obfuscationOptions, runtimeOptions),
-          obfuscate(element, obfuscationOptions, runtimeOptions)
+          obfuscate(to, transformationOptions, parserOptions, runtimeOptions),
+          obfuscate(element, transformationOptions, parserOptions, runtimeOptions)
         ),
         ignoredFilesInGeneration,
-        obfuscationOptions,
+        transformationOptions,
+        parserOptions,
         runtimeOptions
       );
     }

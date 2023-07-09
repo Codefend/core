@@ -1,29 +1,32 @@
-import { mapCustomGeneratedWords } from "./custom-generated";
-import { mapIgnoredWords } from "./ignored";
+import { IInternalParserOptions, IInternalTransformationOptions } from "../models/internal";
 import { buildMap, sortMap } from "./mapper";
-import { IObfuscationOptions } from "./options";
 import { parse } from "./parser";
-import { mapPredefinedWords } from "./predefined";
 import { replace } from "./replacer";
 import { IRuntimeOptions } from "./runtime";
+import { mapDefaultWords } from "./transformation/default";
+import { mapIgnoredWords } from "./transformation/ignore";
+import { mapPoolWords } from "./transformation/pool";
+import { mapStaticWords } from "./transformation/static";
 
-export function obfuscate(code: string, options: IObfuscationOptions, runtimeOptions: IRuntimeOptions) {
-  const words = parse({ code: code, regexList: options.regexList });
+export function obfuscate(
+  code: string,
+  transformationOptions: IInternalTransformationOptions,
+  parserOptions: IInternalParserOptions,
+  runtimeOptions: IRuntimeOptions
+) {
+  const words = parse({ code: code, parserOptions: parserOptions });
 
   buildMap({ words: words }, runtimeOptions);
 
   sortMap(runtimeOptions);
 
-  mapPredefinedWords({ predefinedWords: options.predefinedWords }, runtimeOptions);
+  mapStaticWords({ static: transformationOptions.static }, runtimeOptions);
 
-  mapIgnoredWords({ ignoredWords: options.ignoredWords }, runtimeOptions);
+  mapIgnoredWords({ ignore: transformationOptions.ignore }, runtimeOptions);
 
-  mapCustomGeneratedWords(
-    { prefix: options.prefix, customGeneratedWords: options.customGeneratedWords },
-    runtimeOptions
-  );
+  mapPoolWords({ prefix: transformationOptions.prefix, pool: transformationOptions.pool }, runtimeOptions);
 
-  const output = replace({ code: code }, runtimeOptions);
+  mapDefaultWords({ prefix: transformationOptions.prefix }, runtimeOptions);
 
-  return output;
+  return replace({ code: code }, runtimeOptions);
 }

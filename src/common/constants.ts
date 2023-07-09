@@ -1,6 +1,6 @@
 export const OPTIONS_FILE_PATH = "./.codefendrc.json";
 
-export const RC_VERSION = "1.1.0";
+export const RC_VERSION = "3.0.0";
 
 export const LOG_OPTIONS = {
   PREFIX_SIZE: 11,
@@ -12,3 +12,5 @@ export const LOG_OPTIONS = {
 };
 
 export const VALID_VAR_REGEX = /^[a-zA-Z_$][a-zA-Z$0-9]*$/g;
+
+export const MIN_POOL_ITEM_LENGTH = 3;

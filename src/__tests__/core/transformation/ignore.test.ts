@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { IMapIgnoredWordsOptions } from "../../core/ignored";
-import { buildRuntimeOptions } from "../../core/runtime";
-import { mapIgnoredWords } from "../../index";
+import { buildRuntimeOptions } from "../../../core/runtime";
+import { IMapIgnoredWordsOptions, mapIgnoredWords } from "../../../core/transformation/ignore";
 
 describe("Ignored words", () => {
   const options: IMapIgnoredWordsOptions = {
-    ignoredWords: ["l_ignored"],
+    ignore: ["l_ignored"],
   };
   const runtimeOptions = buildRuntimeOptions();
   runtimeOptions.map = {
@@ -17,11 +16,11 @@ describe("Ignored words", () => {
     mapIgnoredWords(options, runtimeOptions);
 
     it("ensure correct mapping", () => {
-      expect(runtimeOptions.map[options.ignoredWords[0]]).toEqual(options.ignoredWords[0]);
+      expect(runtimeOptions.map[options.ignore[0]]).toEqual(options.ignore[0]);
     });
 
     it("ensure correct stats", () => {
-      expect(runtimeOptions.processed.map[options.ignoredWords[0]].count).toEqual(0);
+      expect(runtimeOptions.processed.map[options.ignore[0]].count).toEqual(0);
     });
   });
 });
