@@ -1,8 +1,8 @@
 export { buildMap, sortMap } from "./mapper";
-export { mapIgnoredWords } from "./ignored";
-export { mapPredefinedWords } from "./predefined";
-export { mapCustomGeneratedWords } from "./custom-generated";
+export { mapIgnoredWords } from "./transformation/ignore";
+export { mapStaticWords } from "./transformation/static";
+export { mapPoolWords } from "./transformation/pool";
 export { obfuscate } from "./obfuscate";
-export { buildDefaultOptions, buildObfuscationOptions } from "./options";
+export { buildDefaultOptions } from "./options";
 export { buildRuntimeOptions } from "./runtime";
-export { stats } from "./stats";
+export { stats } from "./debug/stats";

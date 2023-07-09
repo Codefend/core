@@ -1,50 +1,19 @@
 import { version } from "../../package.json";
-import { RC_VERSION } from "../common/constants";
-import { initializeRegex } from "./parser";
-export interface IOptions {
-  generationOptions?: IGenerationOptions;
-  obfuscationOptions: IObfuscationOptions;
-  __meta?: IMetaOptions;
-}
-
-export interface IGenerationOptions {
-  inputDir: string;
-  outputDir: string;
-  ignoredFilesInGeneration: string[];
-}
-
-export interface IObfuscationOptions {
-  stats: boolean;
-  prefix: string;
-  predefinedWords: IPredefinedWordOption[];
-  ignoredWords: string[];
-  regexList: IRegexListOption[];
-  customGeneratedWords: string[];
-}
-
-export interface IRegexListOption {
-  value: string;
-  name: string;
-  flag: string;
-  _regExp?: RegExp;
-}
-
-export interface IPredefinedWordOption {
-  originalWord: string;
-  targetWord: string;
-}
-
-export interface IMetaOptions {
-  version: string;
-  rcVersion: string;
-}
+import { RC_VERSION, MIN_POOL_ITEM_LENGTH } from "../common/constants";
+import {
+  IInternalDebugOptions,
+  IInternalGenerationOptions,
+  IInternalParserOptions,
+  IInternalTransformationOptions,
+} from "../models/internal";
+import { IOptions } from "../models/options";
 
 export function buildDefaultOptions(): IOptions {
   const options = {
-    generationOptions: {
+    generation: {
       inputDir: ".",
       outputDir: "codefend-output",
-      ignoredFilesInGeneration: [
+      ignore: [
         "codefend-output",
         ".rc.json",
         "node_modules",
@@ -58,43 +27,81 @@ export function buildDefaultOptions(): IOptions {
       ],
     },
 
-    obfuscationOptions: {
-      stats: true,
+    transformation: {
       prefix: "Ox",
-      predefinedWords: [],
-      ignoredWords: ["node_modules"],
+      static: [],
+      ignore: ["node_modules"],
+      pool: [],
+    },
+    debug: {
+      stats: true,
+    },
+    parser: {
       regexList: [
         {
           name: "main",
           value: "([a-zA-Z]+(_[a-zA-Z0-9]+)+)",
-          flag: "g",
         },
         {
           name: "file",
           value: "((cmp|lib)+(-[a-zA-Z0-9]+)+)",
-          flag: "g",
         },
       ],
-      customGeneratedWords: [],
     },
-
     __meta: {
       version: version,
       rcVersion: RC_VERSION,
     },
   } as IOptions;
 
-  options.obfuscationOptions.regexList.forEach((e) => (e._regExp = initializeRegex(e)));
-
   return options;
 }
 
-export function buildObfuscationOptions(options?: IObfuscationOptions) {
-  options = options ?? ({} as IObfuscationOptions);
-  const defaultOptions = buildDefaultOptions();
-
+export function buildTranformationOptions(options: IOptions): IInternalTransformationOptions {
   return {
-    ...defaultOptions.obfuscationOptions,
-    ...options,
+    prefix: options.transformation.prefix,
+    static: options.transformation.static ?? [],
+    ignore: options.transformation.ignore ?? [],
+    pool: buildTransformationPoolOption(options.transformation.pool),
+  };
+}
+
+function buildTransformationPoolOption(pool: string | string[] | undefined): Set<string> {
+  if (!pool) {
+    return new Set<string>();
+  }
+  const poolArray = typeof pool === "string" ? pool.split(" ") : pool;
+
+  return new Set<string>(poolArray.filter((e) => e.length >= MIN_POOL_ITEM_LENGTH));
+}
+
+export function buildParserOptions(options: IOptions) {
+  const ret: IInternalParserOptions = { regexList: [] };
+
+  options.parser.regexList.forEach((e) => {
+    ret.regexList.push({ name: e.name, regex: new RegExp(e.value, "g") });
+  });
+  return ret;
+}
+
+export function buildGenerationOptions(options: IOptions): IInternalGenerationOptions {
+  return {
+    inputDir: options.generation.inputDir,
+    outputDir: options.generation.outputDir,
+    ignore: buildGenerationIgnoreOptions(options),
+  };
+}
+
+function buildGenerationIgnoreOptions(options: IOptions) {
+  const ret = options.generation.ignore ?? [];
+  if (!ret.includes(options.generation.outputDir)) {
+    ret.push(options.generation.outputDir);
+  }
+  return ret;
+}
+
+export function buildDebugOptions(options: IOptions): IInternalDebugOptions {
+  return {
+    stats: typeof options.debug.stats === "boolean" ? options.debug.stats : true,
   };
 }

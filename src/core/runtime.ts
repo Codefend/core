@@ -16,8 +16,9 @@ export function buildRuntimeOptions(): IRuntimeOptions {
 
 export enum WordEncryptionType {
   default,
-  ignored,
-  predefined,
+  ignore,
+  static,
+  pool,
 }
 
 export interface IMapProcessed {

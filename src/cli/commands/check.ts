@@ -1,7 +1,7 @@
 import { log } from "../../common";
 import { OPTIONS_FILE_PATH, RC_VERSION, VALID_VAR_REGEX } from "../../common/constants";
-import { IOptions } from "../../core/options";
 import { readFile, tryParse } from "../../fs/reader";
+import { IOptions } from "../../models/options";
 
 export interface ICheckResults {
   warnings: string[];
@@ -24,7 +24,7 @@ export function checkCommand(): IOptions | null {
   const options = tryParse(file) as IOptions | null;
 
   if (!options) {
-    checkResults.errors.push(".codefendrc.json does not contains a valid json format");
+    checkResults.errors.push(".codefendrc.json contains an invalid JSON format");
     printCheckResults(checkResults);
     return null;
   }
@@ -35,19 +35,11 @@ export function checkCommand(): IOptions | null {
     }
   }
 
-  if (!options.generationOptions) {
-    checkResults.errors.push(
-      ".codefendrc.json is missing generationOptions. please run codefend -i to create a new one"
-    );
-    printCheckResults(checkResults);
-    return null;
-  }
-
-  if (!VALID_VAR_REGEX.test(options.obfuscationOptions.prefix)) {
+  if (!VALID_VAR_REGEX.test(options.transformation.prefix)) {
     checkResults.errors.push("Invalid 'prefix' in .codefendrc.json.");
   }
 
-  checkCustomGeneratedWords(checkResults, options);
+  checkTransformationPool(checkResults, options);
 
   const success = !checkResults.errors.length;
   printCheckResults(checkResults);
@@ -68,16 +60,15 @@ function printCheckResults(checkResults: ICheckResults) {
   });
 }
 
-function isDuplicateExists(arr: string[]) {
-  return new Set(arr).size !== arr.length;
-}
+function checkTransformationPool(checkResults: ICheckResults, options: IOptions) {
+  if (!options.transformation.pool) return;
 
-function checkCustomGeneratedWords(checkResults: ICheckResults, options: IOptions) {
-  if (isDuplicateExists(options.obfuscationOptions.customGeneratedWords)) {
-    checkResults.errors.push("Invalid 'customGeneratedWords' in .codefendrc.json. (duplicates)");
-  }
-
-  options.obfuscationOptions.customGeneratedWords.forEach((word) => {
+  const poolArray =
+    typeof options.transformation.pool === "string"
+      ? options.transformation.pool.split(" ")
+      : options.transformation.pool;
+  const poolSet = new Set<string>(poolArray);
+  poolSet.forEach((word) => {
     if (!VALID_VAR_REGEX.test(word)) {
       checkResults.errors.push(`Invalid 'customGeneratedWords' in .codefendrc.json. word:"${word}"`);
     }

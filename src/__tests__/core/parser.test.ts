@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
+import { buildDefaultOptions, buildParserOptions } from "../../core/options";
 import { IParsedWord, IParseOptions, parse } from "../../core/parser";
-import { buildDefaultOptions } from "../../index";
 
 describe("Parser", () => {
   describe("main-regex", () => {
     const options: IParseOptions = {
       code: `const l_var = 0;`,
-      regexList: buildDefaultOptions().obfuscationOptions.regexList,
+      parserOptions: buildParserOptions(buildDefaultOptions()),
     };
 
     it("with default options", () => {

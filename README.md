@@ -267,7 +267,7 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
       * Displays detailed stats about the obfuscated words:
       * e.g:
       * Ignored node_modules (5 times)
-      * Predefined l_Hello -> l_Hi (2 times)
+      * Static l_Hello -> l_Hi (2 times)
       * Encrypted l_a -> Ox0 (15 times)
     */
     stats: true,
@@ -286,12 +286,12 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
     customGeneratedWords: [ "iLove", "bananas" ],
 
 
-    /** predefinedWords: Array<{originalWord:string, targetWord:string}>
+    /** staticWords: Array<{from:string, to:string}>
     * Words that should be obfuscated in a special (determined output)
-    * {"originalWord":"l_secretVar" , "targetWord": "123456"}
+    * {"from":"l_secretVar" , "to": "123456"}
     * Note: the original word must have a prefix 'l_' or must match the regex to be detected by Codefend in the first place and get replaced.
     */
-    predefinedWords: [],
+    staticWords: [],
 
 
     /** ignoredWords: Array<string>
