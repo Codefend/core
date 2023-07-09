@@ -22,7 +22,7 @@ export function obfuscateCommand(options: IOptions | null) {
   log.debug("Codefend", "Obfuscation started...", log.info);
   log.debug("Codefend", `Removing existing output folder ${options.generationOptions.outputDir}...`, log.info);
   removeFolder(options.generationOptions.outputDir);
-  
+
   const obfuscationOptions = buildObfuscationOptions(options.obfuscationOptions);
   const runtimeOptions = buildRuntimeOptions();
 
