@@ -1,60 +1,58 @@
-import { obfuscate } from "../../core/obfuscate";
-import { IOptions } from "../../core/options";
-import { initializeRegex } from "../../core/parser";
-import { buildRuntimeOptions } from "../../core/runtime";
-import { copyFolder } from "../../fs/copier";
-import { getAllFileNamesInDir, readFile } from "../../fs/reader";
-import { removeFolder } from "../../fs/remover";
-import { writeFile } from "../../fs/writer";
-import { buildObfuscationOptions, log, stats } from "../../index";
+import { stats } from "../../core/debug/stats.js";
+import { copyFolder } from "../../core/generation/copy.js";
+import { getAllFileNamesInDir, readFile } from "../../core/generation/read.js";
+import { removeFolder } from "../../core/generation/remove.js";
+import { writeFile } from "../../core/generation/write.js";
+import {
+    buildDebugOptions,
+    buildGenerationOptions,
+    buildParserOptions,
+    buildTransformationOptions,
+} from "../../core/options/options.js";
+import { obfuscate } from "../../core/process/obfuscate.js";
+import { buildRuntimeOptions } from "../../core/process/runtime.js";
+import { IOptions } from "../../models/options.js";
 
 export function obfuscateCommand(options: IOptions | null) {
-  if (!options) {
-    log.error("Codefend", "Could not start with Obfuscation. Please resolve errors first.");
-    return;
-  }
+    if (!options) {
+        console.warn("Obfuscation process canceled due to unresolved errors.");
+        return;
+    }
 
-  if (!options.generationOptions) {
-    return;
-  }
-  applyTransformationsOnOptions(options);
+    const generationOptions = buildGenerationOptions(options);
+    const transformationOptions = buildTransformationOptions(options);
+    const parserOptionsResponse = buildParserOptions(options.parser);
+    if (parserOptionsResponse.error) {
+        console.warn(parserOptionsResponse.error.errorDescription);
+        return;
+    }
+    const parserOptions = parserOptionsResponse.data;
+    const debugOptions = buildDebugOptions(options);
+    const runtimeOptions = buildRuntimeOptions();
 
-  log.debug("Codefend", "Obfuscation started...", log.info);
-  log.debug("Codefend", `Removing existing output folder ${options.generationOptions.outputDir}...`, log.info);
-  removeFolder(options.generationOptions.outputDir);
-  log.debug("Codefend", "Copying new files...", log.info);
-  copyFolder(
-    options.generationOptions.inputDir,
-    options.generationOptions.outputDir,
-    options.generationOptions.ignoredFilesInGeneration
-  );
+    console.warn("Obfuscation started...");
+    console.warn(`Removing existing output folder ${generationOptions.outputDir}...`);
+    removeFolder(generationOptions.outputDir);
 
-  const fileNames = getAllFileNamesInDir(options.generationOptions.outputDir);
-  log.success("Codefend", `Copied ${fileNames.length} file(s)`);
-  const obfuscationOptions = buildObfuscationOptions(options.obfuscationOptions);
-  const runtimeOptions = buildRuntimeOptions();
-  let fileCode;
-  fileNames.forEach((fileName) => {
-    fileCode = readFile(fileName as string);
-    writeFile(fileName as string, obfuscate(fileCode ?? "", obfuscationOptions, runtimeOptions));
-  });
-  stats({ stats: obfuscationOptions.stats }, runtimeOptions);
-  log.success("Codefend", `Obfuscated ${Object.keys(runtimeOptions.map).length} word(s)`);
-  log.success("Codefend", `Obfuscation completed.`);
-}
-function applyTransformationsOnOptions(options: IOptions) {
-  initializeRegexList(options);
-  addInternallyRequiredFilesToIgnoreInGeneration(options);
-}
+    console.warn("Copying new files...");
+    copyFolder(
+        generationOptions.inputDir,
+        generationOptions.outputDir,
+        generationOptions.ignore,
+        transformationOptions,
+        parserOptions!,
+        runtimeOptions,
+    );
 
-function initializeRegexList(options: IOptions) {
-  options.obfuscationOptions.regexList.forEach((regexListOption) => {
-    regexListOption._regExp = initializeRegex(regexListOption);
-  });
-}
+    const fileNames = getAllFileNamesInDir(generationOptions.outputDir);
+    console.warn(`Copied ${fileNames.length} file(s)`);
 
-function addInternallyRequiredFilesToIgnoreInGeneration(options: IOptions) {
-  if (!options.generationOptions?.ignoredFilesInGeneration.includes(options.generationOptions.outputDir)) {
-    options.generationOptions?.ignoredFilesInGeneration.push(options.generationOptions.outputDir);
-  }
+    let fileCode;
+    fileNames.forEach((fileName) => {
+        fileCode = readFile(fileName as string);
+        writeFile(fileName as string, obfuscate(fileCode ?? "", transformationOptions, parserOptions!, runtimeOptions));
+    });
+    stats({ stats: debugOptions.stats }, runtimeOptions);
+    console.warn(`Obfuscated ${Object.keys(runtimeOptions.map).length} word(s)`);
+    console.warn(`Obfuscation completed.`);
 }

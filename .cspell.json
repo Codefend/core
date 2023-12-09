@@ -1,21 +1,7 @@
 {
-  "version": "0.1",
-  "language": "en",
-  "words": [
-    "degit",
-    "esbuild",
-    "Codefend",
-    "octocat",
-    "rmrf",
-    "socio",
-    "codefendrc"
-  ],
-  "flagWords": [],
-  "ignorePaths": [
-    "package.json",
-    "package-lock.json",
-    "yarn.lock",
-    "tsconfig.json",
-    "node_modules/**"
-  ]
+    "version": "0.1",
+    "language": "en",
+    "words": ["codefend", "octocat", "socio", "ryansonshine", "KABAB", "racters", "nsnewline", "normaluppercase", "containsspecialcharacters", "containsnewline", "startwithnumber"],
+    "flagWords": [],
+    "ignorePaths": ["package.json", "package-lock.json", "yarn.lock", "tsconfig.json", "node_modules/**"]
 }

@@ -1,40 +1,34 @@
-import { Command } from "commander";
-import { version } from "../../package.json";
-import { checkCommand } from "./commands/check";
-import { initCommand } from "./commands/init";
-import { obfuscateCommand } from "./commands/obfuscate";
+import { CLI_OPTIONS, DEFAULT_CLI_OPTION } from "../core/utils/constants.js";
+import { checkCommand } from "./commands/check.js";
+import { helpCommand } from "./commands/help.js";
+import { initCommand } from "./commands/init.js";
+import { obfuscateCommand } from "./commands/obfuscate.js";
+import { unknownCommand } from "./commands/unknown.js";
+import { versionCommand } from "./commands/version.js";
 
 export function startCLI() {
-  executeCommand(buildCommand());
-}
+    const inputArgs = process.argv.splice(2);
+    const selectedArg: string = inputArgs.length > 0 ? inputArgs[0] ?? DEFAULT_CLI_OPTION : DEFAULT_CLI_OPTION;
 
-function buildCommand() {
-  return new Command()
-    .description("Defend Your Code By All Means Necessary =)")
-    .option("-i, --init", "Creates the config file (.codefendrc.json)")
-    .option("-o, --obfuscate", "Obfuscate the project")
-    .option("-c, --check", "Check the config file for potential warnings/errors")
-    .version(version, "-v, --version", "Output the version number")
-    .helpOption("-h, --help", "Display help for command")
-    .parse(process.argv);
-}
-
-function executeCommand(command: Command) {
-  const options = command.opts();
-
-  if (options.init) {
-    initCommand();
-  }
-
-  if (options.check) {
-    checkCommand();
-  }
-
-  if (options.obfuscate) {
-    obfuscateCommand(checkCommand());
-  }
-
-  if (options.help || !process.argv.slice(2).length) {
-    command.outputHelp();
-  }
+    const option = CLI_OPTIONS.find((e) => [e.short, e.long].includes(selectedArg));
+    switch (option?.short) {
+        case "-h":
+            helpCommand();
+            break;
+        case "-v":
+            versionCommand();
+            break;
+        case "-i":
+            initCommand();
+            break;
+        case "-c":
+            checkCommand();
+            break;
+        case "-o":
+            obfuscateCommand(checkCommand());
+            break;
+        default:
+            unknownCommand(selectedArg);
+            break;
+    }
 }

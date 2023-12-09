@@ -1,107 +1,105 @@
 {
-  "name": "codefend",
-  "version": "2.1.0",
-  "description": "Code obfuscator CLI that protects your code regardless of the programming language or framework.",
-  "keywords": [
-    "obfuscator",
-    "uglifier",
-    "encrypt",
-    "angular",
-    "vue",
-    "react",
-    "svelte",
-    "typescript",
-    "css",
-    "html",
-    "python",
-    "c#",
-    "c++",
-    "obfuscate",
-    "uglify",
-    "obfuscation",
-    "uglification"
-  ],
-  "author": "Mounzer Adas",
-  "homepage": "https://github.com/Codefend/core.git",
-  "bugs": {
-    "url": "https://github.com/Codefend/core/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Codefend/core.git"
-  },
-  "license": "MIT",
-  "main": "./build/cjs/index.js",
-  "module": "./build/esm/index.js",
-  "types": "./build/src/index.d.ts",
-  "bin": {
-    "codefend": "./bin/codefend"
-  },
-  "files": [
-    "build/**/*",
-    "bin/**"
-  ],
-  "engines": {
-    "node": "^18.7.0 || >= 16",
-    "npm": "^8.16.0 || >= 8"
-  },
-  "volta": {
-    "node": "18.7.0",
-    "npm": "8.16.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "build": "npm run clean && npm run type:dts && npm run build:main",
-    "build:main": "node -r ./esbuild-hook ./scripts/build",
-    "clean": "node -r ./esbuild-hook ./scripts/clean",
-    "type:dts": "tsc --emitDeclarationOnly",
-    "type:check": "tsc --noEmit",
-    "format": "prettier \"src/**/*.ts\" --write",
-    "format:check": "prettier \"src/**/*.ts\" --check",
-    "lint": "eslint src --ext .ts --fix",
-    "lint:check": "eslint src --ext .ts",
-    "test": "vitest run",
-    "test:watch": "vitest watch",
-    "test:coverage": "vitest run --coverage",
-    "test:setup": "node -r ./esbuild-hook ./scripts/testSetup",
-    "spell:check": "cspell \"{README.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,.github/*.md,src/**/*.ts}\"",
-    "cz": "cz",
-    "semantic-release": "semantic-release"
-  },
-  "devDependencies": {
-    "@ryansonshine/commitizen": "^4.2.8",
-    "@ryansonshine/cz-conventional-changelog": "^3.3.4",
-    "@semantic-release/changelog": "^6.0.2",
-    "@semantic-release/commit-analyzer": "^9.0.2",
-    "@semantic-release/github": "^8.0.7",
-    "@semantic-release/npm": "^9.0.1",
-    "@semantic-release/release-notes-generator": "^10.0.3",
-    "@types/node": "^18.11.18",
-    "@types/prompts": "^2.4.2",
-    "@typescript-eslint/eslint-plugin": "^5.48.0",
-    "@typescript-eslint/parser": "^5.48.0",
-    "c8": "^7.12.0",
-    "cspell": "^6.18.1",
-    "esbuild": "^0.16.14",
-    "eslint": "^8.31.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-import": "^2.26.0",
-    "nyc": "^15.1.0",
-    "prettier": "^2.8.1",
-    "semantic-release": "^20.1.0",
-    "source-map-support": "^0.5.21",
-    "typescript": "^4.9.4",
-    "vitest": "^0.26.3"
-  },
-  "overrides": {
-    "semver-regex": "3.1.4"
-  },
-  "dependencies": {
-    "chalk": "^5.2.0",
-    "commander": "^10.0.0"
-  }
+    "name": "codefend",
+    "version": "3.0.0-alpha.1",
+    "description": "Code obfuscator CLI that protects your code regardless of the programming language or framework.",
+    "keywords": [
+        "obfuscator",
+        "uglifier",
+        "encrypt",
+        "angular",
+        "vue",
+        "react",
+        "svelte",
+        "typescript",
+        "css",
+        "html",
+        "python",
+        "c#",
+        "c++",
+        "obfuscate",
+        "uglify",
+        "obfuscation",
+        "uglification"
+    ],
+    "author": "Mounzer Adas",
+    "homepage": "https://github.com/Codefend/core.git",
+    "bugs": {
+        "url": "https://github.com/Codefend/core/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Codefend/core.git"
+    },
+    "license": "MIT",
+    "type": "module",
+    "exports": "./build/index.js",
+    "types": "./build/index.d.ts",
+    "main": "./build/cjs/index.js",
+    "module": "./build/esm/index.js",
+    "bin": {
+        "codefend": "./bin/index.js"
+    },
+    "files": [
+        "build/**/*",
+        "bin/**"
+    ],
+    "engines": {
+        "node": "^18.16.1",
+        "npm": "^9.5.1"
+    },
+    "volta": {
+        "node": "18.16.1",
+        "npm": "9.5.1"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "build": "npm run clean && npm run type:dts && npm run build:main",
+        "build:main": "tsx ./scripts/build.ts",
+        "clean": "rimraf build coverage nyc_output",
+        "type:dts": "tsc --emitDeclarationOnly --project tsconfig.build.json",
+        "type:check": "tsc --noEmit",
+        "format": "prettier \"src/**/*.ts\" --write",
+        "format:check": "prettier \"src/**/*.ts\" --check",
+        "lint": "eslint src --ext .ts --fix",
+        "lint:check": "eslint src --ext .ts",
+        "test": "vitest run",
+        "test:watch": "vitest watch",
+        "test:coverage": "vitest run --coverage",
+        "spell:check": "cspell \"{README.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,.github/*.md,src/**/*.ts}\"",
+        "cz": "cz",
+        "semantic-release": "semantic-release"
+    },
+    "devDependencies": {
+        "@ryansonshine/commitizen": "^4.2.8",
+        "@ryansonshine/cz-conventional-changelog": "^3.3.4",
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/commit-analyzer": "^10.0.1",
+        "@semantic-release/github": "^9.0.4",
+        "@semantic-release/npm": "^10.0.4",
+        "@semantic-release/release-notes-generator": "^11.0.4",
+        "@types/node": "^18.16.3",
+        "@types/prompts": "^2.4.4",
+        "@typescript-eslint/eslint-plugin": "^6.1.0",
+        "@typescript-eslint/parser": "^6.1.0",
+        "c8": "^8.0.0",
+        "cspell": "^6.31.2",
+        "esbuild": "^0.18.16",
+        "eslint": "^8.45.0",
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-import-resolver-typescript": "^3.5.5",
+        "eslint-plugin-eslint-comments": "^3.2.0",
+        "eslint-plugin-import": "^2.27.5",
+        "eslint-plugin-simple-import-sort": "^10.0.0",
+        "globby": "^13.2.2",
+        "nyc": "^15.1.0",
+        "prettier": "^3.0.0",
+        "rimraf": "^5.0.1",
+        "semantic-release": "^21.0.7",
+        "source-map-support": "^0.5.21",
+        "tsx": "^3.12.7",
+        "typescript": "^5.1.6",
+        "vitest": "^0.33.0"
+    }
 }
