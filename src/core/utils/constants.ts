@@ -1,10 +1,11 @@
 import { IInternalRegexOption } from "../../models/internal.js";
+import { version } from "../../../package.json";
 
 export const PROJECT_KEBAB_CASE_NAME = "codefend";
 export const PROJECT_DISPLAY_NAME = "Codefend";
 export const OPTIONS_FILE_NAME = ".codefendrc.json";
 export const OPTIONS_FILE_PATH = `./${OPTIONS_FILE_NAME}`;
-export const VERSION = "0.0.0-development";
+export const VERSION = version;
 export const RC_VERSION = "0.0.1";
 export const DEFAULT_PROJECT_NAME = "project";
 
@@ -60,7 +61,7 @@ export const CLI_OPTIONS = [
 ];
 
 export const PARSERS: Record<string, { regexList: IInternalRegexOption[] }> = {
-    "UO-P1": {
+    Parser_A: {
         regexList: [
             {
                 name: "main",
@@ -74,5 +75,5 @@ export const PARSERS: Record<string, { regexList: IInternalRegexOption[] }> = {
     },
 };
 
-export const DEFAULT_PARSER_NAME = "UO-P1";
+export const DEFAULT_PARSER_NAME = "Parser_A";
 export const CUSTOM_PARSER_NAME = "CUSTOM";
