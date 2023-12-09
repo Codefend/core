@@ -1,5 +1,5 @@
-import { IInternalRegexOption } from "../../models/internal.js";
 import { version } from "../../../package.json";
+import { IInternalRegexOption } from "../../models/internal.js";
 
 export const PROJECT_KEBAB_CASE_NAME = "codefend";
 export const PROJECT_DISPLAY_NAME = "Codefend";
