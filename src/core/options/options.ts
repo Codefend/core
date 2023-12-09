@@ -25,6 +25,7 @@ export function buildDefaultOptions(projectName?: string): IOptions {
             outputDir: "codefend-output",
             ignore: [
                 "codefend-output",
+                ".codefendrc.json",
                 "node_modules",
                 ".git",
                 ".github",
