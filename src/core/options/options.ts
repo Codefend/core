@@ -22,9 +22,9 @@ export function buildDefaultOptions(projectName?: string): IOptions {
     const options = {
         generation: {
             inputDir: ".",
-            outputDir: "obfuscator-output",
+            outputDir: "codefend-output",
             ignore: [
-                "obfuscator-output",
+                "codefend-output",
                 "node_modules",
                 ".git",
                 ".github",

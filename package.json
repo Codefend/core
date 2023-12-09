@@ -31,31 +31,30 @@
         "url": "https://github.com/Codefend/core.git"
     },
     "license": "MIT",
-    "type": "module",
-    "exports": "./build/index.js",
-    "types": "./build/index.d.ts",
-    "main": "./build/cjs/index.js",
-    "module": "./build/esm/index.js",
-    "bin": {
-        "codefend": "./bin/index.js"
+    "exports": {
+        ".": {
+            "types": "./build/index.d.ts",
+            "import": "./build/index.mjs",
+            "require": "./build/index.cjs"
+        }
     },
+    "main": "./build/index.mjs",
+    "module": "./build/index.mjs",
+    "types": "./build/index.d.ts",
     "files": [
-        "build/**/*",
+        "build",
         "bin/**"
     ],
-    "engines": {
-        "node": ">=18.16.1",
-        "npm": ">=9.5.1"
-    },
-    "volta": {
-        "node": ">=18.16.1",
-        "npm": ">=9.5.1"
+    "type": "module",
+    "bin": {
+        "codefend": "./bin/index.js"
     },
     "publishConfig": {
         "access": "public"
     },
     "scripts": {
-        "build": "npm run clean && npm run type:dts && npm run build:main",
+        "build": "unbuild",
+        "dev": "unbuild --stub",
         "build:main": "tsx ./scripts/build.ts",
         "clean": "rimraf build coverage nyc_output",
         "type:dts": "tsc --emitDeclarationOnly --project tsconfig.build.json",
@@ -83,9 +82,7 @@
         "@types/prompts": "^2.4.4",
         "@typescript-eslint/eslint-plugin": "^6.1.0",
         "@typescript-eslint/parser": "^6.1.0",
-        "c8": "^8.0.0",
         "cspell": "^6.31.2",
-        "esbuild": "^0.18.16",
         "eslint": "^8.45.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-import-resolver-typescript": "^3.5.5",
@@ -100,6 +97,7 @@
         "source-map-support": "^0.5.21",
         "tsx": "^3.12.7",
         "typescript": "^5.1.6",
+        "unbuild": "^2.0.0",
         "vitest": "^0.33.0"
     }
 }
