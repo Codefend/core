@@ -22,6 +22,8 @@ The complete list of examples for different programming languages/frameworks can
 
 ```bash
 npm install -g codefend
+codefend -i  //required only the first time, generates .codefendrc.json
+codefend -o  //obfuscates your whole project inside a new directory: 'codefend-output'
 ```
 
 #### `Dev dependency`
