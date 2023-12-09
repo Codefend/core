@@ -208,8 +208,6 @@ codefend -o  //obfuscates your whole project inside a new directory: 'codefend-o
 
 Please refer to the [configuration](https://codefend.github.io/docs/references/configuration) section of the docs.
 
-```
-
 ## Migration guide
 
 Please refer to the [migration guide](https://codefend.github.io/docs/migrations/codefend-v3) section of the docs.
@@ -225,6 +223,8 @@ Please make sure to update tests as appropriate.
 ## License
 
 [MIT](./LICENSE.md)
+
+```
 
 ```
 
