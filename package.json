@@ -68,7 +68,7 @@
         "test:coverage": "vitest run --coverage",
         "spell:check": "cspell \"{README.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,.github/*.md,src/**/*.ts}\"",
         "cz": "cz",
-        "semantic-release": "semantic-release"
+        "semantic-release": "semantic-release --release-as $npm_package_version"
     },
     "devDependencies": {
         "@ryansonshine/commitizen": "^4.2.8",
