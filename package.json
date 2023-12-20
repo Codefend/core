@@ -95,7 +95,7 @@
         "rimraf": "^5.0.1",
         "semantic-release": "^21.0.7",
         "source-map-support": "^0.5.21",
-        "tsx": "^3.12.7",
+        "tsx": "^4.7.0",
         "typescript": "^5.1.6",
         "unbuild": "^2.0.0",
         "vitest": "^0.33.0"
