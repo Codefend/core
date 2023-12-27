@@ -6,3 +6,4 @@ coverage/
 .codefendrc.json
 /codefend-output
 .codefend-local
+.local

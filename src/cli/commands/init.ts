@@ -1,17 +1,10 @@
-import { OPTIONS_FILE_PATH } from "../../common/constants";
-import { buildDefaultOptions } from "../../core/options";
-import { writeFile } from "../../fs/writer";
-import { log } from "../../index";
+import { getCurrentDirectoryName } from "../../core/generation/read.js";
+import { writeFile } from "../../core/generation/write.js";
+import { buildDefaultOptions } from "../../core/options/options.js";
+import { OPTIONS_FILE_NAME, OPTIONS_FILE_PATH } from "../../core/utils/constants.js";
 
 export function initCommand() {
-  const options = buildDefaultOptions();
-
-  if (options.obfuscationOptions.regexList.length) {
-    options.obfuscationOptions.regexList.forEach((regex) => {
-      delete regex._regExp;
-    });
-  }
-
-  writeFile(OPTIONS_FILE_PATH, JSON.stringify(options, null, 4));
-  log.success("Codefend", ".codefendrc.json created.");
+    const options = buildDefaultOptions(getCurrentDirectoryName());
+    writeFile(OPTIONS_FILE_PATH, JSON.stringify(options, null, 4));
+    console.log(`${OPTIONS_FILE_NAME} created.`);
 }
