@@ -1,14 +1,15 @@
+//@ts-ignore
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"],
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  l_name = "Codefend";
+    l_name = "Codefend";
 
-  f_onClick() {
-    console.log("clicked!");
-  }
+    f_onClick() {
+        console.log("clicked!");
+    }
 }

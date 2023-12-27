@@ -1,4 +1,5 @@
 {
+    "exclude": ["examples/angular/app.component.ts", "examples/angular/codefend-output/app.component.ts"],
     "compilerOptions": {
         "target": "es2018",
         "lib": ["esnext"],

@@ -1,14 +1,15 @@
+//@ts-ignore
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"],
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  Ox2 = "Codefend";
+    Ox2 = "Codefend";
 
-  Ox1() {
-    console.log("clicked!");
-  }
+    Ox1() {
+        console.log("clicked!");
+    }
 }
