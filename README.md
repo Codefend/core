@@ -41,18 +41,16 @@ npx codefend -i  //required only the first time, generates .codefendrc.json
 npx codefend -o  //obfuscates your whole project inside a new directory: 'codefend-output'
 ```
 
-#### `Webpack` (not recommended)
+<!-- #### `Webpack` (deprecated)
 
 If you're using Webpack, you can use
 [webpack-plugin-codefend](https://www.npmjs.com/package/webpack-plugin-codefend) instead of directly using the CLI, you can skip the installation in this case and jump directly to the [plugin documentation](https://github.com/Codefend/webpack-plugin-codefend#readme)
-(not recommended because the webpack plugin is not compatible with Codefend v3)
 
-#### `Rollup/Vite` (not recommended)
+#### `Rollup/Vite` (deprecated)
 
 If you're using Rollup or Vite, you can use
 [rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend)
-instead of directly using the CLI, you can skip the installation in this case and jump directly to the [plugin documentation](https://github.com/Codefend/rollup-plugin-codefend#readme)
-(not recommended because the webpack plugin is not compatible with Codefend v3)
+instead of directly using the CLI, you can skip the installation in this case and jump directly to the [plugin documentation](https://github.com/Codefend/rollup-plugin-codefend#readme) -->
 
 ## Commands
 

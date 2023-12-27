@@ -1,0 +1,40 @@
+{
+    "generation": {
+        "inputDir": ".",
+        "outputDir": "codefend-output",
+        "ignore": [
+            "codefend-output",
+            ".codefendrc.json",
+            "node_modules",
+            ".git",
+            ".github",
+            ".gitignore",
+            ".vscode",
+            "build",
+            "dist",
+            "README.md"
+        ]
+    },
+    "transformation": {
+        "prefix": "Ox",
+        "static": [],
+        "ignore": [
+            "node_modules"
+        ],
+        "pool": []
+    },
+    "debug": {
+        "stats": true
+    },
+    "parser": {
+        "name": "Parser_A"
+    },
+    "__meta": {
+        "projectName": "angular",
+        "rc": {
+            "version": "0.0.1",
+            "generatedBy": "codefend@3.0.0-alpha.2",
+            "generatedAt": "2023-12-27T20:23:03.309Z"
+        }
+    }
+}
