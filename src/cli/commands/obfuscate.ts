@@ -1,4 +1,4 @@
-import { stats } from "../../core/debug/stats.js";
+import { getObfuscatedWordsCount, stats } from "../../core/debug/stats.js";
 import { copyFolder } from "../../core/generation/copy.js";
 import { getAllFileNamesInDir, readFile } from "../../core/generation/read.js";
 import { removeFolder } from "../../core/generation/remove.js";
@@ -54,6 +54,6 @@ export function obfuscateCommand(options: IOptions | null) {
     writeFile(fileName as string, obfuscate(fileCode ?? "", transformationOptions, parserOptions!, runtimeOptions));
   });
   stats({ stats: debugOptions.stats }, runtimeOptions);
-  console.warn(`Obfuscated ${Object.keys(runtimeOptions.map).length} word(s)`);
+  console.warn(`Obfuscated ${getObfuscatedWordsCount(runtimeOptions)} word(s)`);
   console.warn(`Obfuscation completed.`);
 }
