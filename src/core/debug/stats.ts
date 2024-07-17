@@ -1,14 +1,19 @@
 import { IRuntimeOptions, WordEncryptionType } from "../process/runtime.js";
+import { LOG_DEFAULT_BAR } from "../utils/constants.js";
+
+export type IStatsOptions = {
+  stats: boolean;
+};
 
 export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions) {
   if (!options.stats) {
-    console.warn("Obfuscation Stats disabled");
+    console.warn("Obfuscation stats disabled");
     return;
   }
-  console.warn("Obfuscation Stats:");
+  console.warn(`${LOG_DEFAULT_BAR}Obfuscation stats${LOG_DEFAULT_BAR}`);
   for (const key in runtimeOptions.processed.map) {
     if (runtimeOptions.processed.map[key]?.type === WordEncryptionType.ignore) {
-      console.warn("Ignored", `${key} -> ${key} (${runtimeOptions.processed.map[key]?.count} times)`);
+      console.warn("Ignored", `${key} -> ${key} ${getCountLabel(runtimeOptions.processed.map[key]?.count)}`);
     }
   }
 
@@ -16,7 +21,7 @@ export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions) {
     if (runtimeOptions.processed.map[key]?.type === WordEncryptionType.static) {
       console.warn(
         "Static",
-        `${key} -> ${runtimeOptions.processed.map[key]?.target} (${runtimeOptions.processed.map[key]?.count} times)`,
+        `${key} -> ${runtimeOptions.processed.map[key]?.target} ${getCountLabel(runtimeOptions.processed.map[key]?.count)}`,
       );
     }
   }
@@ -25,7 +30,7 @@ export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions) {
     if (runtimeOptions.processed.map[key]?.type === WordEncryptionType.pool) {
       console.warn(
         "Pool",
-        `${key} -> ${runtimeOptions.processed.map[key]?.target} (${runtimeOptions.processed.map[key]?.count} times)`,
+        `${key} -> ${runtimeOptions.processed.map[key]?.target} ${getCountLabel(runtimeOptions.processed.map[key]?.count)}`,
       );
     }
   }
@@ -37,12 +42,13 @@ export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions) {
     ) {
       console.warn(
         "Encrypted",
-        `${key} -> ${runtimeOptions.processed.map[key]?.target} (${runtimeOptions.processed.map[key]?.count} times)`,
+        `${key} -> ${runtimeOptions.processed.map[key]?.target} ${getCountLabel(runtimeOptions.processed.map[key]?.count)}`,
       );
     }
   }
+  console.log("");
 }
 
-export type IStatsOptions = {
-  stats: boolean;
-};
+function getCountLabel(count: number): string {
+  return `(${count} time${count == 1 ? "" : "s"})`;
+}

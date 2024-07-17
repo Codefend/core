@@ -11,6 +11,7 @@ import {
 } from "../../core/options/options.js";
 import { obfuscate } from "../../core/process/obfuscate.js";
 import { buildRuntimeOptions } from "../../core/process/runtime.js";
+import { LOG_DEFAULT_BAR } from "../../core/utils/constants.js";
 import { IOptions } from "../../models/options.js";
 
 export function obfuscateCommand(options: IOptions | null) {
@@ -30,11 +31,11 @@ export function obfuscateCommand(options: IOptions | null) {
   const debugOptions = buildDebugOptions(options);
   const runtimeOptions = buildRuntimeOptions();
 
-  console.warn("Obfuscation started...");
-  console.warn(`Removing existing output folder ${generationOptions.outputDir}...`);
+  console.warn(`\n${LOG_DEFAULT_BAR}Obfuscation started${LOG_DEFAULT_BAR}`);
+  console.warn(`Removing existing output folder ${generationOptions.outputDir}`);
   removeFolder(generationOptions.outputDir);
 
-  console.warn("Copying new files...");
+  console.warn("Copying new files");
   copyFolder(
     generationOptions.inputDir,
     generationOptions.outputDir,
@@ -45,7 +46,7 @@ export function obfuscateCommand(options: IOptions | null) {
   );
 
   const fileNames = getAllFileNamesInDir(generationOptions.outputDir);
-  console.warn(`Copied ${fileNames.length} file(s)`);
+  console.warn(`Copied ${fileNames.length} file(s)\n`);
 
   let fileCode;
   fileNames.forEach((fileName) => {
