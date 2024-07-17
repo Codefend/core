@@ -1,19 +1,19 @@
 {
-    "version": "0.1",
-    "language": "en",
-    "words": [
-        "codefend",
-        "octocat",
-        "socio",
-        "ryansonshine",
-        "racters",
-        "nsnewline",
-        "normaluppercase",
-        "containsspecialcharacters",
-        "containsnewline",
-        "startwithnumber",
-        "codefendrc"
-    ],
-    "flagWords": [],
-    "ignorePaths": ["package.json", "package-lock.json", "yarn.lock", "tsconfig.json", "node_modules/**"]
+  "version": "0.1",
+  "language": "en",
+  "words": [
+    "codefend",
+    "octocat",
+    "racters",
+    "nsnewline",
+    "normaluppercase",
+    "containsspecialcharacters",
+    "containsnewline",
+    "startwithnumber",
+    "codefendrc",
+    "Bundlephobia",
+    "minifiers"
+  ],
+  "flagWords": [],
+  "ignorePaths": ["package.json", "package-lock.json", "yarn.lock", "tsconfig.json", "node_modules/**"]
 }
