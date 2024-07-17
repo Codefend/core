@@ -77,3 +77,5 @@ export const PARSERS: Record<string, { regexList: IInternalRegexOption[] }> = {
 
 export const DEFAULT_PARSER_NAME = "Parser_A";
 export const CUSTOM_PARSER_NAME = "CUSTOM";
+
+export const LOG_DEFAULT_BAR = "----------";

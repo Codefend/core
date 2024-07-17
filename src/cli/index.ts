@@ -1,4 +1,4 @@
-import { CLI_OPTIONS, DEFAULT_CLI_OPTION } from "../core/utils/constants.js";
+import { CLI_OPTIONS, DEFAULT_CLI_OPTION, VERSION } from "../core/utils/constants.js";
 import { checkCommand } from "./commands/check.js";
 import { helpCommand } from "./commands/help.js";
 import { initCommand } from "./commands/init.js";
@@ -25,6 +25,7 @@ export function startCLI() {
       checkCommand();
       break;
     case "-o":
+      console.warn(`Codefend v${VERSION}`);
       obfuscateCommand(checkCommand());
       break;
     default:
