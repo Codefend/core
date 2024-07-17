@@ -1,3 +1,3 @@
 #!/usr/bin/env node
-import { startCLI } from "../build/index.cjs";
+import { startCLI } from "../dist/index.cjs";
 startCLI();
