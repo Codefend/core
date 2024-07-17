@@ -4,55 +4,55 @@ import { getAllFileNamesInDir, readFile } from "../../core/generation/read.js";
 import { removeFolder } from "../../core/generation/remove.js";
 import { writeFile } from "../../core/generation/write.js";
 import {
-    buildDebugOptions,
-    buildGenerationOptions,
-    buildParserOptions,
-    buildTransformationOptions,
+  buildDebugOptions,
+  buildGenerationOptions,
+  buildParserOptions,
+  buildTransformationOptions,
 } from "../../core/options/options.js";
 import { obfuscate } from "../../core/process/obfuscate.js";
 import { buildRuntimeOptions } from "../../core/process/runtime.js";
 import { IOptions } from "../../models/options.js";
 
 export function obfuscateCommand(options: IOptions | null) {
-    if (!options) {
-        console.warn("Obfuscation process canceled due to unresolved errors.");
-        return;
-    }
+  if (!options) {
+    console.warn("Obfuscation process canceled due to unresolved errors.");
+    return;
+  }
 
-    const generationOptions = buildGenerationOptions(options);
-    const transformationOptions = buildTransformationOptions(options);
-    const parserOptionsResponse = buildParserOptions(options.parser);
-    if (parserOptionsResponse.error) {
-        console.warn(parserOptionsResponse.error.errorDescription);
-        return;
-    }
-    const parserOptions = parserOptionsResponse.data;
-    const debugOptions = buildDebugOptions(options);
-    const runtimeOptions = buildRuntimeOptions();
+  const generationOptions = buildGenerationOptions(options);
+  const transformationOptions = buildTransformationOptions(options);
+  const parserOptionsResponse = buildParserOptions(options.parser);
+  if (parserOptionsResponse.error) {
+    console.warn(parserOptionsResponse.error.errorDescription);
+    return;
+  }
+  const parserOptions = parserOptionsResponse.data;
+  const debugOptions = buildDebugOptions(options);
+  const runtimeOptions = buildRuntimeOptions();
 
-    console.warn("Obfuscation started...");
-    console.warn(`Removing existing output folder ${generationOptions.outputDir}...`);
-    removeFolder(generationOptions.outputDir);
+  console.warn("Obfuscation started...");
+  console.warn(`Removing existing output folder ${generationOptions.outputDir}...`);
+  removeFolder(generationOptions.outputDir);
 
-    console.warn("Copying new files...");
-    copyFolder(
-        generationOptions.inputDir,
-        generationOptions.outputDir,
-        generationOptions.ignore,
-        transformationOptions,
-        parserOptions!,
-        runtimeOptions,
-    );
+  console.warn("Copying new files...");
+  copyFolder(
+    generationOptions.inputDir,
+    generationOptions.outputDir,
+    generationOptions.ignore,
+    transformationOptions,
+    parserOptions!,
+    runtimeOptions,
+  );
 
-    const fileNames = getAllFileNamesInDir(generationOptions.outputDir);
-    console.warn(`Copied ${fileNames.length} file(s)`);
+  const fileNames = getAllFileNamesInDir(generationOptions.outputDir);
+  console.warn(`Copied ${fileNames.length} file(s)`);
 
-    let fileCode;
-    fileNames.forEach((fileName) => {
-        fileCode = readFile(fileName as string);
-        writeFile(fileName as string, obfuscate(fileCode ?? "", transformationOptions, parserOptions!, runtimeOptions));
-    });
-    stats({ stats: debugOptions.stats }, runtimeOptions);
-    console.warn(`Obfuscated ${Object.keys(runtimeOptions.map).length} word(s)`);
-    console.warn(`Obfuscation completed.`);
+  let fileCode;
+  fileNames.forEach((fileName) => {
+    fileCode = readFile(fileName as string);
+    writeFile(fileName as string, obfuscate(fileCode ?? "", transformationOptions, parserOptions!, runtimeOptions));
+  });
+  stats({ stats: debugOptions.stats }, runtimeOptions);
+  console.warn(`Obfuscated ${Object.keys(runtimeOptions.map).length} word(s)`);
+  console.warn(`Obfuscation completed.`);
 }

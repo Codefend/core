@@ -10,12 +10,12 @@ export const RC_VERSION = "0.0.1";
 export const DEFAULT_PROJECT_NAME = "project";
 
 export const LOG_OPTIONS = {
-    PREFIX_SIZE: 11,
-    MESSAGE_SIZE: 64,
-    COLORS: {
-        PREFIX_BG: "#282634",
-        PREFIX_FG: "#ff4067",
-    },
+  PREFIX_SIZE: 11,
+  MESSAGE_SIZE: 64,
+  COLORS: {
+    PREFIX_BG: "#282634",
+    PREFIX_FG: "#ff4067",
+  },
 };
 
 export const DEFAULT_PREFIX = "Ox";
@@ -33,46 +33,46 @@ Options:`;
 export const DEFAULT_CLI_OPTION = "-h";
 
 export const CLI_OPTIONS = [
-    {
-        short: "-i",
-        long: "--init",
-        description: `Create the config file (${OPTIONS_FILE_NAME})`,
-    },
-    {
-        short: "-c",
-        long: "--check",
-        description: "Obfuscate the project",
-    },
-    {
-        short: "-o",
-        long: "--obfuscate",
-        description: "Check the config file for potential warnings/errors",
-    },
-    {
-        short: "-v",
-        long: "--version",
-        description: "Output the version number",
-    },
-    {
-        short: "-h",
-        long: "--help",
-        description: "Display help for command",
-    },
+  {
+    short: "-i",
+    long: "--init",
+    description: `Create the config file (${OPTIONS_FILE_NAME})`,
+  },
+  {
+    short: "-c",
+    long: "--check",
+    description: "Obfuscate the project",
+  },
+  {
+    short: "-o",
+    long: "--obfuscate",
+    description: "Check the config file for potential warnings/errors",
+  },
+  {
+    short: "-v",
+    long: "--version",
+    description: "Output the version number",
+  },
+  {
+    short: "-h",
+    long: "--help",
+    description: "Display help for command",
+  },
 ];
 
 export const PARSERS: Record<string, { regexList: IInternalRegexOption[] }> = {
-    Parser_A: {
-        regexList: [
-            {
-                name: "main",
-                regex: new RegExp("([a-zA-Z]+(_[a-zA-Z0-9]+)+)", "g"),
-            },
-            {
-                name: "file",
-                regex: new RegExp("((pkg|cmp|lib|file|folder|module|style|main)+(-[a-zA-Z0-9]+)+)", "g"),
-            },
-        ],
-    },
+  Parser_A: {
+    regexList: [
+      {
+        name: "main",
+        regex: new RegExp("([a-zA-Z]+(_[a-zA-Z0-9]+)+)", "g"),
+      },
+      {
+        name: "file",
+        regex: new RegExp("((pkg|cmp|lib|file|folder|module|style|main)+(-[a-zA-Z0-9]+)+)", "g"),
+      },
+    ],
+  },
 };
 
 export const DEFAULT_PARSER_NAME = "Parser_A";

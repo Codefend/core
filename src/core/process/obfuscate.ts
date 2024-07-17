@@ -9,24 +9,24 @@ import { mapStaticWords } from "../transformation/static.js";
 import { IRuntimeOptions } from "./runtime.js";
 
 export function obfuscate(
-    code: string,
-    transformationOptions: IInternalTransformationOptions,
-    parserOptions: IInternalParserOptions,
-    runtimeOptions: IRuntimeOptions,
+  code: string,
+  transformationOptions: IInternalTransformationOptions,
+  parserOptions: IInternalParserOptions,
+  runtimeOptions: IRuntimeOptions,
 ): string {
-    const words = parse({ code: code, parserOptions: parserOptions });
+  const words = parse({ code: code, parserOptions: parserOptions });
 
-    buildMap({ words: words }, runtimeOptions);
+  buildMap({ words: words }, runtimeOptions);
 
-    sortMap(runtimeOptions);
+  sortMap(runtimeOptions);
 
-    mapStaticWords({ static: transformationOptions.static }, runtimeOptions);
+  mapStaticWords({ static: transformationOptions.static }, runtimeOptions);
 
-    mapIgnoredWords({ ignore: transformationOptions.ignore }, runtimeOptions);
+  mapIgnoredWords({ ignore: transformationOptions.ignore }, runtimeOptions);
 
-    mapPoolWords({ prefix: transformationOptions.prefix, pool: transformationOptions.pool }, runtimeOptions);
+  mapPoolWords({ prefix: transformationOptions.prefix, pool: transformationOptions.pool }, runtimeOptions);
 
-    mapDefaultWords({ prefix: transformationOptions.prefix }, runtimeOptions);
+  mapDefaultWords({ prefix: transformationOptions.prefix }, runtimeOptions);
 
-    return replace({ code: code }, runtimeOptions);
+  return replace({ code: code }, runtimeOptions);
 }
