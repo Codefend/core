@@ -1,0 +1,75 @@
+name: CI
+run-name: CI Workflow
+
+on: [push]
+
+jobs:
+    audit:
+        name: 🛡️ Audit
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+            - name: 🛡️ Audit
+              run: npm audit --audit-level=high
+
+    format:
+        name: 🔬 Format
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+            - uses: bahmutov/npm-install@v1
+            - name: 🔬 Format
+              run: npm run format:check
+
+    lint:
+        name: ⬣ ESLint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+            - uses: bahmutov/npm-install@v1
+            - name: ⬣ ESLint
+              run: npm run lint:check
+
+    spell:
+        name: 🈸 Spellcheck
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+            - uses: bahmutov/npm-install@v1
+            - name: 🈸 Spellcheck
+              run: npm run spell:check
+
+    type:
+        name: ʦ Typecheck
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+            - uses: bahmutov/npm-install@v1
+            - name: ʦ Typecheck
+              run: npm run type:check
+
+    test:
+        name: ⚡ Tests
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+            - uses: bahmutov/npm-install@v1
+            - name: ⚡ Tests
+              run: npm run test
+
+    build:
+        name: 🚀 Build
+        needs: [audit, format, lint, spell, type, test]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+            - uses: bahmutov/npm-install@v1
+            - name: 🔨 Build
+              run: npm run build
