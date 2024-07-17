@@ -1,4 +1,4 @@
-import { getObfuscatedWordsCount, stats } from "../../core/debug/stats.js";
+import { stats } from "../../core/debug/stats.js";
 import { copyFolder } from "../../core/generation/copy.js";
 import { getAllFileNamesInDir, readFile } from "../../core/generation/read.js";
 import { removeFolder } from "../../core/generation/remove.js";
