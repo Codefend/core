@@ -6,7 +6,7 @@
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Codefend/core/ci.yml?branch=main)
 ![NPM](https://img.shields.io/npm/dt/codefend)
-![Bundlephobia](https://img.shields.io/bundlephobia/min/webpack-plugin-codefend)
+![Bundlephobia](https://img.shields.io/bundlephobia/min/codefend)
 ![NPM](https://img.shields.io/node/v/codefend)
 ![NPM](https://img.shields.io/npm/l/codefend)
 
