@@ -52,3 +52,14 @@ export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions) {
 function getCountLabel(count: number): string {
   return `(${count} time${count == 1 ? "" : "s"})`;
 }
+
+export function getObfuscatedWordsCount(runtimeOptions: IRuntimeOptions): number {
+  let ret = Object.keys(runtimeOptions.processed.map).length;
+
+  for (const key in runtimeOptions.processed.map) {
+    if (runtimeOptions.processed.map[key].count == 0) {
+      ret--;
+    }
+  }
+  return ret;
+}
