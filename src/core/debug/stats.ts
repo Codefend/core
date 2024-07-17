@@ -52,7 +52,3 @@ export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions) {
 function getCountLabel(count: number): string {
   return `(${count} time${count == 1 ? "" : "s"})`;
 }
-
-export type IStatsOptions = {
-  stats: boolean;
-};
