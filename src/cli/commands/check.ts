@@ -1,5 +1,6 @@
 import { readFile, tryParse } from "../../core/generation/read.js";
 import {
+  DEFAULT_PREFIX,
   OPTIONS_FILE_NAME,
   OPTIONS_FILE_PATH,
   PROJECT_DISPLAY_NAME,
@@ -41,7 +42,7 @@ export function checkCommand(): IOptions | null {
     checkResults.warnings.push(`${OPTIONS_FILE_NAME} was generated in an older version of ${PROJECT_DISPLAY_NAME}.`);
   }
 
-  if (!VALID_VAR_REGEX.test(options.transformation.prefix)) {
+  if (!VALID_VAR_REGEX.test(options.transformation?.prefix ?? DEFAULT_PREFIX)) {
     checkResults.errors.push(`Invalid 'prefix' in ${OPTIONS_FILE_NAME}.`);
   }
 
@@ -66,7 +67,9 @@ function printCheckResults(checkResults: ICheckResults): void {
 }
 
 function checkTransformationPool(checkResults: ICheckResults, options: IOptions): void {
-  if (!options.transformation.pool) return;
+  if (!options.transformation?.pool) {
+    return;
+  }
 
   const poolArray =
     typeof options.transformation.pool === "string"

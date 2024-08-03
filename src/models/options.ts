@@ -1,6 +1,6 @@
 export type IOptions = {
   generation: IGenerationOptions;
-  transformation: ITransformationOptions;
+  transformation?: ITransformationOptions;
   parser?: IParserOptions;
   debug: IDebugOptions;
   __meta?: IMeta;
@@ -13,7 +13,7 @@ export type IGenerationOptions = {
 };
 
 export type ITransformationOptions = {
-  prefix: string;
+  prefix?: string;
   static?: IStaticWordTransformationOption[];
   ignore?: string[];
   pool?: string | string[];
@@ -25,10 +25,10 @@ export type IDebugOptions = {
 
 export type IParserOptions = {
   name: string;
-  regexList?: IRegexOption[];
+  regexList?: IParserRegexOption[];
 };
 
-export type IRegexOption = {
+export type IParserRegexOption = {
   value: string;
   name: string;
 };
