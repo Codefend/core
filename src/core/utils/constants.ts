@@ -1,5 +1,6 @@
 import { version } from "../../../package.json";
 import { IInternalRegexOption } from "../../models/internal.js";
+import { ICheckErrorCodes, ICheckWarningCodes, IStringModifierFunction } from "../../models/types";
 
 export const PROJECT_KEBAB_CASE_NAME = "codefend";
 export const PROJECT_DISPLAY_NAME = "Codefend";
@@ -97,3 +98,34 @@ export const DEFAULT_PARSER_NAME = PARSER_NAMES.default;
 export const CUSTOM_PARSER_NAME = "custom";
 
 export const LOG_DEFAULT_BAR = "----------";
+
+export const CODEFEND_CHECK_WARNING_CODES = {
+  VERSION_WARNING: "VERSION_WARNING",
+  PARSER_A_WARNING: "PARSER_A_WARNING",
+  GENERATION_PACKAGE_LOCK_WARNING: "GENERATION_PACKAGE_LOCK_WARNING",
+} as const;
+
+export const CODEFEND_CHECK_WARNING_MESSAGES: Record<ICheckWarningCodes, string> = {
+  [CODEFEND_CHECK_WARNING_CODES.VERSION_WARNING]: `${OPTIONS_FILE_NAME} was generated in an older version of ${PROJECT_DISPLAY_NAME}.`,
+
+  [CODEFEND_CHECK_WARNING_CODES.PARSER_A_WARNING]: `${PARSER_NAMES.Parser_A} has been deprecated.\nPlease rename '${PARSER_NAMES.Parser_A}' to '${DEFAULT_PARSER_NAME}' in your ${OPTIONS_FILE_NAME}.\nThis change will not affect functionality; it's only a name update.`,
+
+  [CODEFEND_CHECK_WARNING_CODES.GENERATION_PACKAGE_LOCK_WARNING]: `The 'package-lock.json' entry was not found in the 'ignore' list under 'generation' in your ${OPTIONS_FILE_NAME}.\nIt is recommended to add it to avoid potential issues.`,
+};
+
+export const CODEFEND_CHECK_ERROR_CODES = {
+  FILE_NOT_FOUND_ERROR: "FILE_NOT_FOUND_ERROR",
+  INVALID_JSON_ERROR: "INVALID_JSON_ERROR",
+  INVALID_PREFIX_ERROR: "INVALID_PREFIX_ERROR",
+  INVALID_CUSTOM_WORD_ERROR: "INVALID_CUSTOM_WORD_ERROR",
+} as const;
+
+export const CODEFEND_CHECK_ERROR_MESSAGES: Record<ICheckErrorCodes, string | IStringModifierFunction> = {
+  [CODEFEND_CHECK_ERROR_CODES.FILE_NOT_FOUND_ERROR]: `${OPTIONS_FILE_NAME} not found. Please run ${PROJECT_KEBAB_CASE_NAME} -i first to create it.`,
+  [CODEFEND_CHECK_ERROR_CODES.INVALID_JSON_ERROR]: `${OPTIONS_FILE_NAME} contains an invalid JSON format`,
+
+  [CODEFEND_CHECK_ERROR_CODES.INVALID_PREFIX_ERROR]: `Invalid 'prefix' in ${OPTIONS_FILE_NAME}.`,
+
+  INVALID_CUSTOM_WORD_ERROR: (word: string): string =>
+    `Invalid 'customGeneratedWords' in ${OPTIONS_FILE_NAME}. word:"${word}"`,
+};

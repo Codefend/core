@@ -2,7 +2,7 @@ export type IOptions = {
   generation: IGenerationOptions;
   transformation?: ITransformationOptions;
   parser?: IParserOptions;
-  debug: IDebugOptions;
+  debug?: IDebugOptions;
   __meta?: IMeta;
 };
 
@@ -21,6 +21,7 @@ export type ITransformationOptions = {
 
 export type IDebugOptions = {
   stats?: boolean;
+  ignoredWarnings?: IDebugIgnoredWarningsOption;
 };
 
 export type IParserOptions = {
@@ -46,3 +47,5 @@ export type IMeta = {
     generatedAt: string;
   };
 };
+
+export type IDebugIgnoredWarningsOption = "all" | string[];

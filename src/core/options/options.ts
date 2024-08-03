@@ -47,6 +47,7 @@ export function buildDefaultOptions(projectName?: string): IOptions {
     },
     debug: {
       stats: true,
+      ignoredWarnings: [],
     },
     parser: {
       name: DEFAULT_PARSER_NAME,
@@ -145,5 +146,6 @@ function buildGenerationIgnoreOptions(options: IOptions): string[] {
 export function buildDebugOptions(debugOptions?: IDebugOptions): IInternalDebugOptions {
   return {
     stats: typeof debugOptions?.stats === "boolean" ? debugOptions.stats : true,
+    ignoredWarnings: debugOptions?.ignoredWarnings === undefined ? [] : debugOptions?.ignoredWarnings,
   };
 }
