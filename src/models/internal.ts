@@ -1,3 +1,5 @@
+import { IDebugIgnoredWarningsOption } from "./options";
+
 export type IInternalOptions = {
   generation: IInternalGenerationOptions;
   transformation: IInternalTransformationOptions;
@@ -20,6 +22,7 @@ export type IInternalTransformationOptions = {
 
 export type IInternalDebugOptions = {
   stats: boolean;
+  ignoredWarnings: IDebugIgnoredWarningsOption;
 };
 
 export type IInternalResponse<T> = {
