@@ -61,6 +61,7 @@
     "prepack": "npm run lint:check && npm run spell:check && npm run type:check && npm run test:run && npm run build"
   },
   "devDependencies": {
+    "@types/node": "^22.1.0",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
     "@typescript-eslint/parser": "^7.16.1",
     "cspell": "^8.12.1",
@@ -70,6 +71,6 @@
     "prettier": "^3.3.3",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
-    "vitest": "^2.0.3"
+    "vitest": "^2.0.5"
   }
 }
