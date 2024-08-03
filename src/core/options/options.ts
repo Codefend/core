@@ -35,6 +35,7 @@ export function buildDefaultOptions(projectName?: string): IOptions {
         "build",
         "dist",
         "README.md",
+        "package-lock.json",
       ],
     },
 
