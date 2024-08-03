@@ -29,7 +29,7 @@ export function checkCommand(): IOptions | null {
     return null;
   }
 
-  const options = tryParse(file) as IOptions | null;
+  const options = tryParse<IOptions>(file);
 
   if (!options) {
     checkResults.errors.push(`${OPTIONS_FILE_NAME} contains an invalid JSON format`);
@@ -53,7 +53,7 @@ export function checkCommand(): IOptions | null {
   return success ? options : null;
 }
 
-function printCheckResults(checkResults: ICheckResults) {
+function printCheckResults(checkResults: ICheckResults): void {
   const message = `Check completed. ${checkResults.errors.length} error(s)  ${checkResults.warnings.length} warning(s) `;
   console.warn(message);
 
@@ -65,7 +65,7 @@ function printCheckResults(checkResults: ICheckResults) {
   });
 }
 
-function checkTransformationPool(checkResults: ICheckResults, options: IOptions) {
+function checkTransformationPool(checkResults: ICheckResults, options: IOptions): void {
   if (!options.transformation.pool) return;
 
   const poolArray =

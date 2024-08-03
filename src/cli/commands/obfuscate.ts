@@ -14,7 +14,7 @@ import { buildRuntimeOptions } from "../../core/process/runtime.js";
 import { LOG_DEFAULT_BAR } from "../../core/utils/constants.js";
 import { IOptions } from "../../models/options.js";
 
-export function obfuscateCommand(options: IOptions | null) {
+export function obfuscateCommand(options: IOptions | null): void {
   if (!options) {
     console.warn("Obfuscation process canceled due to unresolved errors.");
     return;

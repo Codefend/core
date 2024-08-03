@@ -1,6 +1,6 @@
 import { IRuntimeOptions, WordEncryptionType } from "../process/runtime.js";
 
-export function mapIgnoredWords(options: IMapIgnoredWordsOptions, runtimeOptions: IRuntimeOptions) {
+export function mapIgnoredWords(options: IMapIgnoredWordsOptions, runtimeOptions: IRuntimeOptions): void {
   options.ignore.forEach((word: string) => {
     runtimeOptions.map[word] = word;
     if (word in runtimeOptions.processed.map) {

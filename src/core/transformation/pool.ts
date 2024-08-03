@@ -1,6 +1,6 @@
 import { IRuntimeOptions, WordEncryptionType } from "../process/runtime.js";
 
-export function mapPoolWords(options: IMapCustomGeneratedWordsOptions, runtimeOptions: IRuntimeOptions) {
+export function mapPoolWords(options: IMapCustomGeneratedWordsOptions, runtimeOptions: IRuntimeOptions): void {
   let sequence = 0;
   let word;
   for (const key in runtimeOptions.processed.map) {
@@ -20,9 +20,9 @@ export type IMapCustomGeneratedWordsOptions = {
   pool: string[];
 };
 
-function generateWord(sequence: number, options: IMapCustomGeneratedWordsOptions) {
+function generateWord(sequence: number, options: IMapCustomGeneratedWordsOptions): string | undefined {
   if (options.pool.length <= sequence) {
-    return null;
+    return;
   }
   let index = 0;
   for (const entry of options.pool) {

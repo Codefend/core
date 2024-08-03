@@ -5,7 +5,7 @@ export type IStatsOptions = {
   stats: boolean;
 };
 
-export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions) {
+export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions): void {
   if (!options.stats) {
     console.warn("Obfuscation stats disabled");
     return;

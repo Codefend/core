@@ -127,7 +127,7 @@ export function buildGenerationOptions(options: IOptions): IInternalGenerationOp
   };
 }
 
-function buildGenerationIgnoreOptions(options: IOptions) {
+function buildGenerationIgnoreOptions(options: IOptions): string[] {
   const ret = options.generation.ignore ?? [];
   if (!ret.includes(options.generation.outputDir)) {
     ret.push(options.generation.outputDir);
