@@ -14,21 +14,21 @@ import { buildRuntimeOptions } from "../../core/process/runtime.js";
 import { LOG_DEFAULT_BAR } from "../../core/utils/constants.js";
 import { IOptions } from "../../models/options.js";
 
-export function obfuscateCommand(options: IOptions | null) {
+export function obfuscateCommand(options: IOptions | null): void {
   if (!options) {
     console.warn("Obfuscation process canceled due to unresolved errors.");
     return;
   }
 
   const generationOptions = buildGenerationOptions(options);
-  const transformationOptions = buildTransformationOptions(options);
+  const transformationOptions = buildTransformationOptions(options.transformation);
   const parserOptionsResponse = buildParserOptions(options.parser);
   if (parserOptionsResponse.error) {
     console.warn(parserOptionsResponse.error.errorDescription);
     return;
   }
   const parserOptions = parserOptionsResponse.data;
-  const debugOptions = buildDebugOptions(options);
+  const debugOptions = buildDebugOptions(options.debug);
   const runtimeOptions = buildRuntimeOptions();
 
   console.warn(`\n${LOG_DEFAULT_BAR}Obfuscation started${LOG_DEFAULT_BAR}`);
@@ -50,8 +50,8 @@ export function obfuscateCommand(options: IOptions | null) {
 
   let fileCode;
   fileNames.forEach((fileName) => {
-    fileCode = readFile(fileName as string);
-    writeFile(fileName as string, obfuscate(fileCode ?? "", transformationOptions, parserOptions!, runtimeOptions));
+    fileCode = readFile(fileName);
+    writeFile(fileName, obfuscate(fileCode ?? "", transformationOptions, parserOptions!, runtimeOptions));
   });
   stats({ stats: debugOptions.stats }, runtimeOptions);
   console.warn(`Obfuscated ${getObfuscatedWordsCount(runtimeOptions)} word(s)`);

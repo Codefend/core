@@ -1,6 +1,6 @@
 import { IInternalParserOptions } from "../../models/internal.js";
 
-export function parse(options: IParseOptions) {
+export function parse(options: IParseOptions): IParsedWord[] {
   const words: IParsedWord[] = [];
   let matches;
   options.parserOptions.regexList.forEach((regexListOption) => {

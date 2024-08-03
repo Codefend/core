@@ -60,22 +60,40 @@ export const CLI_OPTIONS = [
   },
 ];
 
+const DEFAULT_REGEX_LIST = [
+  {
+    name: "main",
+    regex: new RegExp("([a-zA-Z]+(_[a-zA-Z0-9]+)+)", "g"),
+  },
+  {
+    name: "file",
+    regex: new RegExp("((pkg|cmp|lib|file|folder|module|style|main)+(-[a-zA-Z0-9]+)+)", "g"),
+  },
+];
+
+export const PARSER_NAMES = {
+  default: "default",
+  fileOnly: "fileOnly",
+  codeOnly: "codeOnly",
+  Parser_A: "Parser_A",
+} as const;
+
 export const PARSERS: Record<string, { regexList: IInternalRegexOption[] }> = {
-  Parser_A: {
-    regexList: [
-      {
-        name: "main",
-        regex: new RegExp("([a-zA-Z]+(_[a-zA-Z0-9]+)+)", "g"),
-      },
-      {
-        name: "file",
-        regex: new RegExp("((pkg|cmp|lib|file|folder|module|style|main)+(-[a-zA-Z0-9]+)+)", "g"),
-      },
-    ],
+  [PARSER_NAMES.default]: {
+    regexList: DEFAULT_REGEX_LIST,
+  },
+  [PARSER_NAMES.fileOnly]: {
+    regexList: DEFAULT_REGEX_LIST.filter((e) => e.name === "file"),
+  },
+  [PARSER_NAMES.codeOnly]: {
+    regexList: DEFAULT_REGEX_LIST.filter((e) => e.name === "main"),
+  },
+  [PARSER_NAMES.Parser_A]: {
+    regexList: DEFAULT_REGEX_LIST,
   },
 };
 
-export const DEFAULT_PARSER_NAME = "Parser_A";
-export const CUSTOM_PARSER_NAME = "CUSTOM";
+export const DEFAULT_PARSER_NAME = PARSER_NAMES.default;
+export const CUSTOM_PARSER_NAME = "custom";
 
 export const LOG_DEFAULT_BAR = "----------";

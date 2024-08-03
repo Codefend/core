@@ -12,7 +12,7 @@ export function copyFolder(
   transformationOptions: IInternalTransformationOptions,
   parserOptions: IInternalParserOptions,
   runtimeOptions: IRuntimeOptions,
-) {
+): void {
   if (!fs.existsSync(to)) fs.mkdirSync(to);
   fs.readdirSync(from).forEach((element) => {
     if (ignoredFilesInGeneration.includes(element)) return;
