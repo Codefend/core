@@ -1,8 +1,10 @@
+import { IParserNames } from "./types";
+
 export type IOptions = {
   generation: IGenerationOptions;
-  transformation: ITransformationOptions;
+  transformation?: ITransformationOptions;
   parser?: IParserOptions;
-  debug: IDebugOptions;
+  debug?: IDebugOptions;
   __meta?: IMeta;
 };
 
@@ -13,7 +15,7 @@ export type IGenerationOptions = {
 };
 
 export type ITransformationOptions = {
-  prefix: string;
+  prefix?: string;
   static?: IStaticWordTransformationOption[];
   ignore?: string[];
   pool?: string | string[];
@@ -21,14 +23,15 @@ export type ITransformationOptions = {
 
 export type IDebugOptions = {
   stats?: boolean;
+  ignoredWarnings?: IDebugIgnoredWarningsOption;
 };
 
 export type IParserOptions = {
-  name: string;
-  regexList?: IRegexOption[];
+  name: IParserNames;
+  regexList?: IParserRegexOption[];
 };
 
-export type IRegexOption = {
+export type IParserRegexOption = {
   value: string;
   name: string;
 };
@@ -46,3 +49,5 @@ export type IMeta = {
     generatedAt: string;
   };
 };
+
+export type IDebugIgnoredWarningsOption = "all" | string[];

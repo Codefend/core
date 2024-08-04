@@ -5,13 +5,14 @@ import {
   IInternalResponse,
   IInternalTransformationOptions,
 } from "../../models/internal.js";
-import { IOptions, IParserOptions } from "../../models/options.js";
+import { IDebugOptions, IOptions, IParserOptions, ITransformationOptions } from "../../models/options.js";
 import {
   CUSTOM_PARSER_NAME,
   DEFAULT_PARSER_NAME,
   DEFAULT_PREFIX,
   DEFAULT_PROJECT_NAME,
   MIN_POOL_ITEM_LENGTH,
+  PARSER_NAMES,
   PARSERS,
   PROJECT_KEBAB_CASE_NAME,
   RC_VERSION,
@@ -19,7 +20,7 @@ import {
 } from "../utils/constants.js";
 
 export function buildDefaultOptions(projectName?: string): IOptions {
-  const options = {
+  const options: IOptions = {
     generation: {
       inputDir: ".",
       outputDir: "codefend-output",
@@ -34,6 +35,7 @@ export function buildDefaultOptions(projectName?: string): IOptions {
         "build",
         "dist",
         "README.md",
+        "package-lock.json",
       ],
     },
 
@@ -45,6 +47,7 @@ export function buildDefaultOptions(projectName?: string): IOptions {
     },
     debug: {
       stats: true,
+      ignoredWarnings: [],
     },
     parser: {
       name: DEFAULT_PARSER_NAME,
@@ -57,17 +60,19 @@ export function buildDefaultOptions(projectName?: string): IOptions {
         generatedAt: new Date().toISOString(),
       },
     },
-  } as IOptions;
+  };
 
   return options;
 }
 
-export function buildTransformationOptions(options: IOptions): IInternalTransformationOptions {
+export function buildTransformationOptions(
+  transformationOptions?: ITransformationOptions,
+): IInternalTransformationOptions {
   return {
-    prefix: options.transformation.prefix,
-    static: options.transformation.static ?? [],
-    ignore: options.transformation.ignore ?? [],
-    pool: buildTransformationPoolOption(options.transformation.pool),
+    prefix: transformationOptions?.prefix ?? DEFAULT_PREFIX,
+    static: transformationOptions?.static ?? [],
+    ignore: transformationOptions?.ignore ?? [],
+    pool: buildTransformationPoolOption(transformationOptions?.pool),
   };
 }
 
@@ -91,9 +96,12 @@ export function buildTransformationPoolOption(pool: string | string[] | undefine
 
 export function buildParserOptions(parser?: IParserOptions): IInternalResponse<IInternalParserOptions> {
   const ret: IInternalResponse<IInternalParserOptions> = {};
-
   if (!parser || !parser?.name) {
     return { data: { name: DEFAULT_PARSER_NAME, regexList: PARSERS[DEFAULT_PARSER_NAME]!.regexList } };
+  }
+
+  if (parser.name in PARSER_NAMES) {
+    return { data: { name: parser.name, regexList: PARSERS[parser.name]!.regexList } };
   }
 
   if (parser.name.toLowerCase() === CUSTOM_PARSER_NAME.toLowerCase()) {
@@ -127,7 +135,7 @@ export function buildGenerationOptions(options: IOptions): IInternalGenerationOp
   };
 }
 
-function buildGenerationIgnoreOptions(options: IOptions) {
+function buildGenerationIgnoreOptions(options: IOptions): string[] {
   const ret = options.generation.ignore ?? [];
   if (!ret.includes(options.generation.outputDir)) {
     ret.push(options.generation.outputDir);
@@ -135,8 +143,9 @@ function buildGenerationIgnoreOptions(options: IOptions) {
   return ret;
 }
 
-export function buildDebugOptions(options: IOptions): IInternalDebugOptions {
+export function buildDebugOptions(debugOptions?: IDebugOptions): IInternalDebugOptions {
   return {
-    stats: typeof options.debug.stats === "boolean" ? options.debug.stats : true,
+    stats: typeof debugOptions?.stats === "boolean" ? debugOptions.stats : true,
+    ignoredWarnings: debugOptions?.ignoredWarnings === undefined ? [] : debugOptions?.ignoredWarnings,
   };
 }

@@ -1,16 +1,14 @@
 import { IRuntimeOptions, WordEncryptionType } from "../process/runtime.js";
-import { LOG_DEFAULT_BAR } from "../utils/constants.js";
 
 export type IStatsOptions = {
   stats: boolean;
 };
 
-export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions) {
+export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions): void {
   if (!options.stats) {
-    console.warn("Obfuscation stats disabled");
     return;
   }
-  console.warn(`${LOG_DEFAULT_BAR}Obfuscation stats${LOG_DEFAULT_BAR}`);
+  console.warn(`Obfuscation stats:`);
   for (const key in runtimeOptions.processed.map) {
     if (runtimeOptions.processed.map[key]?.type === WordEncryptionType.ignore) {
       console.warn("Ignored", `${key} -> ${key} ${getCountLabel(runtimeOptions.processed.map[key]?.count)}`);

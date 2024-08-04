@@ -1,4 +1,4 @@
-import { CLI_OPTIONS, DEFAULT_CLI_OPTION, VERSION } from "../core/utils/constants.js";
+import { CLI_OPTIONS, DEFAULT_CLI_OPTION, PROJECT_DISPLAY_NAME, VERSION } from "../core/utils/constants.js";
 import { checkCommand } from "./commands/check.js";
 import { helpCommand } from "./commands/help.js";
 import { initCommand } from "./commands/init.js";
@@ -6,7 +6,7 @@ import { obfuscateCommand } from "./commands/obfuscate.js";
 import { unknownCommand } from "./commands/unknown.js";
 import { versionCommand } from "./commands/version.js";
 
-export function startCLI() {
+export function startCLI(): void {
   const inputArgs = process.argv.splice(2);
   const selectedArg: string = inputArgs.length > 0 ? (inputArgs[0] ?? DEFAULT_CLI_OPTION) : DEFAULT_CLI_OPTION;
 
@@ -25,7 +25,7 @@ export function startCLI() {
       checkCommand();
       break;
     case "-o":
-      console.warn(`Codefend v${VERSION}`);
+      console.warn(`${PROJECT_DISPLAY_NAME} v${VERSION}`);
       obfuscateCommand(checkCommand());
       break;
     default:

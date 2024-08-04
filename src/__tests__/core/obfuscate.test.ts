@@ -3,14 +3,13 @@ import { describe, expect, it } from "vitest";
 import { buildDefaultOptions, buildParserOptions, buildTransformationOptions } from "../../core/options/options.js";
 import { obfuscate } from "../../core/process/obfuscate.js";
 import { buildRuntimeOptions } from "../../core/process/runtime.js";
-import { IOptions } from "../../models/options.js";
 
 describe("Obfuscate", () => {
   describe("main-regex", () => {
     const code = "const l_var = 0;";
     it("with default options", () => {
-      const options: IOptions = buildDefaultOptions();
-      const transformationOptions = buildTransformationOptions(options);
+      const options = buildDefaultOptions();
+      const transformationOptions = buildTransformationOptions(options.transformation);
       const parserOptions = buildParserOptions(options.parser).data!;
       const runtimeOptions = buildRuntimeOptions();
       const output = obfuscate(code, transformationOptions, parserOptions, runtimeOptions);
@@ -21,8 +20,8 @@ describe("Obfuscate", () => {
   describe("predefined-ignored", () => {
     const code = `import * from "./lib-file";const l_var = 0;const l_predefined_and_ignored = 0;`;
     it("with default options", () => {
-      const options: IOptions = buildDefaultOptions();
-      const transformationOptions = buildTransformationOptions(options);
+      const options = buildDefaultOptions();
+      const transformationOptions = buildTransformationOptions(options.transformation);
       const parserOptions = buildParserOptions(options.parser).data!;
 
       transformationOptions.ignore = ["l_predefined_and_ignored"];
@@ -40,8 +39,8 @@ describe("Obfuscate", () => {
 
   describe("override options", () => {
     const code = "const l_var = 0;";
-    const defaultOptions: IOptions = buildDefaultOptions();
-    const transformationOptions = buildTransformationOptions(defaultOptions);
+    const defaultOptions = buildDefaultOptions();
+    const transformationOptions = buildTransformationOptions(defaultOptions.transformation);
     transformationOptions.prefix = "Zx";
     const parserOptions = buildParserOptions(defaultOptions.parser).data!;
     it("prefix overridden", () => {

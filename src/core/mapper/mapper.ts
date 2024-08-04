@@ -1,10 +1,10 @@
 import { IParsedWord } from "../parser/parser.js";
 import { IRuntimeOptions, WordEncryptionType } from "../process/runtime.js";
 
-export function buildMap(options: IBuildMapOptions, runtimeOptions: IRuntimeOptions) {
+export function buildMap(options: IBuildMapOptions, runtimeOptions: IRuntimeOptions): void {
   options.words.forEach((word) => {
     if (runtimeOptions.map[word.value]) {
-      runtimeOptions.processed.map[word.value]!.count++;
+      runtimeOptions.processed.map[word.value].count++;
       return;
     }
     runtimeOptions.map[word.value] = "";
@@ -15,7 +15,7 @@ export function buildMap(options: IBuildMapOptions, runtimeOptions: IRuntimeOpti
     };
   });
 }
-export function sortMap(runtimeOptions: IRuntimeOptions) {
+export function sortMap(runtimeOptions: IRuntimeOptions): void {
   runtimeOptions.map = Object.keys(runtimeOptions.map)
     .sort((a, b) => {
       return b.length - a.length;

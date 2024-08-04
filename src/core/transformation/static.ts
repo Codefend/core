@@ -1,7 +1,7 @@
 import { IInternalStaticWordTransformationOption } from "../../models/internal.js";
 import { IRuntimeOptions, WordEncryptionType } from "../process/runtime.js";
 
-export function mapStaticWords(options: IMapStaticWordsOptions, runtimeOptions: IRuntimeOptions) {
+export function mapStaticWords(options: IMapStaticWordsOptions, runtimeOptions: IRuntimeOptions): void {
   options.static.forEach((staticWord) => {
     runtimeOptions.map[staticWord.from] = staticWord.to;
 
