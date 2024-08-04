@@ -1,6 +1,6 @@
 import { version } from "../../../package.json";
 import { IInternalRegexOption } from "../../models/internal.js";
-import { ICheckErrorCodes, ICheckWarningCodes, IParserNames, IStringModifierFunction } from "../../models/types";
+import { IParserNames } from "../../models/types";
 
 export const PROJECT_KEBAB_CASE_NAME = "codefend";
 export const PROJECT_DISPLAY_NAME = "Codefend";
@@ -97,35 +97,36 @@ export const PARSERS: Partial<Record<IParserNames, { regexList: IInternalRegexOp
 export const DEFAULT_PARSER_NAME = PARSER_NAMES.default;
 export const CUSTOM_PARSER_NAME = "custom";
 
-export const LOG_DEFAULT_BAR = "----------";
-
-export const CODEFEND_CHECK_WARNING_CODES = {
-  VERSION_WARNING: "VERSION_WARNING",
-  PARSER_A_WARNING: "PARSER_A_WARNING",
-  GENERATION_PACKAGE_LOCK_WARNING: "GENERATION_PACKAGE_LOCK_WARNING",
+export const CODEFEND_CHECK_WARNING = {
+  version: {
+    code: "@meta/version-warning",
+    message: `${OPTIONS_FILE_NAME} was generated in an older version of ${PROJECT_DISPLAY_NAME}.`,
+  },
+  deprecatedDefaultParser: {
+    code: "@parser/deprecated-default-parser-warning",
+    message: `${PARSER_NAMES.Parser_A} has been deprecated.\nPlease rename '${PARSER_NAMES.Parser_A}' to '${DEFAULT_PARSER_NAME}' in your ${OPTIONS_FILE_NAME}.\nThis change will not affect functionality; it's only a name update.\nFor more information, please refer to this issue: https://github.com/Codefend/core/issues/182.`,
+  },
+  ignoreMissingPackageLock: {
+    code: "@generation/ignore-missing-package-lock-warning",
+    message: `The 'package-lock.json' entry was not found in the 'ignore' list under 'generation' in your ${OPTIONS_FILE_NAME}.\nIt is recommended to add it to avoid potential issues.For more information, please refer to this issue: https://github.com/Codefend/core/issues/183.`,
+  },
 } as const;
 
-export const CODEFEND_CHECK_WARNING_MESSAGES: Record<ICheckWarningCodes, string> = {
-  [CODEFEND_CHECK_WARNING_CODES.VERSION_WARNING]: `${OPTIONS_FILE_NAME} was generated in an older version of ${PROJECT_DISPLAY_NAME}.`,
-
-  [CODEFEND_CHECK_WARNING_CODES.PARSER_A_WARNING]: `${PARSER_NAMES.Parser_A} has been deprecated.\nPlease rename '${PARSER_NAMES.Parser_A}' to '${DEFAULT_PARSER_NAME}' in your ${OPTIONS_FILE_NAME}.\nThis change will not affect functionality; it's only a name update.`,
-
-  [CODEFEND_CHECK_WARNING_CODES.GENERATION_PACKAGE_LOCK_WARNING]: `The 'package-lock.json' entry was not found in the 'ignore' list under 'generation' in your ${OPTIONS_FILE_NAME}.\nIt is recommended to add it to avoid potential issues.`,
-};
-
-export const CODEFEND_CHECK_ERROR_CODES = {
-  FILE_NOT_FOUND_ERROR: "FILE_NOT_FOUND_ERROR",
-  INVALID_JSON_ERROR: "INVALID_JSON_ERROR",
-  INVALID_PREFIX_ERROR: "INVALID_PREFIX_ERROR",
-  INVALID_CUSTOM_WORD_ERROR: "INVALID_CUSTOM_WORD_ERROR",
+export const CODEFEND_CHECK_ERROR = {
+  configurationFileNotFound: {
+    code: "@config/file-not-found-error",
+    message: `${OPTIONS_FILE_NAME} not found. Please run ${PROJECT_KEBAB_CASE_NAME} -i first to create it.`,
+  },
+  configurationFileInvalidJSON: {
+    code: "@config/invalid-json-error",
+    message: `${OPTIONS_FILE_NAME} contains an invalid JSON format`,
+  },
+  transformationInvalidPrefix: {
+    code: "@transformation/invalid-prefix-error",
+    message: `Invalid 'prefix' in ${OPTIONS_FILE_NAME}.`,
+  },
+  transformationInvalidPool: {
+    code: "@transformation/invalid-pool-error",
+    message: "",
+  },
 } as const;
-
-export const CODEFEND_CHECK_ERROR_MESSAGES: Record<ICheckErrorCodes, string | IStringModifierFunction> = {
-  [CODEFEND_CHECK_ERROR_CODES.FILE_NOT_FOUND_ERROR]: `${OPTIONS_FILE_NAME} not found. Please run ${PROJECT_KEBAB_CASE_NAME} -i first to create it.`,
-  [CODEFEND_CHECK_ERROR_CODES.INVALID_JSON_ERROR]: `${OPTIONS_FILE_NAME} contains an invalid JSON format`,
-
-  [CODEFEND_CHECK_ERROR_CODES.INVALID_PREFIX_ERROR]: `Invalid 'prefix' in ${OPTIONS_FILE_NAME}.`,
-
-  INVALID_CUSTOM_WORD_ERROR: (word: string): string =>
-    `Invalid 'customGeneratedWords' in ${OPTIONS_FILE_NAME}. word:"${word}"`,
-};

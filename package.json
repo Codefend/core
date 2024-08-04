@@ -1,6 +1,6 @@
 {
   "name": "codefend",
-  "version": "3.1.0-alpha.1",
+  "version": "3.1.0",
   "description": "Code obfuscator CLI that protects your code regardless of the programming language or framework.",
   "keywords": [
     "codefend",
@@ -33,14 +33,24 @@
     "url": "git+https://github.com/Codefend/core.git"
   },
   "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    "import": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "require": {
+      "types": "./dist/index.d.cts",
+      "require": "./dist/index.cjs"
+    }
+  },
   "files": [
     "dist",
     "bin/**"
   ],
-  "type": "module",
   "bin": {
     "codefend": "./bin/index.js"
   },

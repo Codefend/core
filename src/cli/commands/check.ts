@@ -1,9 +1,7 @@
 import { readFile, tryParse } from "../../core/generation/read.js";
 import {
-  CODEFEND_CHECK_ERROR_CODES,
-  CODEFEND_CHECK_ERROR_MESSAGES,
-  CODEFEND_CHECK_WARNING_CODES,
-  CODEFEND_CHECK_WARNING_MESSAGES,
+  CODEFEND_CHECK_ERROR,
+  CODEFEND_CHECK_WARNING,
   DEFAULT_PREFIX,
   OPTIONS_FILE_NAME,
   OPTIONS_FILE_PATH,
@@ -11,18 +9,8 @@ import {
   RC_VERSION,
   VALID_VAR_REGEX,
 } from "../../core/utils/constants.js";
-import { ICheckErrorCodes, ICheckWarningCodes, IStringModifierFunction } from "../../models/types.js";
+import { ICheckResults } from "../../models/ICheck.js";
 import { IOptions } from "../../models/options.js";
-
-export type ICheckResult = {
-  code: ICheckErrorCodes | ICheckWarningCodes;
-  message: string;
-};
-
-export type ICheckResults = {
-  warnings: ICheckResult[];
-  errors: ICheckResult[];
-};
 
 export function checkCommand(): IOptions | null {
   const checkResults = initializeCheckResults();
@@ -67,30 +55,21 @@ function parseOptions(file: string): IOptions | null {
 }
 
 function onFileNotFoundError(checkResults: ICheckResults): void {
-  checkResults.errors.push({
-    code: CODEFEND_CHECK_ERROR_CODES.FILE_NOT_FOUND_ERROR,
-    message: CODEFEND_CHECK_ERROR_MESSAGES.FILE_NOT_FOUND_ERROR as string,
-  });
+  checkResults.errors.push(CODEFEND_CHECK_ERROR.configurationFileNotFound);
   printCheckResults(checkResults, null);
 }
 
 function onInvalidJsonError(checkResults: ICheckResults): void {
-  checkResults.errors.push({
-    code: CODEFEND_CHECK_ERROR_CODES.INVALID_JSON_ERROR,
-    message: CODEFEND_CHECK_ERROR_MESSAGES.INVALID_JSON_ERROR as string,
-  });
+  checkResults.errors.push(CODEFEND_CHECK_ERROR.configurationFileInvalidJSON);
   printCheckResults(checkResults, null);
 }
 
 function validateMetaVersion(checkResults: ICheckResults, options: IOptions): void {
-  if (options.debug?.ignoredWarnings?.includes(CODEFEND_CHECK_WARNING_CODES.VERSION_WARNING)) {
+  if (options.debug?.ignoredWarnings?.includes(CODEFEND_CHECK_WARNING.version.code)) {
     return;
   }
   if (options.__meta?.rc?.version && options.__meta.rc.version !== RC_VERSION) {
-    checkResults.warnings.push({
-      code: CODEFEND_CHECK_WARNING_CODES.VERSION_WARNING,
-      message: CODEFEND_CHECK_WARNING_MESSAGES.VERSION_WARNING,
-    });
+    checkResults.warnings.push(CODEFEND_CHECK_WARNING.version);
   }
 }
 
@@ -98,35 +77,26 @@ function validateGenerationPackageLock(checkResults: ICheckResults, options: IOp
   if (options.generation?.ignore == null) {
     return;
   }
-  if (options.debug?.ignoredWarnings?.includes(CODEFEND_CHECK_WARNING_CODES.GENERATION_PACKAGE_LOCK_WARNING)) {
+  if (options.debug?.ignoredWarnings?.includes(CODEFEND_CHECK_WARNING.ignoreMissingPackageLock.code)) {
     return;
   }
   if (!options.generation?.ignore?.includes("package-lock.json")) {
-    checkResults.warnings.push({
-      code: CODEFEND_CHECK_WARNING_CODES.GENERATION_PACKAGE_LOCK_WARNING,
-      message: CODEFEND_CHECK_WARNING_MESSAGES.GENERATION_PACKAGE_LOCK_WARNING,
-    });
+    checkResults.warnings.push(CODEFEND_CHECK_WARNING.ignoreMissingPackageLock);
   }
 }
 
 function validateDeprecatedParser(checkResults: ICheckResults, options: IOptions): void {
-  if (options.debug?.ignoredWarnings?.includes(CODEFEND_CHECK_WARNING_CODES.PARSER_A_WARNING)) {
+  if (options.debug?.ignoredWarnings?.includes(CODEFEND_CHECK_WARNING.deprecatedDefaultParser.code)) {
     return;
   }
   if (options.parser?.name === PARSER_NAMES.Parser_A) {
-    checkResults.warnings.push({
-      code: CODEFEND_CHECK_WARNING_CODES.PARSER_A_WARNING,
-      message: CODEFEND_CHECK_WARNING_MESSAGES.PARSER_A_WARNING,
-    });
+    checkResults.warnings.push(CODEFEND_CHECK_WARNING.deprecatedDefaultParser);
   }
 }
 
 function validateTransformationPrefix(checkResults: ICheckResults, options: IOptions): void {
   if (!VALID_VAR_REGEX.test(options.transformation?.prefix ?? DEFAULT_PREFIX)) {
-    checkResults.errors.push({
-      code: CODEFEND_CHECK_ERROR_CODES.INVALID_PREFIX_ERROR,
-      message: CODEFEND_CHECK_ERROR_MESSAGES.INVALID_PREFIX_ERROR as string,
-    });
+    checkResults.errors.push(CODEFEND_CHECK_ERROR.transformationInvalidPrefix);
   }
 }
 
@@ -143,21 +113,22 @@ function validateTransformationPool(checkResults: ICheckResults, options: IOptio
   poolSet.forEach((word) => {
     if (!VALID_VAR_REGEX.test(word)) {
       checkResults.errors.push({
-        code: CODEFEND_CHECK_ERROR_CODES.INVALID_CUSTOM_WORD_ERROR,
-        message: (CODEFEND_CHECK_ERROR_MESSAGES.INVALID_CUSTOM_WORD_ERROR as IStringModifierFunction)(word),
+        code: CODEFEND_CHECK_ERROR.transformationInvalidPool.code,
+        message: `Invalid 'pool' in ${OPTIONS_FILE_NAME}. word:"${word}"`,
       });
     }
   });
 }
 
 function printCheckResults(checkResults: ICheckResults, options: IOptions | null): void {
-  const message = `Check completed. ${checkResults.errors.length} error(s)  ${checkResults.warnings.length} warning(s) `;
+  const hasIgnoredAllWarnings = options?.debug?.ignoredWarnings == "all";
+  const message = `Check completed. ${checkResults.errors.length} error(s)  ${hasIgnoredAllWarnings ? 0 : checkResults.warnings.length} warning(s) `;
   console.warn(message);
 
   checkResults.errors.forEach((error) => {
     console.warn(`\n[${error.code}]: ${error.message}`);
   });
-  if (options?.debug?.ignoredWarnings == "all") {
+  if (hasIgnoredAllWarnings) {
     return;
   }
   checkResults.warnings.forEach((warning) => {
@@ -167,5 +138,5 @@ function printCheckResults(checkResults: ICheckResults, options: IOptions | null
 }
 
 function printIgnoreWarningSentence(warningCode: string): string {
-  return `To turn off this warning, add '${warningCode}' to the 'ignoredWarnings' list or set 'ignoredWarnings':'all' in your ${OPTIONS_FILE_NAME}.\nYou should add this configuration under the debug section.\nFor more information, visit this link: https://codefend.github.io/docs/references/configuration#debug.`;
+  return `To turn off this warning, add '${warningCode}' to the 'ignoredWarnings' list or set 'ignoredWarnings':'all' in your ${OPTIONS_FILE_NAME}.\nFor more information, visit this link: https://codefend.github.io/docs/references/configuration#debug.`;
 }
