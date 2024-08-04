@@ -10,11 +10,13 @@
 ![NPM](https://img.shields.io/node/v/codefend)
 ![NPM](https://img.shields.io/npm/l/codefend)
 
-`Codefend` is a versatile CLI tool designed to obfuscate not only your source code but also your folder and file names across any programming language or framework. In addition to its CLI functionality, Codefend is available as a plugin for Webpack, Rollup, and Vite.
+`Codefend` is a dynamic 🪩 CLI tool that obfuscates your source code, folders, and file names, compatible with any programming language or framework.
+It delivers powerful obfuscation while ensuring Performance Maintained ⚡, so you benefit from enhanced security without compromising your application's speed or efficiency.
+Additionally, Codefend offers plugins for Webpack, Rollup, and Vite.
 
-Beyond basic obfuscation, Codefend offers advanced features. It seamlessly integrates with existing uglifiers or minifiers, providing a two-layer obfuscation process that creates a hidden code within another hidden code, ensuring irreversible protection of your source code.
+Beyond simple obfuscation, Codefend delivers advanced features, integrating smoothly with current uglifiers or minifiers. It employs a two-layer obfuscation 🪞 process, embedding hidden code within hidden code for irreversible source code protection.
 
-To unleash Codefend's capabilities, it requires adherence to specific naming conventions within your project. Once set up, Codefend automates the obfuscation process, allowing you to focus on coding while it safeguards your intellectual property ✨
+As a programmer, you need to implement simple naming conventions in your project for Codefend to work effectively. Once set up, Codefend will take over the obfuscation process, freeing you to focus on development while it safeguards your intellectual property ✨
 
 - [Folder and files naming convention](https://codefend.github.io/docs/basic-usage/naming-conventions/folders-files-naming-convention)
 - [Code naming convention](https://codefend.github.io/docs/basic-usage/naming-conventions/code-naming-convention)
