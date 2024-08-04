@@ -95,13 +95,13 @@ function validateMetaVersion(checkResults: ICheckResults, options: IOptions): vo
 }
 
 function validateGenerationPackageLock(checkResults: ICheckResults, options: IOptions): void {
-  if (options.transformation?.ignore == null) {
+  if (options.generation?.ignore == null) {
     return;
   }
   if (options.debug?.ignoredWarnings?.includes(CODEFEND_CHECK_WARNING_CODES.GENERATION_PACKAGE_LOCK_WARNING)) {
     return;
   }
-  if (!options.transformation.ignore.includes("package-lock.json")) {
+  if (!options.generation?.ignore?.includes("package-lock.json")) {
     checkResults.warnings.push({
       code: CODEFEND_CHECK_WARNING_CODES.GENERATION_PACKAGE_LOCK_WARNING,
       message: CODEFEND_CHECK_WARNING_MESSAGES.GENERATION_PACKAGE_LOCK_WARNING,
@@ -167,5 +167,5 @@ function printCheckResults(checkResults: ICheckResults, options: IOptions | null
 }
 
 function printIgnoreWarningSentence(warningCode: string): string {
-  return `To turn off this warning, add '${warningCode}' to the 'ignoredWarnings' list or set 'ignoredWarnings':'all' in your ${OPTIONS_FILE_NAME}.\nYou should add this configuration under the debug section.\nFor more information, visit this link: https://codefend.github.io/docs/references/configuration.`;
+  return `To turn off this warning, add '${warningCode}' to the 'ignoredWarnings' list or set 'ignoredWarnings':'all' in your ${OPTIONS_FILE_NAME}.\nYou should add this configuration under the debug section.\nFor more information, visit this link: https://codefend.github.io/docs/references/configuration#debug.`;
 }

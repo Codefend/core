@@ -1,6 +1,6 @@
 import { version } from "../../../package.json";
 import { IInternalRegexOption } from "../../models/internal.js";
-import { ICheckErrorCodes, ICheckWarningCodes, IStringModifierFunction } from "../../models/types";
+import { ICheckErrorCodes, ICheckWarningCodes, IParserNames, IStringModifierFunction } from "../../models/types";
 
 export const PROJECT_KEBAB_CASE_NAME = "codefend";
 export const PROJECT_DISPLAY_NAME = "Codefend";
@@ -79,7 +79,7 @@ export const PARSER_NAMES = {
   Parser_A: "Parser_A",
 } as const;
 
-export const PARSERS: Record<string, { regexList: IInternalRegexOption[] }> = {
+export const PARSERS: Partial<Record<IParserNames, { regexList: IInternalRegexOption[] }>> = {
   [PARSER_NAMES.default]: {
     regexList: DEFAULT_REGEX_LIST,
   },

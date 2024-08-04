@@ -1,3 +1,5 @@
+import { IParserNames } from "./types";
+
 export type IOptions = {
   generation: IGenerationOptions;
   transformation?: ITransformationOptions;
@@ -25,7 +27,7 @@ export type IDebugOptions = {
 };
 
 export type IParserOptions = {
-  name: string;
+  name: IParserNames;
   regexList?: IParserRegexOption[];
 };
 
