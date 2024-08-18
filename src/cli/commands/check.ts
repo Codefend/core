@@ -1,5 +1,7 @@
+import Table from "cli-table3";
 import { readFile, tryParse } from "../../core/generation/read.js";
 import {
+  CHECK_MAX_TABLE_COLUMN_WIDTH,
   CODEFEND_CHECK_ERROR,
   CODEFEND_CHECK_WARNING,
   DEFAULT_PREFIX,
@@ -11,6 +13,30 @@ import {
 } from "../../core/utils/constants.js";
 import { ICheckResults } from "../../models/ICheck.js";
 import { IOptions } from "../../models/options.js";
+
+const RED = "\x1b[31m";
+const ORANGE = "\x1b[33m";
+const WHITE = "\x1b[37m";
+const RESET = "\x1b[0m";
+
+function wrapText(text: string, width: number): string {
+  const lines = [];
+  const words = text.split(" ");
+
+  let line = words.shift() || "";
+
+  for (const word of words) {
+    if (line.length + word.length + 1 <= width) {
+      line += " " + word;
+    } else {
+      lines.push(line);
+      line = word;
+    }
+  }
+  lines.push(line);
+
+  return lines.join("\n");
+}
 
 export function checkCommand(): IOptions | null {
   const checkResults = initializeCheckResults();
@@ -122,19 +148,45 @@ function validateTransformationPool(checkResults: ICheckResults, options: IOptio
 
 function printCheckResults(checkResults: ICheckResults, options: IOptions | null): void {
   const hasIgnoredAllWarnings = options?.debug?.ignoredWarnings == "all";
+
+  const errorRows = checkResults.errors.map((error) => [
+    `${RED}${error.code}${RESET}`,
+    wrapText(`${WHITE}${error.message}${RESET}`, CHECK_MAX_TABLE_COLUMN_WIDTH),
+  ]);
+
+  const warningRows = !hasIgnoredAllWarnings
+    ? checkResults.warnings.map((warning) => [
+        `${ORANGE}${warning.code}${RESET}`,
+        wrapText(`${WHITE}${warning.message}${RESET}`, CHECK_MAX_TABLE_COLUMN_WIDTH),
+      ])
+    : [];
+
+  const errorTable = new Table({
+    head: ["Error Code", "Error Message"],
+    colWidths: [20, CHECK_MAX_TABLE_COLUMN_WIDTH],
+    style: { "padding-left": 1, "padding-right": 1 },
+  });
+
+  const warningTable = new Table({
+    head: [`${ORANGE}Warning Code${RESET}`, `${ORANGE}Warning Message${RESET}`],
+    colWidths: [20, CHECK_MAX_TABLE_COLUMN_WIDTH],
+    style: { "padding-left": 1, "padding-right": 1 },
+  });
+
+  errorRows.forEach((row) => errorTable.push(row));
+  warningRows.forEach((row) => warningTable.push(row));
+
   const message = `Check completed. ${checkResults.errors.length} error(s)  ${hasIgnoredAllWarnings ? 0 : checkResults.warnings.length} warning(s) `;
   console.warn(message);
 
-  checkResults.errors.forEach((error) => {
-    console.warn(`\n[${error.code}]: ${error.message}`);
-  });
-  if (hasIgnoredAllWarnings) {
-    return;
+  if (checkResults.errors.length > 0) {
+    console.warn(errorTable.toString());
   }
-  checkResults.warnings.forEach((warning) => {
-    console.warn(`\n[${warning.code}]: ${warning.message}`);
-    console.warn(printIgnoreWarningSentence(warning.code));
-  });
+
+  if (!hasIgnoredAllWarnings && checkResults.warnings.length > 0) {
+    console.warn(warningTable.toString());
+    console.warn(printIgnoreWarningSentence("N/A"));
+  }
 }
 
 function printIgnoreWarningSentence(warningCode: string): string {

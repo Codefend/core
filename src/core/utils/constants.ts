@@ -21,7 +21,7 @@ export const LOG_OPTIONS = {
 
 export const DEFAULT_PREFIX = "Ox";
 
-export const VALID_VAR_REGEX = /^[a-zA-Z_$][a-zA-Z$0-9]*$/g;
+export const VALID_VAR_REGEX = /^[a-zA-Z_$][a-zA-Z$0-9]*$/;
 
 export const MIN_POOL_ITEM_LENGTH = 3;
 
@@ -130,3 +130,5 @@ export const CODEFEND_CHECK_ERROR = {
     message: "",
   },
 } as const;
+
+export const CHECK_MAX_TABLE_COLUMN_WIDTH = 100;
