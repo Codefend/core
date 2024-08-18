@@ -1,4 +1,5 @@
 import { IRuntimeOptions, WordEncryptionType } from "../process/runtime.js";
+import Table from "cli-table3";
 
 export type IStatsOptions = {
   stats: boolean;
@@ -8,47 +9,38 @@ export function stats(options: IStatsOptions, runtimeOptions: IRuntimeOptions): 
   if (!options.stats) {
     return;
   }
-  console.warn(`Obfuscation stats:`);
+
+  const table = new Table({
+    head: ["Transformation", "From", "To", "Count"],
+    colWidths: [17, 35, 35, 10],
+  });
+
   for (const key in runtimeOptions.processed.map) {
-    if (runtimeOptions.processed.map[key]?.type === WordEncryptionType.ignore) {
-      console.warn("Ignored", `${key} -> ${key} ${getCountLabel(runtimeOptions.processed.map[key]?.count)}`);
+    const item = runtimeOptions.processed.map[key];
+    const count = item?.count || 0;
+    switch (item?.type) {
+      case WordEncryptionType.ignore:
+        table.push(["Ignored", key, `${key}`, count]);
+        break;
+      case WordEncryptionType.static:
+        table.push(["Static", key, `${item.target}`, count]);
+        break;
+      case WordEncryptionType.pool:
+        table.push(["Pool", key, `${item.target}`, count]);
+        break;
+      case WordEncryptionType.default:
+      case null:
+      case undefined:
+        table.push(["Prefix", key, `${item?.target || ""}`, count]);
+        break;
+      default:
+        console.warn(`Unknown type for key ${key}`);
     }
   }
 
-  for (const key in runtimeOptions.processed.map) {
-    if (runtimeOptions.processed.map[key]?.type === WordEncryptionType.static) {
-      console.warn(
-        "Static",
-        `${key} -> ${runtimeOptions.processed.map[key]?.target} ${getCountLabel(runtimeOptions.processed.map[key]?.count)}`,
-      );
-    }
-  }
-
-  for (const key in runtimeOptions.processed.map) {
-    if (runtimeOptions.processed.map[key]?.type === WordEncryptionType.pool) {
-      console.warn(
-        "Pool",
-        `${key} -> ${runtimeOptions.processed.map[key]?.target} ${getCountLabel(runtimeOptions.processed.map[key]?.count)}`,
-      );
-    }
-  }
-
-  for (const key in runtimeOptions.processed.map) {
-    if (
-      runtimeOptions.processed.map[key]?.type == null ||
-      runtimeOptions.processed.map[key]!.type == WordEncryptionType.default
-    ) {
-      console.warn(
-        "Encrypted",
-        `${key} -> ${runtimeOptions.processed.map[key]?.target} ${getCountLabel(runtimeOptions.processed.map[key]?.count)}`,
-      );
-    }
-  }
+  console.log("Obfuscation stats:");
+  console.log(table.toString());
   console.log("");
-}
-
-function getCountLabel(count: number): string {
-  return `(${count} time${count == 1 ? "" : "s"})`;
 }
 
 export function getObfuscatedWordsCount(runtimeOptions: IRuntimeOptions): number {
