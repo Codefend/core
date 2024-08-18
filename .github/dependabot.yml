@@ -1,8 +1,8 @@
 version: 2
 updates:
-    - package-ecosystem: "npm"
-      directory: "/"
-      schedule:
-          interval: "weekly"
-      versioning-strategy: increase
-      target-branch: "main"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    versioning-strategy: increase
+    target-branch: "main"
