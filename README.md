@@ -16,7 +16,7 @@ Additionally, Codefend offers plugins for Webpack, Rollup, and Vite.
 
 Beyond simple obfuscation, Codefend delivers advanced features, integrating smoothly with current uglifiers or minifiers. It employs a two-layer obfuscation 🪞 process, embedding hidden code within hidden code for irreversible source code protection.
 
-As a programmer, you need to implement either a folder and files naming convention, a code naming convention, or both in your project for Codefend to work effectively. Once set up, Codefend will take over the obfuscation process, freeing you to focus on development while it safeguards your intellectual property ✨
+For Codefend to work properly, you need to implement a folder and files naming convention, a code naming convention, or both. Once set up, Codefend will handle obfuscation, allowing you to concentrate on development and safeguard your intellectual property ✨
 
 - [Folder and files naming convention](https://codefend.github.io/docs/basic-usage/naming-conventions/folders-files-naming-convention)
 - [Code naming convention](https://codefend.github.io/docs/basic-usage/naming-conventions/code-naming-convention)
