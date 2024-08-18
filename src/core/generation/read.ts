@@ -4,7 +4,8 @@ import path from "path";
 export function readFile(path: string, flag = "r"): string | null {
   try {
     return fs.readFileSync(path, { encoding: "utf8", flag: flag });
-  } catch (e) {
+  } catch (error) {
+    console.error(error);
     return null;
   }
 }
@@ -12,7 +13,8 @@ export function readFile(path: string, flag = "r"): string | null {
 export function tryParse<T>(json: string): T | null {
   try {
     return JSON.parse(json);
-  } catch (e) {
+  } catch (error) {
+    console.error(error);
     return null;
   }
 }
