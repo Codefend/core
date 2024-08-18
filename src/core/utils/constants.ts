@@ -130,3 +130,5 @@ export const CODEFEND_CHECK_ERROR = {
     message: "",
   },
 } as const;
+
+export const CHECK_MAX_TABLE_COLUMN_WIDTH = 100;
