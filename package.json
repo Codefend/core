@@ -64,8 +64,8 @@
     "test": "vitest",
     "test:run": "vitest --run",
     "test:coverage": "vitest run --coverage",
-    "lint": "eslint src --ext .ts --fix",
-    "lint:check": "eslint src --ext .ts",
+    "lint": "eslint src .ts --fix",
+    "lint:check": "eslint src",
     "spell:check": "cspell \"{README.md,CODE_OF_CONDUCT.md,CONTRIBUTING.md,.github/*.md,src/**/*.ts}\"",
     "type:check": "tsc --noEmit",
     "prepack": "npm run lint:check && npm run spell:check && npm run type:check && npm run test:run && npm run build"
