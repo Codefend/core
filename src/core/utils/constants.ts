@@ -21,7 +21,7 @@ export const LOG_OPTIONS = {
 
 export const DEFAULT_PREFIX = "Ox";
 
-export const VALID_VAR_REGEX = /^[a-zA-Z_$][a-zA-Z$0-9]*$/g;
+export const VALID_VAR_REGEX = /^[a-zA-Z_$][a-zA-Z$0-9]*$/;
 
 export const MIN_POOL_ITEM_LENGTH = 3;
 
