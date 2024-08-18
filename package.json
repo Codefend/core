@@ -1,6 +1,6 @@
 {
   "name": "codefend",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Code obfuscator CLI that protects your code regardless of the programming language or framework.",
   "keywords": [
     "codefend",
