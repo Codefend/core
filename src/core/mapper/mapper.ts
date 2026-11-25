@@ -9,7 +9,7 @@ export function buildMap(options: IBuildMapOptions, runtimeOptions: IRuntimeOpti
     }
     runtimeOptions.map[word.value] = "";
     runtimeOptions.processed.map[word.value] = {
-      count: 1,
+      count: (runtimeOptions.processed.map[word.value]?.count ?? 0) + 1,
       target: "",
       type: WordEncryptionType.default,
     };

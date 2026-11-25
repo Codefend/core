@@ -49,4 +49,64 @@ describe("Obfuscate", () => {
       expect(output).toEqual("const Zx0 = 0;");
     });
   });
+
+  describe("repeated-match statistics", () => {
+    it.each([
+      {
+        name: "default",
+        options: {},
+        expectedReplacement: "Ox0",
+        expectedFirstOutput: "Ox0 Ox0 Ox0",
+        expectedSecondOutput: "Ox0 Ox0",
+      },
+      {
+        name: "static",
+        options: { static: [{ from: "l_value", to: "fixed" }] },
+        expectedReplacement: "fixed",
+        expectedFirstOutput: "fixed fixed fixed",
+        expectedSecondOutput: "fixed fixed",
+      },
+      {
+        name: "ignored",
+        options: { ignore: ["l_value"] },
+        expectedReplacement: "l_value",
+        expectedFirstOutput: "l_value l_value l_value",
+        expectedSecondOutput: "l_value l_value",
+      },
+      {
+        name: "pool",
+        options: { pool: ["alpha"] },
+        expectedReplacement: "alpha",
+        expectedFirstOutput: "alpha alpha alpha",
+        expectedSecondOutput: "alpha alpha",
+      },
+      {
+        name: "empty static",
+        options: { static: [{ from: "l_value", to: "" }] },
+        expectedReplacement: "",
+        expectedFirstOutput: "  ",
+        expectedSecondOutput: " ",
+      },
+    ])(
+      "counts matches across calls without changing $name output",
+      ({ options, expectedReplacement, expectedFirstOutput, expectedSecondOutput }) => {
+        const transformationOptions = buildTransformationOptions(options);
+        const parserOptions = buildParserOptions().data!;
+        const runtimeOptions = buildRuntimeOptions();
+
+        const firstOutput = obfuscate("l_value l_value l_value", transformationOptions, parserOptions, runtimeOptions);
+
+        expect(firstOutput).toBe(expectedFirstOutput);
+        expect(runtimeOptions.map).toEqual({ l_value: expectedReplacement });
+        expect(runtimeOptions.processed.map.l_value!.count).toBe(3);
+        const mappingAfterFirstCall = { ...runtimeOptions.processed.map.l_value! };
+
+        const secondOutput = obfuscate("l_value l_value", transformationOptions, parserOptions, runtimeOptions);
+
+        expect(secondOutput).toBe(expectedSecondOutput);
+        expect(runtimeOptions.map).toEqual({ l_value: expectedReplacement });
+        expect(runtimeOptions.processed.map.l_value).toEqual({ ...mappingAfterFirstCall, count: 5 });
+      },
+    );
+  });
 });
