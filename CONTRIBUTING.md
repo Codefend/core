@@ -26,6 +26,13 @@ If you encounter a problem with this library or if you have a new feature you'd 
 
 **GitHub Pull requests**
 
+Use Node.js 22.18 or later on the 22.x line, 24.11 or later on the 24.x line, or 26 or later for development.
+Node.js 24 LTS is recommended. These build and test tooling requirements are separate from Codefend's published
+Node.js 18-or-later runtime support.
+
+Install the locked development dependencies with `npm ci`. After `npm run build`, run `npm run test:package` to check
+both module formats, package entry points, source maps, and the CLI launcher.
+
 Please leverage the repository's own tools to make sure the code is aligned with our standards:
 
 1. Run all check commands before submitting the PR (`type:check`, `format:check`, `lint:check`, `test:coverage` and `spell:check`)
