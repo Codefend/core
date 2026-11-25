@@ -92,6 +92,10 @@ for (const [argument, expected] of [
   assert.ifError(result.error);
   assert.equal(result.status, 0, result.stderr);
   assert.ok(result.stdout.includes(expected), "Unexpected CLI output for " + argument);
+  if (argument === "--help") {
+    assert.match(result.stdout, /^  -c, --check\s+Check the config file for potential warnings\/errors$/m);
+    assert.match(result.stdout, /^  -o, --obfuscate\s+Obfuscate the project$/m);
+  }
 }
 
 console.log(
