@@ -35,6 +35,10 @@ export function getUnknownOptionMessage(option: string): string {
   return `error: unknown option '${option}'`;
 }
 
+export function getFileReadErrorMessage(filePath: string): string {
+  return `error: unable to read '${filePath}'. Obfuscation stopped.`;
+}
+
 export const DEFAULT_CLI_OPTION = "-h";
 
 export const CLI_OPTIONS = [

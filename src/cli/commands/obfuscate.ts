@@ -11,6 +11,7 @@ import {
 } from "../../core/options/options.js";
 import { obfuscate } from "../../core/process/obfuscate.js";
 import { buildRuntimeOptions } from "../../core/process/runtime.js";
+import { getFileReadErrorMessage } from "../../core/utils/constants.js";
 import { IOptions } from "../../models/options.js";
 
 export function obfuscateCommand(options: IOptions | null): void {
@@ -43,10 +44,12 @@ export function obfuscateCommand(options: IOptions | null): void {
   const fileNames = getAllFileNamesInDir(generationOptions.outputDir);
   console.warn(`Obfuscated ${fileNames.length} file(s)\n`);
 
-  let fileCode;
   fileNames.forEach((fileName) => {
-    fileCode = readFile(fileName);
-    writeFile(fileName, obfuscate(fileCode ?? "", transformationOptions, parserOptions!, runtimeOptions));
+    const fileCode = readFile(fileName);
+    if (fileCode === null) {
+      throw new Error(getFileReadErrorMessage(fileName));
+    }
+    writeFile(fileName, obfuscate(fileCode, transformationOptions, parserOptions!, runtimeOptions));
   });
   stats({ stats: debugOptions.stats }, runtimeOptions);
   console.warn(`Obfuscated ${getObfuscatedWordsCount(runtimeOptions)} word(s)`);
