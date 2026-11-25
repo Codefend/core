@@ -8,3 +8,6 @@ coverage/
 /codefend-output
 .codefend-local
 .local
+/AGENTS.md
+/agents.md
+/docs/maintenance/
