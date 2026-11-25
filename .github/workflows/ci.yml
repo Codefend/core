@@ -1,7 +1,10 @@
 name: CI
 run-name: CI Workflow
 
-on: [push]
+on: [push, pull_request]
+
+permissions:
+    contents: read
 
 jobs:
     audit:
@@ -10,6 +13,9 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
+              with:
+                  node-version: "24"
+                  cache: npm
             - name: 🛡️ Audit
               run: npm audit --audit-level=high
 
@@ -19,7 +25,10 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
-            - uses: bahmutov/npm-install@v1
+              with:
+                  node-version: "24"
+                  cache: npm
+            - run: npm ci
             - name: 🔬 Format
               run: npm run format:check
 
@@ -29,7 +38,10 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
-            - uses: bahmutov/npm-install@v1
+              with:
+                  node-version: "24"
+                  cache: npm
+            - run: npm ci
             - name: ⬣ ESLint
               run: npm run lint:check
 
@@ -39,7 +51,10 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
-            - uses: bahmutov/npm-install@v1
+              with:
+                  node-version: "24"
+                  cache: npm
+            - run: npm ci
             - name: 🈸 Spellcheck
               run: npm run spell:check
 
@@ -49,7 +64,10 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
-            - uses: bahmutov/npm-install@v1
+              with:
+                  node-version: "24"
+                  cache: npm
+            - run: npm ci
             - name: ʦ Typecheck
               run: npm run type:check
 
@@ -59,9 +77,14 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
-            - uses: bahmutov/npm-install@v1
+              with:
+                  node-version: "24"
+                  cache: npm
+            - run: npm ci
             - name: ⚡ Tests
-              run: npm run test
+              run: npm run test:run
+            - name: Coverage
+              run: npm run test:coverage
 
     build:
         name: 🚀 Build
@@ -70,6 +93,32 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
-            - uses: bahmutov/npm-install@v1
+              with:
+                  node-version: "24"
+                  cache: npm
+            - run: npm ci
             - name: 🔨 Build
               run: npm run build
+            - name: Package contracts
+              run: npm run test:package
+
+    runtime:
+        name: Node.js ${{ matrix.node }} runtime
+        needs: build
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node: ["18.0.0", "20", "22", "24", "26"]
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: "24"
+                  cache: npm
+            - run: npm ci
+            - run: npm run build
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node }}
+            - name: Package runtime contracts
+              run: npm run test:package
