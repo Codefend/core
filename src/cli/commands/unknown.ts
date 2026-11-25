@@ -1,3 +1,5 @@
+import { getUnknownOptionMessage } from "../../core/utils/constants.js";
+
 export function unknownCommand(option: string): void {
-  console.log(`error: unknown option '${option}'`);
+  console.log(getUnknownOptionMessage(option));
 }

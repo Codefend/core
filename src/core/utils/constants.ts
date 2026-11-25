@@ -31,6 +31,10 @@ Protect Any Source Code.
 
 Options:`;
 
+export function getUnknownOptionMessage(option: string): string {
+  return `error: unknown option '${option}'`;
+}
+
 export const DEFAULT_CLI_OPTION = "-h";
 
 export const CLI_OPTIONS = [
