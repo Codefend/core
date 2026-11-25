@@ -4,9 +4,9 @@
 
 # Codefend
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Codefend/core/ci.yml?branch=main)
+[![Latest CI workflow status](https://img.shields.io/github/actions/workflow/status/Codefend/core/ci.yml)](https://github.com/Codefend/core/actions/workflows/ci.yml)
 ![NPM](https://img.shields.io/npm/dt/codefend)
-![Bundlephobia](https://img.shields.io/bundlephobia/min/codefend)
+[![npm unpacked size](https://img.shields.io/npm/unpacked-size/codefend)](https://www.npmjs.com/package/codefend)
 ![NPM](https://img.shields.io/node/v/codefend)
 ![NPM](https://img.shields.io/npm/l/codefend)
 

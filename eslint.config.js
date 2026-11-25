@@ -1,6 +1,7 @@
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import prettierPlugin from "eslint-plugin-prettier";
 import tsParser from "@typescript-eslint/parser";
+import prettierConfig from "eslint-config-prettier/flat";
 
 export default [
   {
@@ -23,4 +24,5 @@ export default [
       "@typescript-eslint/explicit-function-return-type": 2,
     },
   },
+  prettierConfig,
 ];
