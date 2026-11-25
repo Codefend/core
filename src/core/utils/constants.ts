@@ -42,12 +42,12 @@ export const CLI_OPTIONS = [
   {
     short: "-c",
     long: "--check",
-    description: "Obfuscate the project",
+    description: "Check the config file for potential warnings/errors",
   },
   {
     short: "-o",
     long: "--obfuscate",
-    description: "Check the config file for potential warnings/errors",
+    description: "Obfuscate the project",
   },
   {
     short: "-v",
