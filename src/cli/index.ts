@@ -7,7 +7,7 @@ import { unknownCommand } from "./commands/unknown.js";
 import { versionCommand } from "./commands/version.js";
 
 export function startCLI(): void {
-  const inputArgs = process.argv.splice(2);
+  const inputArgs = process.argv.slice(2);
   const selectedArg: string = inputArgs.length > 0 ? (inputArgs[0] ?? DEFAULT_CLI_OPTION) : DEFAULT_CLI_OPTION;
 
   const option = CLI_OPTIONS.find((e) => [e.short, e.long].includes(selectedArg));

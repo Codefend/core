@@ -31,6 +31,14 @@ Protect Any Source Code.
 
 Options:`;
 
+export function getUnknownOptionMessage(option: string): string {
+  return `error: unknown option '${option}'`;
+}
+
+export function getFileReadErrorMessage(filePath: string): string {
+  return `error: unable to read '${filePath}'. Obfuscation stopped.`;
+}
+
 export const DEFAULT_CLI_OPTION = "-h";
 
 export const CLI_OPTIONS = [
@@ -42,12 +50,12 @@ export const CLI_OPTIONS = [
   {
     short: "-c",
     long: "--check",
-    description: "Obfuscate the project",
+    description: "Check the config file for potential warnings/errors",
   },
   {
     short: "-o",
     long: "--obfuscate",
-    description: "Check the config file for potential warnings/errors",
+    description: "Obfuscate the project",
   },
   {
     short: "-v",
