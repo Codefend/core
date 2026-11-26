@@ -1,8 +1,13 @@
 import { describe, expect, it } from "vitest";
 
+import { buildMap } from "../../../core/mapper/mapper.js";
 import { buildTransformationPoolOption } from "../../../core/options/options.js";
 import { buildRuntimeOptions, WordEncryptionType } from "../../../core/process/runtime.js";
-import { IMapCustomGeneratedWordsOptions, mapPoolWords } from "../../../core/transformation/pool.js";
+import { mapDefaultWords } from "../../../core/transformation/default.js";
+import { mapIgnoredWords } from "../../../core/transformation/ignore.js";
+import { mapPoolWords } from "../../../core/transformation/pool.js";
+import { mapStaticWords } from "../../../core/transformation/static.js";
+
 describe("Pool words", () => {
   const pool = [
     "s",
@@ -14,42 +19,70 @@ describe("Pool words", () => {
   ];
   const expectedParsedPool = ["normaluppercase", "containsspecialcharacters", "containsnewline", "startwithnumber"];
 
-  const options: IMapCustomGeneratedWordsOptions = {
-    prefix: "Ox",
-    pool: buildTransformationPoolOption(pool),
-  };
-
-  const runtimeOptions = buildRuntimeOptions();
-
-  runtimeOptions.map = {
-    l_var: "Ox0",
-    "lib-file": "Ox1",
-    l_predefined: "Ox2",
-    l_var2: "Ox3",
-    l_var3: "Ox4",
-  };
-
-  runtimeOptions.processed.map["l_var"] = { target: "", type: WordEncryptionType.default, count: 0 };
-  runtimeOptions.processed.map["lib-file"] = { target: "", type: WordEncryptionType.default, count: 0 };
-  runtimeOptions.processed.map["l_predefined"] = { target: "", type: WordEncryptionType.default, count: 0 };
-  runtimeOptions.processed.map["l_var2"] = { target: "", type: WordEncryptionType.default, count: 0 };
-  runtimeOptions.processed.map["l_var3"] = { target: "", type: WordEncryptionType.default, count: 0 };
-
-  mapPoolWords(options, runtimeOptions);
-
   it("ensure correct pool parsing", () => {
-    expect(options.pool).toEqual(expectedParsedPool);
+    expect(buildTransformationPoolOption(pool)).toEqual(expectedParsedPool);
   });
 
   it("ensure correct mapping", () => {
-    expect(runtimeOptions.map["l_var"]).toEqual(options.pool[0]);
-    expect(runtimeOptions.map["lib-file"]).toEqual(options.pool[1]);
-    expect(runtimeOptions.map["l_predefined"]).toEqual(options.pool[2]);
-    expect(runtimeOptions.map["l_var2"]).toEqual(options.pool[3]);
+    const runtime = buildRuntimeOptions();
+    buildMap(
+      {
+        words: [
+          { value: "l_first", fromRegex: "main" },
+          { value: "l_second", fromRegex: "main" },
+        ],
+      },
+      runtime,
+    );
+
+    mapPoolWords({ prefix: "Ox", pool: ["alpha", "bravo"] }, runtime);
+
+    expect(runtime.map).toEqual({ l_first: "alpha", l_second: "bravo" });
+    expect(runtime.processed.map.l_first).toEqual({ target: "alpha", type: WordEncryptionType.pool, count: 1 });
+    expect(runtime.processed.map.l_second).toEqual({ target: "bravo", type: WordEncryptionType.pool, count: 1 });
   });
 
   it("ensure fallback to prefix when pool is fully consumed", () => {
-    const key = "l_var3";
-    expect(runtimeOptions.map[key]).toEqual(runtimeOptions.map[key]);
+    const runtime = buildRuntimeOptions();
+    buildMap(
+      {
+        words: [
+          { value: "l_first", fromRegex: "main" },
+          { value: "l_second", fromRegex: "main" },
+        ],
+      },
+      runtime,
+    );
+
+    mapPoolWords({ prefix: "Zx", pool: ["alpha"] }, runtime);
+    mapDefaultWords({ prefix: "Zx" }, runtime);
+
+    expect(runtime.map).toEqual({ l_first: "alpha", l_second: "Zx0" });
+    expect(runtime.processed.map.l_second).toEqual({ target: "Zx0", type: WordEncryptionType.default, count: 1 });
+  });
+
+  it("preserves static and ignored mappings without consuming pool entries", () => {
+    const runtime = buildRuntimeOptions();
+    buildMap({ words: ["l_static", "l_ignored", "l_first"].map((value) => ({ value, fromRegex: "main" })) }, runtime);
+    mapStaticWords({ static: [{ from: "l_static", to: "fixed" }] }, runtime);
+    mapIgnoredWords({ ignore: ["l_ignored"] }, runtime);
+
+    mapPoolWords({ prefix: "Ox", pool: ["alpha"] }, runtime);
+    mapDefaultWords({ prefix: "Ox" }, runtime);
+
+    expect(runtime.map).toEqual({ l_static: "fixed", l_ignored: "l_ignored", l_first: "alpha" });
+    expect(runtime.processed.map.l_static!.type).toBe(WordEncryptionType.static);
+    expect(runtime.processed.map.l_ignored!.type).toBe(WordEncryptionType.ignore);
+  });
+
+  it("leaves every word available for the default transformation when the pool is empty", () => {
+    const runtime = buildRuntimeOptions();
+    buildMap({ words: [{ value: "l_first", fromRegex: "main" }] }, runtime);
+
+    mapPoolWords({ prefix: "Zx", pool: [] }, runtime);
+    mapDefaultWords({ prefix: "Zx" }, runtime);
+
+    expect(runtime.map).toEqual({ l_first: "Zx0" });
+    expect(runtime.processed.map.l_first!.type).toBe(WordEncryptionType.default);
   });
 });
