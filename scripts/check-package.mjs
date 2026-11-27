@@ -51,8 +51,8 @@ function checkAPI(api) {
   const prefixed = api.buildParserOptions({ name: "prefixed" }).data;
   assert.ok(prefixed);
   assert.equal(
-    api.obfuscate("l_total external_value LED_BUILTIN pkg-file", defaults, prefixed, api.buildRuntimeOptions()),
-    "Ox0 external_value LED_BUILTIN pkg-file",
+    api.obfuscate("m_total l_total external_value LED_BUILTIN pkg-file", defaults, prefixed, api.buildRuntimeOptions()),
+    "Ox0 l_total external_value LED_BUILTIN pkg-file",
   );
   assert.equal(
     api.obfuscate(

@@ -10,15 +10,15 @@ describe("Obfuscate", () => {
     const code = `(() => {
       const LED_BUILTIN = 2;
       const external_value = 3;
-      const l_total = LED_BUILTIN + external_value;
-      return l_total;
+      const m_total = LED_BUILTIN + external_value;
+      return m_total;
     })()`;
     const parserOptions = buildParserOptions({ name: "prefixed" }).data!;
     const transformationOptions = buildTransformationOptions();
 
     const output = obfuscate(code, transformationOptions, parserOptions, buildRuntimeOptions());
 
-    expect(output).not.toContain("l_total");
+    expect(output).not.toContain("m_total");
     expect(output).toContain("LED_BUILTIN");
     expect(output).toContain("external_value");
     expect(runInNewContext(code)).toBe(5);

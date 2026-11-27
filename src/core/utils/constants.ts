@@ -99,7 +99,7 @@ export const PARSERS: Partial<Record<IParserNames, { regexList: IInternalRegexOp
     regexList: DEFAULT_REGEX_LIST.filter((e) => e.name === "main"),
   },
   [PARSER_NAMES.prefixed]: {
-    regexList: [{ name: "startsWithLUnderscore", regex: /\bl_[A-Za-z][A-Za-z0-9]*\b/g }],
+    regexList: [{ name: "startsWithMUnderscore", regex: /\bm_[A-Za-z][A-Za-z0-9]*\b/g }],
   },
   [PARSER_NAMES.Parser_A]: {
     regexList: DEFAULT_REGEX_LIST,

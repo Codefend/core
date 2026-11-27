@@ -6,10 +6,10 @@ import { CUSTOM_PARSER_NAME, DEFAULT_PARSER_NAME, PARSER_NAMES, PARSERS } from "
 
 describe("Parser", () => {
   describe("prefixed preset", () => {
-    it.each(["l_total", "l_firstName", "l_value2"])("discovers the marked name %s", (code) => {
+    it.each(["m_total", "m_firstName", "m_value2"])("discovers the marked name %s", (code) => {
       const parserOptions = buildParserOptions({ name: "prefixed" }).data!;
 
-      expect(parse({ code, parserOptions })).toEqual([{ value: code, fromRegex: "startsWithLUnderscore" }]);
+      expect(parse({ code, parserOptions })).toEqual([{ value: code, fromRegex: "startsWithMUnderscore" }]);
     });
 
     it.each([
@@ -19,11 +19,11 @@ describe("Parser", () => {
       "setup",
       "loop",
       "f_readSensor",
-      "m_camera",
-      "l_total_amount",
-      "al_total",
-      "l_1value",
-      "L_total",
+      "l_total",
+      "m_total_amount",
+      "am_total",
+      "m_1value",
+      "M_total",
       "pkg-widget",
     ])("does not discover %s", (code) => {
       const parserOptions = buildParserOptions({ name: "prefixed" }).data!;
@@ -31,19 +31,19 @@ describe("Parser", () => {
       expect(parse({ code, parserOptions })).toEqual([]);
     });
 
-    it("uses the same discovery rule as the documentation's custom parser", () => {
-      const code = 'const l_value2 = external_value; "l_total"; // l_firstName';
+    it("uses the same discovery rule as an equivalent custom parser", () => {
+      const code = 'const m_value2 = external_value; "m_total"; // m_firstName';
       const preset = buildParserOptions({ name: "prefixed" }).data!;
       const custom = buildParserOptions({
         name: "custom",
-        regexList: [{ name: "startsWithLUnderscore", value: "\\bl_[A-Za-z][A-Za-z0-9]*\\b" }],
+        regexList: [{ name: "startsWithMUnderscore", value: "\\bm_[A-Za-z][A-Za-z0-9]*\\b" }],
       }).data!;
 
       expect(parse({ code, parserOptions: preset })).toEqual(parse({ code, parserOptions: custom }));
       expect(parse({ code, parserOptions: preset }).map((word) => word.value)).toEqual([
-        "l_value2",
-        "l_total",
-        "l_firstName",
+        "m_value2",
+        "m_total",
+        "m_firstName",
       ]);
     });
   });
