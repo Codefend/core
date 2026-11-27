@@ -194,7 +194,9 @@ See the [documentation examples](https://codefend.github.io/docs/examples/list) 
 
 ### Parser presets
 
-Use `parser.name` to select a naming convention. The opt-in `prefixed` preset selects `m_` followed by an ASCII letter and then letters or digits, such as `m_total` or `m_value2`:
+Choose `prefixed` for stricter selection of names you explicitly mark with `m_`. The `default` parser discovers broader underscore names and hyphenated file-name patterns. Narrowing discovery to your `m_` convention helps avoid selecting unrelated library constants, external API fields, or file names that match those broader rules.
+
+The preset selects `m_` followed by an ASCII letter and then letters or digits, such as `m_total` or `m_value2`:
 
 ```json
 {
