@@ -16,10 +16,16 @@ Additionally, Codefend offers plugins for [Webpack](https://www.npmjs.com/packag
 
 Beyond simple obfuscation, Codefend delivers advanced features, integrating smoothly with current uglifiers or minifiers. It employs a two-layer obfuscation 🪞 process, embedding hidden code within hidden code for irreversible source code protection.
 
-For Codefend to work properly, you need to implement a folder and files naming convention, a code naming convention, or both. Once set up, Codefend will handle obfuscation, allowing you to concentrate on development and safeguard your intellectual property ✨
+## Naming conventions
 
-- [Folder and files naming convention](https://codefend.github.io/docs/basic-usage/naming-conventions/folders-files-naming-convention)
+Codefend uses naming conventions to select names in source code and file paths. The guides below explain how to adopt them in your project.
+
 - [Code naming convention](https://codefend.github.io/docs/basic-usage/naming-conventions/code-naming-convention)
+- [Folder and files naming convention](https://codefend.github.io/docs/basic-usage/naming-conventions/folders-files-naming-convention)
+
+### Migrate an existing project with AI
+
+The [AI migration guide](https://codefend.github.io/docs/basic-usage/naming-conventions/ai-assisted-migration) includes a **copyable prompt** to help your coding assistant adopt Codefend's naming conventions. It covers renaming internal variables, functions, and classes, updating references, preserving external interfaces, and testing the generated output.
 
 Visit the [docs](https://codefend.github.io/docs/) for instructions, examples, and advanced settings.
 
@@ -175,10 +181,6 @@ For a more detailed explanation, please refer to the [obfuscation](https://codef
 ### `Step 3`: install dependencies, build and deploy the obfuscated project
 
 Please refer to the [build and deployment](https://codefend.github.io/docs/distribution/build-and-deployment) and [ troubleshooting](https://codefend.github.io/docs/distribution/troubleshooting) sections of the docs.
-
-## Migrate an existing project with AI
-
-Use the [AI migration prompt](https://codefend.github.io/docs/basic-usage/naming-conventions/ai-assisted-migration) to adapt an existing project's internal variables, functions, classes, parameters, and members to Codefend's naming conventions. The guide provides a copyable prompt that asks your coding assistant to update references, preserve external interfaces and data keys, and test both the renamed source and the Codefend output.
 
 ## Examples
 
