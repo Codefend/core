@@ -12,14 +12,20 @@
 
 `Codefend` is a dynamic 🪩 CLI tool that obfuscates your source code, folders, and file names, compatible with any programming language or framework.
 It delivers powerful obfuscation while ensuring performance maintained ⚡, so you benefit from enhanced security without compromising your application's speed or efficiency.
-Additionally, Codefend offers plugins for Webpack, Rollup, and Vite.
+Additionally, Codefend offers plugins for [Webpack](https://www.npmjs.com/package/webpack-plugin-codefend), [Rollup](https://www.npmjs.com/package/rollup-plugin-codefend), [Vite](https://www.npmjs.com/package/vite-plugin-codefend), and [esbuild](https://www.npmjs.com/package/esbuild-plugin-codefend).
 
 Beyond simple obfuscation, Codefend delivers advanced features, integrating smoothly with current uglifiers or minifiers. It employs a two-layer obfuscation 🪞 process, embedding hidden code within hidden code for irreversible source code protection.
 
-For Codefend to work properly, you need to implement a folder and files naming convention, a code naming convention, or both. Once set up, Codefend will handle obfuscation, allowing you to concentrate on development and safeguard your intellectual property ✨
+## Naming conventions
 
-- [Folder and files naming convention](https://codefend.github.io/docs/basic-usage/naming-conventions/folders-files-naming-convention)
+Codefend uses naming conventions to select names in source code and file paths. The guides below explain how to adopt them in your project.
+
 - [Code naming convention](https://codefend.github.io/docs/basic-usage/naming-conventions/code-naming-convention)
+- [Folder and files naming convention](https://codefend.github.io/docs/basic-usage/naming-conventions/folders-files-naming-convention)
+
+### Migrate an existing project with AI
+
+The [AI migration guide](https://codefend.github.io/docs/basic-usage/naming-conventions/ai-assisted-migration) includes a **copyable prompt** to help your coding assistant adopt Codefend's naming conventions. It covers renaming internal variables, functions, and classes, updating references, preserving external interfaces, and testing the generated output.
 
 Visit the [docs](https://codefend.github.io/docs/) for instructions, examples, and advanced settings.
 
@@ -52,9 +58,17 @@ npx codefend -o  //obfuscates your whole project inside a new directory: 'codefe
 
 If you're using Webpack, you can use [webpack-plugin-codefend](https://www.npmjs.com/package/webpack-plugin-codefend) instead of directly using the CLI, keeping in mind that not all features are propagated to the plugin and may take time to become available.
 
-#### `Rollup/Vite`
+#### `Rollup`
 
-If you're using Rollup or Vite, you can use [rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend) instead of directly using the CLI, keeping in mind that not all features are propagated to the plugin and may take time to become available.
+If you're using Rollup, you can use [rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend) instead of directly using the CLI, keeping in mind that not all features are propagated to the plugin and may take time to become available.
+
+#### `Vite`
+
+If you're using Vite, use [vite-plugin-codefend](https://www.npmjs.com/package/vite-plugin-codefend) to obfuscate production builds while keeping the development server and HMR unchanged. See the [Vite build guide](https://codefend.github.io/docs/examples/vite) for setup. The plugin exposes transformation and debug options; not all CLI features are available.
+
+#### `esbuild`
+
+For esbuild projects, [esbuild-plugin-codefend](https://www.npmjs.com/package/esbuild-plugin-codefend) transforms source files through esbuild's JavaScript build API. See the [esbuild build guide](https://codefend.github.io/docs/examples/esbuild) for installation, configuration, and an executable example.
 
 ## Commands
 
@@ -171,6 +185,10 @@ For a more detailed explanation, please refer to the [obfuscation](https://codef
 ### `Step 3`: install dependencies, build and deploy the obfuscated project
 
 Please refer to the [build and deployment](https://codefend.github.io/docs/distribution/build-and-deployment) and [ troubleshooting](https://codefend.github.io/docs/distribution/troubleshooting) sections of the docs.
+
+## Examples
+
+See the [documentation examples](https://codefend.github.io/docs/examples/list) for language guides, source code, configuration, and expected output. For bundler integrations, follow the [Vite](https://codefend.github.io/docs/examples/vite), [esbuild](https://codefend.github.io/docs/examples/esbuild), [Rollup](https://codefend.github.io/docs/examples/rollup), or [Webpack](https://codefend.github.io/docs/examples/webpack) guide.
 
 ## Configuration
 
