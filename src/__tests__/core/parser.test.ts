@@ -9,7 +9,7 @@ describe("Parser", () => {
     it.each(["l_total", "l_firstName", "l_value2"])("discovers the marked name %s", (code) => {
       const parserOptions = buildParserOptions({ name: "prefixed" }).data!;
 
-      expect(parse({ code, parserOptions })).toEqual([{ value: code, fromRegex: "prefixed" }]);
+      expect(parse({ code, parserOptions })).toEqual([{ value: code, fromRegex: "startsWithLUnderscore" }]);
     });
 
     it.each([
@@ -36,7 +36,7 @@ describe("Parser", () => {
       const preset = buildParserOptions({ name: "prefixed" }).data!;
       const custom = buildParserOptions({
         name: "custom",
-        regexList: [{ name: "prefixed", value: "\\bl_[A-Za-z][A-Za-z0-9]*\\b" }],
+        regexList: [{ name: "startsWithLUnderscore", value: "\\bl_[A-Za-z][A-Za-z0-9]*\\b" }],
       }).data!;
 
       expect(parse({ code, parserOptions: preset })).toEqual(parse({ code, parserOptions: custom }));

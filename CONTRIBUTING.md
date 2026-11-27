@@ -33,6 +33,10 @@ Node.js 18-or-later runtime support.
 Install the locked development dependencies with `npm ci`. After `npm run build`, run `npm run test:package` to check
 both module formats, package entry points, source maps, and the CLI launcher.
 
+### Regex rule names
+
+Use descriptive lowerCamelCase labels for new regex rules. For example, `startsWithLUnderscore` identifies the rule that selects `l_` names. Keep parser preset names separate from rule labels, so a preset can combine multiple rules. Preserve existing rule labels when extending the registry.
+
 Please leverage the repository's own tools to make sure the code is aligned with our standards:
 
 1. Run all check commands before submitting the PR (`type:check`, `format:check`, `lint:check`, `test:coverage` and `spell:check`)
