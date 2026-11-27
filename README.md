@@ -176,6 +176,10 @@ For a more detailed explanation, please refer to the [obfuscation](https://codef
 
 Please refer to the [build and deployment](https://codefend.github.io/docs/distribution/build-and-deployment) and [ troubleshooting](https://codefend.github.io/docs/distribution/troubleshooting) sections of the docs.
 
+## Migrate an existing project with AI
+
+Use the [AI migration prompt](https://codefend.github.io/docs/basic-usage/naming-conventions/ai-assisted-migration) to adapt an existing project's internal variables, functions, classes, parameters, and members to Codefend's naming conventions. The guide provides a copyable prompt that asks your coding assistant to update references, preserve external interfaces and data keys, and test both the renamed source and the Codefend output.
+
 ## Examples
 
 See the [documentation examples](https://codefend.github.io/docs/examples/list) for language guides, source code, configuration, and expected output. For bundler integrations, follow the [Vite](https://codefend.github.io/docs/examples/vite), [Rollup](https://codefend.github.io/docs/examples/rollup), or [Webpack](https://codefend.github.io/docs/examples/webpack) guide.
