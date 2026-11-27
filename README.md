@@ -194,19 +194,19 @@ See the [documentation examples](https://codefend.github.io/docs/examples/list) 
 
 ### Parser presets
 
-Choose `prefixed` for stricter selection of names you explicitly mark with `m_`. The `default` parser discovers broader underscore names and hyphenated file-name patterns. Narrowing discovery to your `m_` convention helps avoid selecting unrelated library constants, external API fields, or file names that match those broader rules.
+Choose `startWithMAndUnderscore` for stricter selection of names you explicitly mark with `m_`. The `default` parser discovers broader underscore names and hyphenated file-name patterns. Narrowing discovery to your `m_` convention helps avoid selecting unrelated library constants, external API fields, or file names that match those broader rules.
 
 The preset selects `m_` followed by an ASCII letter and then letters or digits, such as `m_total` or `m_value2`:
 
 ```json
 {
   "parser": {
-    "name": "prefixed"
+    "name": "startWithMAndUnderscore"
   }
 }
 ```
 
-The regex rule is named `startsWithMUnderscore`, following a descriptive lowerCamelCase convention for new rule names. It does not discover unrelated names such as `LED_BUILTIN`, `external_value`, `l_total`, or names with additional underscores such as `m_total_amount`. Rules still operate on text in source files and paths, including strings and comments. Selection does not change the replacement engine's existing case and substring limitations; test the generated program and preserve external interfaces.
+The preset and its regex rule share the name `startWithMAndUnderscore`, following a descriptive lowerCamelCase convention. The rule does not discover unrelated names such as `LED_BUILTIN`, `external_value`, `l_total`, or names with additional underscores such as `m_total_amount`. Rules still operate on text in source files and paths, including strings and comments. Selection does not change the replacement engine's existing case and substring limitations; test the generated program and preserve external interfaces.
 
 The existing `default`, `codeOnly`, `fileOnly`, deprecated `Parser_A` alias, and `custom` parser remain available. Omitting the parser still selects `default`. Bundler plugins continue to select `codeOnly`; the new preset is available through the core CLI and JavaScript API.
 

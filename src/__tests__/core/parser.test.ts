@@ -5,11 +5,11 @@ import { IParsedWord, IParseOptions, parse } from "../../core/parser/parser.js";
 import { CUSTOM_PARSER_NAME, DEFAULT_PARSER_NAME, PARSER_NAMES, PARSERS } from "../../core/utils/constants.js";
 
 describe("Parser", () => {
-  describe("prefixed preset", () => {
+  describe("startWithMAndUnderscore preset", () => {
     it.each(["m_total", "m_firstName", "m_value2"])("discovers the marked name %s", (code) => {
-      const parserOptions = buildParserOptions({ name: "prefixed" }).data!;
+      const parserOptions = buildParserOptions({ name: "startWithMAndUnderscore" }).data!;
 
-      expect(parse({ code, parserOptions })).toEqual([{ value: code, fromRegex: "startsWithMUnderscore" }]);
+      expect(parse({ code, parserOptions })).toEqual([{ value: code, fromRegex: "startWithMAndUnderscore" }]);
     });
 
     it.each([
@@ -26,17 +26,17 @@ describe("Parser", () => {
       "M_total",
       "pkg-widget",
     ])("does not discover %s", (code) => {
-      const parserOptions = buildParserOptions({ name: "prefixed" }).data!;
+      const parserOptions = buildParserOptions({ name: "startWithMAndUnderscore" }).data!;
 
       expect(parse({ code, parserOptions })).toEqual([]);
     });
 
     it("uses the same discovery rule as an equivalent custom parser", () => {
       const code = 'const m_value2 = external_value; "m_total"; // m_firstName';
-      const preset = buildParserOptions({ name: "prefixed" }).data!;
+      const preset = buildParserOptions({ name: "startWithMAndUnderscore" }).data!;
       const custom = buildParserOptions({
         name: "custom",
-        regexList: [{ name: "startsWithMUnderscore", value: "\\bm_[A-Za-z][A-Za-z0-9]*\\b" }],
+        regexList: [{ name: "startWithMAndUnderscore", value: "\\bm_[A-Za-z][A-Za-z0-9]*\\b" }],
       }).data!;
 
       expect(parse({ code, parserOptions: preset })).toEqual(parse({ code, parserOptions: custom }));

@@ -35,7 +35,7 @@ both module formats, package entry points, source maps, and the CLI launcher.
 
 ### Regex rule names
 
-Use descriptive lowerCamelCase labels for new regex rules. For example, `startsWithMUnderscore` identifies the rule that selects `m_` names. Keep parser preset names separate from rule labels, so a preset can combine multiple rules. Preserve existing rule labels when extending the registry.
+Use descriptive lowerCamelCase names for new regex rules. For a new preset containing a single rule, give the preset and rule the same name, such as `startWithMAndUnderscore` for the `m_` convention. Presets combining multiple rules can use a name describing the combined convention. Preserve existing parser names and rule labels when extending the registry.
 
 Please leverage the repository's own tools to make sure the code is aligned with our standards:
 

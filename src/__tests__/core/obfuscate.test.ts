@@ -6,14 +6,14 @@ import { obfuscate } from "../../core/process/obfuscate.js";
 import { buildRuntimeOptions } from "../../core/process/runtime.js";
 
 describe("Obfuscate", () => {
-  it("executes the prefixed preset output while preserving unrelated names", () => {
+  it("executes the startWithMAndUnderscore preset output while preserving unrelated names", () => {
     const code = `(() => {
       const LED_BUILTIN = 2;
       const external_value = 3;
       const m_total = LED_BUILTIN + external_value;
       return m_total;
     })()`;
-    const parserOptions = buildParserOptions({ name: "prefixed" }).data!;
+    const parserOptions = buildParserOptions({ name: "startWithMAndUnderscore" }).data!;
     const transformationOptions = buildTransformationOptions();
 
     const output = obfuscate(code, transformationOptions, parserOptions, buildRuntimeOptions());

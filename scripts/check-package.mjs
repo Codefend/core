@@ -48,10 +48,10 @@ function checkAPI(api) {
   assert.ok(parser);
   const defaults = api.buildTransformationOptions();
   assert.equal(api.obfuscate("const l_value = 1;", defaults, parser, api.buildRuntimeOptions()), "const Ox0 = 1;");
-  const prefixed = api.buildParserOptions({ name: "prefixed" }).data;
-  assert.ok(prefixed);
+  const namedParser = api.buildParserOptions({ name: "startWithMAndUnderscore" }).data;
+  assert.ok(namedParser);
   assert.equal(
-    api.obfuscate("m_total l_total external_value LED_BUILTIN pkg-file", defaults, prefixed, api.buildRuntimeOptions()),
+    api.obfuscate("m_total l_total external_value LED_BUILTIN pkg-file", defaults, namedParser, api.buildRuntimeOptions()),
     "Ox0 l_total external_value LED_BUILTIN pkg-file",
   );
   assert.equal(
