@@ -12,7 +12,7 @@
 
 `Codefend` is a dynamic 🪩 CLI tool that obfuscates your source code, folders, and file names, compatible with any programming language or framework.
 It delivers powerful obfuscation while ensuring performance maintained ⚡, so you benefit from enhanced security without compromising your application's speed or efficiency.
-Additionally, Codefend offers plugins for Webpack, Rollup, and Vite.
+Additionally, Codefend offers plugins for [Webpack](https://www.npmjs.com/package/webpack-plugin-codefend), [Rollup](https://www.npmjs.com/package/rollup-plugin-codefend), and [Vite](https://www.npmjs.com/package/vite-plugin-codefend).
 
 Beyond simple obfuscation, Codefend delivers advanced features, integrating smoothly with current uglifiers or minifiers. It employs a two-layer obfuscation 🪞 process, embedding hidden code within hidden code for irreversible source code protection.
 
@@ -52,9 +52,13 @@ npx codefend -o  //obfuscates your whole project inside a new directory: 'codefe
 
 If you're using Webpack, you can use [webpack-plugin-codefend](https://www.npmjs.com/package/webpack-plugin-codefend) instead of directly using the CLI, keeping in mind that not all features are propagated to the plugin and may take time to become available.
 
-#### `Rollup/Vite`
+#### `Rollup`
 
-If you're using Rollup or Vite, you can use [rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend) instead of directly using the CLI, keeping in mind that not all features are propagated to the plugin and may take time to become available.
+If you're using Rollup, you can use [rollup-plugin-codefend](https://www.npmjs.com/package/rollup-plugin-codefend) instead of directly using the CLI, keeping in mind that not all features are propagated to the plugin and may take time to become available.
+
+#### `Vite`
+
+If you're using Vite, use [vite-plugin-codefend](https://www.npmjs.com/package/vite-plugin-codefend) to obfuscate production builds while keeping the development server and HMR unchanged. See the [Vite build guide](https://codefend.github.io/docs/examples/vite) for setup. The plugin exposes transformation and debug options; not all CLI features are available.
 
 ## Commands
 
@@ -171,6 +175,10 @@ For a more detailed explanation, please refer to the [obfuscation](https://codef
 ### `Step 3`: install dependencies, build and deploy the obfuscated project
 
 Please refer to the [build and deployment](https://codefend.github.io/docs/distribution/build-and-deployment) and [ troubleshooting](https://codefend.github.io/docs/distribution/troubleshooting) sections of the docs.
+
+## Examples
+
+See the [documentation examples](https://codefend.github.io/docs/examples/list) for language guides, source code, configuration, and expected output. For bundler integrations, follow the [Vite](https://codefend.github.io/docs/examples/vite), [Rollup](https://codefend.github.io/docs/examples/rollup), or [Webpack](https://codefend.github.io/docs/examples/webpack) guide.
 
 ## Configuration
 
