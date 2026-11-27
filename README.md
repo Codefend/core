@@ -12,7 +12,7 @@
 
 `Codefend` is a dynamic 🪩 CLI tool that obfuscates your source code, folders, and file names, compatible with any programming language or framework.
 It delivers powerful obfuscation while ensuring performance maintained ⚡, so you benefit from enhanced security without compromising your application's speed or efficiency.
-Additionally, Codefend offers plugins for [Webpack](https://www.npmjs.com/package/webpack-plugin-codefend), [Rollup](https://www.npmjs.com/package/rollup-plugin-codefend), and [Vite](https://www.npmjs.com/package/vite-plugin-codefend).
+Additionally, Codefend offers plugins for [Webpack](https://www.npmjs.com/package/webpack-plugin-codefend), [Rollup](https://www.npmjs.com/package/rollup-plugin-codefend), [Vite](https://www.npmjs.com/package/vite-plugin-codefend), and [esbuild](https://www.npmjs.com/package/esbuild-plugin-codefend).
 
 Beyond simple obfuscation, Codefend delivers advanced features, integrating smoothly with current uglifiers or minifiers. It employs a two-layer obfuscation 🪞 process, embedding hidden code within hidden code for irreversible source code protection.
 
@@ -65,6 +65,10 @@ If you're using Rollup, you can use [rollup-plugin-codefend](https://www.npmjs.c
 #### `Vite`
 
 If you're using Vite, use [vite-plugin-codefend](https://www.npmjs.com/package/vite-plugin-codefend) to obfuscate production builds while keeping the development server and HMR unchanged. See the [Vite build guide](https://codefend.github.io/docs/examples/vite) for setup. The plugin exposes transformation and debug options; not all CLI features are available.
+
+#### `esbuild`
+
+For esbuild projects, [esbuild-plugin-codefend](https://www.npmjs.com/package/esbuild-plugin-codefend) transforms source files through esbuild's JavaScript build API. See the [esbuild build guide](https://codefend.github.io/docs/examples/esbuild) for installation, configuration, and an executable example.
 
 ## Commands
 
@@ -184,7 +188,7 @@ Please refer to the [build and deployment](https://codefend.github.io/docs/distr
 
 ## Examples
 
-See the [documentation examples](https://codefend.github.io/docs/examples/list) for language guides, source code, configuration, and expected output. For bundler integrations, follow the [Vite](https://codefend.github.io/docs/examples/vite), [Rollup](https://codefend.github.io/docs/examples/rollup), or [Webpack](https://codefend.github.io/docs/examples/webpack) guide.
+See the [documentation examples](https://codefend.github.io/docs/examples/list) for language guides, source code, configuration, and expected output. For bundler integrations, follow the [Vite](https://codefend.github.io/docs/examples/vite), [esbuild](https://codefend.github.io/docs/examples/esbuild), [Rollup](https://codefend.github.io/docs/examples/rollup), or [Webpack](https://codefend.github.io/docs/examples/webpack) guide.
 
 ## Configuration
 
