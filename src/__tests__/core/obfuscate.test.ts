@@ -1,3 +1,4 @@
+import { runInNewContext } from "node:vm";
 import { describe, expect, it } from "vitest";
 
 import { buildDefaultOptions, buildParserOptions, buildTransformationOptions } from "../../core/options/options.js";
@@ -5,6 +6,25 @@ import { obfuscate } from "../../core/process/obfuscate.js";
 import { buildRuntimeOptions } from "../../core/process/runtime.js";
 
 describe("Obfuscate", () => {
+  it("executes the prefixed preset output while preserving unrelated names", () => {
+    const code = `(() => {
+      const LED_BUILTIN = 2;
+      const external_value = 3;
+      const l_total = LED_BUILTIN + external_value;
+      return l_total;
+    })()`;
+    const parserOptions = buildParserOptions({ name: "prefixed" }).data!;
+    const transformationOptions = buildTransformationOptions();
+
+    const output = obfuscate(code, transformationOptions, parserOptions, buildRuntimeOptions());
+
+    expect(output).not.toContain("l_total");
+    expect(output).toContain("LED_BUILTIN");
+    expect(output).toContain("external_value");
+    expect(runInNewContext(code)).toBe(5);
+    expect(runInNewContext(output)).toBe(5);
+  });
+
   describe("main-regex", () => {
     const code = "const l_var = 0;";
     it("with default options", () => {

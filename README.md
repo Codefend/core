@@ -192,6 +192,22 @@ See the [documentation examples](https://codefend.github.io/docs/examples/list) 
 
 ## Configuration
 
+### Parser presets
+
+Use `parser.name` to select a naming convention. The opt-in `prefixed` preset selects `l_` followed by an ASCII letter and then letters or digits, such as `l_total` or `l_value2`:
+
+```json
+{
+  "parser": {
+    "name": "prefixed"
+  }
+}
+```
+
+This preset uses the same discovery rule as the documentation's custom `applicationNames` example. It does not discover unrelated names such as `LED_BUILTIN`, `external_value`, or names with additional underscores such as `l_total_amount`. Rules still operate on text in source files and paths, including strings and comments. Selection does not change the replacement engine's existing case and substring limitations; test the generated program and preserve external interfaces.
+
+The existing `default`, `codeOnly`, `fileOnly`, deprecated `Parser_A` alias, and `custom` parser remain available. Omitting the parser still selects `default`. Bundler plugins continue to select `codeOnly`; the new preset is available through the core CLI and JavaScript API.
+
 Please refer to the [configuration](https://codefend.github.io/docs/references/configuration) section of the docs.
 
 ## Migration guide

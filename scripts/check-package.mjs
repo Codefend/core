@@ -48,6 +48,12 @@ function checkAPI(api) {
   assert.ok(parser);
   const defaults = api.buildTransformationOptions();
   assert.equal(api.obfuscate("const l_value = 1;", defaults, parser, api.buildRuntimeOptions()), "const Ox0 = 1;");
+  const prefixed = api.buildParserOptions({ name: "prefixed" }).data;
+  assert.ok(prefixed);
+  assert.equal(
+    api.obfuscate("l_total external_value LED_BUILTIN pkg-file", defaults, prefixed, api.buildRuntimeOptions()),
+    "Ox0 external_value LED_BUILTIN pkg-file",
+  );
   assert.equal(
     api.obfuscate(
       "const l_value = 1;",

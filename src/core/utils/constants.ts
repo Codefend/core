@@ -84,6 +84,7 @@ export const PARSER_NAMES = {
   default: "default",
   fileOnly: "fileOnly",
   codeOnly: "codeOnly",
+  prefixed: "prefixed",
   Parser_A: "Parser_A",
 } as const;
 
@@ -96,6 +97,9 @@ export const PARSERS: Partial<Record<IParserNames, { regexList: IInternalRegexOp
   },
   [PARSER_NAMES.codeOnly]: {
     regexList: DEFAULT_REGEX_LIST.filter((e) => e.name === "main"),
+  },
+  [PARSER_NAMES.prefixed]: {
+    regexList: [{ name: "prefixed", regex: /\bl_[A-Za-z][A-Za-z0-9]*\b/g }],
   },
   [PARSER_NAMES.Parser_A]: {
     regexList: DEFAULT_REGEX_LIST,
