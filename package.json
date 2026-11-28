@@ -5,7 +5,12 @@
   "keywords": [
     "codefend",
     "obfuscator",
+    "obfuscation",
     "uglifier",
+    "cli",
+    "javascript",
+    "nodejs",
+    "arduino",
     "angular",
     "vue",
     "react",
@@ -18,7 +23,8 @@
     "c++",
     "rollup",
     "webpack",
-    "vite"
+    "vite",
+    "esbuild"
   ],
   "engines": {
     "node": ">=18.0.0"
