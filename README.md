@@ -206,7 +206,11 @@ The preset selects `m_` followed by an ASCII letter and then letters or digits, 
 }
 ```
 
-The preset and its regex rule share the name `startWithMAndUnderscore`, following a descriptive lowerCamelCase convention. The rule does not discover unrelated names such as `LED_BUILTIN`, `external_value`, `l_total`, or names with additional underscores such as `m_total_amount`. Rules still operate on text in source files and paths, including strings and comments. Selection does not change the replacement engine's existing case and substring limitations; test the generated program and preserve external interfaces.
+The preset and its regex rule share the name `startWithMAndUnderscore`, following a descriptive lowerCamelCase convention. The rule does not discover unrelated names such as `LED_BUILTIN`, `external_value`, `l_total`, or names with additional underscores such as `m_total_amount`.
+
+Automatic renaming changes only the exact occurrences found by the selected parser, preserving its casing and boundaries. Static replacements match literal text. When matches start at the same position, the longer match wins; inserted replacement text is not processed again.
+
+Matching remains text-based and can affect strings, comments, paths, and external data keys. Generated-name collisions and pool-mapping limitations still require testing the generated program and preserving external interfaces.
 
 The existing `default`, `codeOnly`, `fileOnly`, deprecated `Parser_A` alias, and `custom` parser remain available. Omitting the parser still selects `default`. Bundler plugins continue to select `codeOnly`; the new preset is available through the core CLI and JavaScript API.
 

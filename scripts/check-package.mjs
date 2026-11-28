@@ -3,6 +3,7 @@ import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
+import { runInNewContext } from "node:vm";
 
 const require = createRequire(import.meta.url);
 const commonjs = require("codefend");
@@ -53,6 +54,20 @@ function checkAPI(api) {
   assert.equal(
     api.obfuscate("m_total l_total external_value LED_BUILTIN pkg-file", defaults, namedParser, api.buildRuntimeOptions()),
     "Ox0 l_total external_value LED_BUILTIN pkg-file",
+  );
+  const program = "(() => { const m_total = 1; const M_TOTAL = 2; const am_total = 4; return m_total + M_TOTAL + am_total; })()";
+  const transformed = api.obfuscate(program, defaults, namedParser, api.buildRuntimeOptions());
+  assert.equal(runInNewContext(transformed), 7);
+  assert.ok(transformed.includes("M_TOTAL"));
+  assert.ok(transformed.includes("am_total"));
+  assert.equal(
+    api.obfuscate(
+      "a.b axb A.B",
+      api.buildTransformationOptions({ static: [{ from: "a.b", to: "fixed" }] }),
+      parser,
+      api.buildRuntimeOptions(),
+    ),
+    "fixed axb A.B",
   );
   assert.equal(
     api.obfuscate(

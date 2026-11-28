@@ -6,6 +6,133 @@ import { obfuscate } from "../../core/process/obfuscate.js";
 import { buildRuntimeOptions } from "../../core/process/runtime.js";
 
 describe("Obfuscate", () => {
+  describe("exact replacement", () => {
+    const presets = ["default", "codeOnly", "startWithMAndUnderscore"] as const;
+
+    it.each(presets)("preserves executable case variants with %s", (name) => {
+      const code = "(() => { const m_total = 1; const M_TOTAL = 2; return m_total + M_TOTAL; })()";
+      const output = obfuscate(
+        code,
+        buildTransformationOptions(),
+        buildParserOptions({ name }).data!,
+        buildRuntimeOptions(),
+      );
+
+      expect(runInNewContext(output)).toBe(3);
+      if (name === "startWithMAndUnderscore") expect(output).toContain("M_TOTAL");
+    });
+
+    it("preserves unselected substrings across calls sharing a runtime", () => {
+      const runtime = buildRuntimeOptions();
+      const parser = buildParserOptions({ name: "startWithMAndUnderscore" }).data!;
+      const transformation = buildTransformationOptions();
+      obfuscate("m_total", transformation, parser, runtime);
+
+      expect(obfuscate("am_total m_total_amount M_TOTAL", transformation, parser, runtime)).toBe(
+        "am_total m_total_amount M_TOTAL",
+      );
+    });
+
+    it.each(presets)("preserves case variants of ignored words with %s", (name) => {
+      expect(
+        obfuscate(
+          "keep KEEP",
+          buildTransformationOptions({ ignore: ["keep"] }),
+          buildParserOptions({ name }).data!,
+          buildRuntimeOptions(),
+        ),
+      ).toBe("keep KEEP");
+    });
+
+    it.each(["default", "fileOnly"] as const)("preserves uppercase file names with %s", (name) => {
+      expect(
+        obfuscate(
+          "file-main FILE-MAIN",
+          buildTransformationOptions(),
+          buildParserOptions({ name }).data!,
+          buildRuntimeOptions(),
+        ),
+      ).toBe("Ox0 FILE-MAIN");
+    });
+
+    it.each(presets)("treats static keys literally and case-sensitively with %s", (name) => {
+      expect(
+        obfuscate(
+          "a.b axb A.B",
+          buildTransformationOptions({ static: [{ from: "a.b", to: "fixed" }] }),
+          buildParserOptions({ name }).data!,
+          buildRuntimeOptions(),
+        ),
+      ).toBe("fixed axb A.B");
+    });
+
+    it.each(presets)("accepts an ignored literal containing regex punctuation with %s", (name) => {
+      expect(
+        obfuscate(
+          "[",
+          buildTransformationOptions({ ignore: ["["] }),
+          buildParserOptions({ name }).data!,
+          buildRuntimeOptions(),
+        ),
+      ).toBe("[");
+    });
+
+    it.each(presets)("prefers the longer static match with %s", (name) => {
+      expect(
+        obfuscate(
+          "m_short-suffix",
+          buildTransformationOptions({ static: [{ from: "m_short-suffix", to: "fixed" }] }),
+          buildParserOptions({ name }).data!,
+          buildRuntimeOptions(),
+        ),
+      ).toBe("fixed");
+    });
+
+    it("retains static mappings across calls", () => {
+      const runtime = buildRuntimeOptions();
+      const parser = buildParserOptions().data!;
+      obfuscate("a.b", buildTransformationOptions({ static: [{ from: "a.b", to: "fixed" }] }), parser, runtime);
+
+      expect(obfuscate("a.b axb", buildTransformationOptions(), parser, runtime)).toBe("fixed axb");
+    });
+
+    it("retains intentionally partial custom rules", () => {
+      expect(
+        obfuscate(
+          "secretSuffix",
+          buildTransformationOptions(),
+          buildParserOptions({ name: "custom", regexList: [{ name: "partial", value: "secret" }] }).data!,
+          buildRuntimeOptions(),
+        ),
+      ).toBe("Ox0Suffix");
+    });
+
+    it.each(["[", "]", "(", ")", "\\", "a.b", "a+b", "a?b", "$value", "a|b", "^x$", "a{2}", "/file"])(
+      "accepts the literal static key %s",
+      (word) => {
+        expect(
+          obfuscate(
+            `${word} unchanged`,
+            buildTransformationOptions({ static: [{ from: word, to: "fixed" }] }),
+            buildParserOptions().data!,
+            buildRuntimeOptions(),
+          ),
+        ).toBe("fixed unchanged");
+      },
+    );
+
+    it("inserts static targets literally", () => {
+      expect(
+        obfuscate(
+          "m_total",
+          buildTransformationOptions({ static: [{ from: "m_total", to: "$&" }] }),
+          buildParserOptions().data!,
+          buildRuntimeOptions(),
+        ),
+      ).toBe("$&");
+    });
+  });
+
   it("executes the startWithMAndUnderscore preset output while preserving unrelated names", () => {
     const code = `(() => {
       const LED_BUILTIN = 2;
