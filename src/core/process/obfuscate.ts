@@ -28,5 +28,5 @@ export function obfuscate(
 
   mapDefaultWords({ prefix: transformationOptions.prefix }, runtimeOptions);
 
-  return replace({ code: code }, runtimeOptions);
+  return replace({ code, parserOptions }, runtimeOptions);
 }
