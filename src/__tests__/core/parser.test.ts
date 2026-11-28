@@ -1,10 +1,71 @@
 import { describe, expect, it } from "vitest";
 
-import { buildParserOptions } from "../../core/options/options.js";
+import { buildDefaultOptions, buildParserOptions } from "../../core/options/options.js";
 import { IParsedWord, IParseOptions, parse } from "../../core/parser/parser.js";
-import { CUSTOM_PARSER_NAME, DEFAULT_PARSER_NAME, PARSERS } from "../../core/utils/constants.js";
+import { CUSTOM_PARSER_NAME, DEFAULT_PARSER_NAME, PARSER_NAMES, PARSERS } from "../../core/utils/constants.js";
 
 describe("Parser", () => {
+  describe("startWithMAndUnderscore preset", () => {
+    it.each(["m_total", "m_firstName", "m_value2"])("discovers the marked name %s", (code) => {
+      const parserOptions = buildParserOptions({ name: "startWithMAndUnderscore" }).data!;
+
+      expect(parse({ code, parserOptions })).toEqual([{ value: code, fromRegex: "startWithMAndUnderscore" }]);
+    });
+
+    it.each([
+      "external_value",
+      "LED_BUILTIN",
+      "main",
+      "setup",
+      "loop",
+      "f_readSensor",
+      "l_total",
+      "m_total_amount",
+      "am_total",
+      "m_1value",
+      "M_total",
+      "pkg-widget",
+    ])("does not discover %s", (code) => {
+      const parserOptions = buildParserOptions({ name: "startWithMAndUnderscore" }).data!;
+
+      expect(parse({ code, parserOptions })).toEqual([]);
+    });
+
+    it("uses the same discovery rule as an equivalent custom parser", () => {
+      const code = 'const m_value2 = external_value; "m_total"; // m_firstName';
+      const preset = buildParserOptions({ name: "startWithMAndUnderscore" }).data!;
+      const custom = buildParserOptions({
+        name: "custom",
+        regexList: [{ name: "startWithMAndUnderscore", value: "\\bm_[A-Za-z][A-Za-z0-9]*\\b" }],
+      }).data!;
+
+      expect(parse({ code, parserOptions: preset })).toEqual(parse({ code, parserOptions: custom }));
+      expect(parse({ code, parserOptions: preset }).map((word) => word.value)).toEqual([
+        "m_value2",
+        "m_total",
+        "m_firstName",
+      ]);
+    });
+  });
+
+  it("keeps the default selection unchanged", () => {
+    expect(buildDefaultOptions().parser?.name).toBe("default");
+    expect(buildParserOptions().data).toEqual(buildParserOptions({ name: "default" }).data);
+  });
+
+  it.each([
+    { name: PARSER_NAMES.default, values: ["l_total", "external_value", "pkg-widget"] },
+    { name: PARSER_NAMES.codeOnly, values: ["l_total", "external_value"] },
+    { name: PARSER_NAMES.fileOnly, values: ["pkg-widget"] },
+    { name: PARSER_NAMES.Parser_A, values: ["l_total", "external_value", "pkg-widget"] },
+  ])("preserves the existing $name preset", ({ name, values }) => {
+    const parserOptions = buildParserOptions({ name }).data!;
+
+    expect(parse({ code: "l_total external_value pkg-widget", parserOptions }).map((word) => word.value)).toEqual(
+      values,
+    );
+  });
+
   it("DEFAULT PARSER", () => {
     const options: IParseOptions = {
       code: `const l_var = 0;`,

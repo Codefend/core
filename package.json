@@ -1,11 +1,16 @@
 {
   "name": "codefend",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "description": "Code obfuscator CLI that protects your code regardless of the programming language or framework.",
   "keywords": [
     "codefend",
     "obfuscator",
+    "obfuscation",
     "uglifier",
+    "cli",
+    "javascript",
+    "nodejs",
+    "arduino",
     "angular",
     "vue",
     "react",
@@ -18,7 +23,8 @@
     "c++",
     "rollup",
     "webpack",
-    "vite"
+    "vite",
+    "esbuild"
   ],
   "engines": {
     "node": ">=18.0.0"
