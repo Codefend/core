@@ -192,28 +192,6 @@ See the [documentation examples](https://codefend.github.io/docs/examples/list) 
 
 ## Configuration
 
-### Parser presets
-
-Choose `startWithMAndUnderscore` for stricter selection of names you explicitly mark with `m_`. The `default` parser discovers broader underscore names and hyphenated file-name patterns. Narrowing discovery to your `m_` convention helps avoid selecting unrelated library constants, external API fields, or file names that match those broader rules.
-
-The preset selects `m_` followed by an ASCII letter and then letters or digits, such as `m_total` or `m_value2`:
-
-```json
-{
-  "parser": {
-    "name": "startWithMAndUnderscore"
-  }
-}
-```
-
-The preset and its regex rule share the name `startWithMAndUnderscore`, following a descriptive lowerCamelCase convention. The rule does not discover unrelated names such as `LED_BUILTIN`, `external_value`, `l_total`, or names with additional underscores such as `m_total_amount`.
-
-Automatic renaming changes only the exact occurrences found by the selected parser, preserving its casing and boundaries. Static replacements match literal text. When matches start at the same position, the longer match wins; inserted replacement text is not processed again.
-
-Matching remains text-based and can affect strings, comments, paths, and external data keys. Generated-name collisions and pool-mapping limitations still require testing the generated program and preserving external interfaces.
-
-The existing `default`, `codeOnly`, `fileOnly`, deprecated `Parser_A` alias, and `custom` parser remain available. Omitting the parser still selects `default`. Bundler plugins continue to select `codeOnly`; the new preset is available through the core CLI and JavaScript API.
-
 Please refer to the [configuration](https://codefend.github.io/docs/references/configuration) section of the docs.
 
 ## Migration guide
